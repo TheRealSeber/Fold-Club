@@ -80,8 +80,6 @@
   }
 </script>
 
-<main class="grow bg-cream py-16">
-  <div class="fc-container">
     {#if cart.items.length === 0}
       <div class="brutal-card paper-shadow-md p-12 text-center">
         <div class="heading mb-4 text-6xl text-ink/20">:(</div>
@@ -92,8 +90,8 @@
         </a>
       </div>
     {:else}
-      <div class="grid gap-8 lg:grid-cols-3">
-        <div class="space-y-4 lg:col-span-2">
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="space-y-6 lg:col-span-2">
           {#each cart.items as item (item.productId)}
             {@const product = getProductById(item.productId)}
             {#if product}
@@ -110,13 +108,13 @@
                   </div>
 
                   <div class="min-w-0 grow sm:grow-0">
-                    <h3 class="heading truncate text-base sm:text-lg">{product.name()}</h3>
+                    <h3 class="heading text-base sm:text-lg">{product.name()}</h3>
                     <p class="body-small text-ink-muted">{formatPrice(product.price)}</p>
                   </div>
                 </div>
 
-                <div class="flex flex-col gap-2 sm:ml-auto sm:flex-row sm:items-center sm:gap-4">
-                  <div class="flex items-center gap-1.5 sm:gap-2">
+                <div class="flex items-center justify-between gap-4 sm:ml-auto sm:gap-4">
+                  <div class="flex items-center gap-2">
                     <button
                       class="btn btn-secondary btn-sm paper-press-sm"
                       onclick={() => handleQuantityChange(item.productId, -1)}
@@ -134,20 +132,17 @@
                     </button>
                   </div>
 
-                  <div class="flex items-center justify-between gap-2 sm:gap-4">
-                    <div class="heading text-right">
-                      <span>{m.cart_total()}</span>
-                      <span>{formatPrice(product.price * item.quantity)}</span>
-                    </div>
-
-                    <button
-                      class="btn btn-secondary btn-sm paper-press-sm text-coral"
-                      onclick={() => handleRemove(item.productId)}
-                      aria-label={m.cart_remove_aria()}
-                    >
-                      X
-                    </button>
+                  <div class="heading flex-1 text-right sm:flex-none">
+                    {formatPrice(product.price * item.quantity)}
                   </div>
+
+                  <button
+                    class="btn btn-secondary btn-sm paper-press-sm text-coral"
+                    onclick={() => handleRemove(item.productId)}
+                    aria-label={m.cart_remove_aria()}
+                  >
+                    X
+                  </button>
                 </div>
               </div>
             {/if}
@@ -175,7 +170,7 @@
             </div>
 
             <button
-              class="btn btn-primary paper-press w-full text-center"
+              class="btn btn-primary paper-press text-center"
               onclick={handleCheckoutClick}
             >
               {m.cart_checkout()}
@@ -191,8 +186,6 @@
         </div>
       </div>
     {/if}
-  </div>
-</main>
 
 <FakeDoorModal bind:open={showFakeDoor} />
 
