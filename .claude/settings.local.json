@@ -1,0 +1,14 @@
+{
+	"permissions": {
+		"allow": [
+			"mcp__svelte__list-sections",
+			"mcp__svelte__get-documentation",
+			"Bash(bun add:*)",
+			"mcp__svelte__svelte-autofixer",
+			"Bash(bun run check:*)",
+			"Bash(timeout 10 bun run dev:*)"
+		]
+	},
+	"enableAllProjectMcpServers": true,
+	"enabledMcpjsonServers": ["svelte"]
+}

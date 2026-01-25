@@ -1,0 +1,521 @@
+/*
+ * FOLD CLUB - Design System
+ * A brutalist, paper-sharp aesthetic for DIY papercraft kits
+ * Inspired by origami folds, geometric precision, and meringue cream tones
+ */
+
+/* ========================================
+   FONT IMPORTS - Sharp, Technical, Bold
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ========================================
+   TAILWIND CSS IMPORTS & PLUGINS
+   ======================================== */
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* ========================================
+   TAILWIND v4 THEME - Design Tokens
+   These generate utilities with full variant support
+   (e.g., lg:bg-cream, hover:text-coral, etc.)
+   ======================================== */
+@theme {
+	/* === COLORS === */
+	/* Cream Palette (Backgrounds) */
+	--color-cream: #faf6f1;
+	--color-cream-warm: #f5ede3;
+	--color-cream-deep: #ebe0d2;
+	--color-paper: #ffffff;
+	--color-paper-shadow: #e8dfd3;
+
+	/* Ink Palette (Text) */
+	--color-ink: #0d0d0d;
+	--color-ink-soft: #2d2d2d;
+	--color-ink-muted: #5c5c5c;
+
+	/* Accent Colors */
+	--color-coral: #ff6b5b;
+	--color-coral-hover: #e85a4a;
+	--color-mint: #3dd9b3;
+	--color-mint-hover: #2cc9a3;
+	--color-gold: #ffb830;
+	--color-gold-hover: #e5a020;
+	--color-violet: #7c5cff;
+	--color-violet-hover: #6b4ce8;
+
+	/* Semantic Colors */
+	--color-success: #22c55e;
+	--color-warning: #eab308;
+	--color-danger: #ef4444;
+	--color-info: #3b82f6;
+
+	/* === FONTS === */
+	--font-heading: 'Archivo Black', Impact, sans-serif;
+	--font-body: 'DM Sans', system-ui, sans-serif;
+
+	/* === SHADOWS (Hard, no blur - papercraft depth) === */
+	--shadow-brutal-xs: 2px 2px 0 var(--color-ink);
+	--shadow-brutal-sm: 3px 3px 0 var(--color-ink);
+	--shadow-brutal-md: 5px 5px 0 var(--color-ink);
+	--shadow-brutal-lg: 8px 8px 0 var(--color-ink);
+	--shadow-brutal-xl: 12px 12px 0 var(--color-ink);
+
+	/* Colored shadows */
+	--shadow-coral: 5px 5px 0 var(--color-coral);
+	--shadow-mint: 5px 5px 0 var(--color-mint);
+	--shadow-gold: 5px 5px 0 var(--color-gold);
+	--shadow-violet: 5px 5px 0 var(--color-violet);
+
+	/* === BORDER WIDTHS === */
+	--border-width-3: 3px;
+
+	/* === SPACING (extends Tailwind's scale) === */
+	--spacing-18: 4.5rem;
+	--spacing-22: 5.5rem;
+}
+
+/* ========================================
+   CUSTOM UTILITIES - With Variant Support
+   Use: lg:fc-container, hover:shadow-brutal-md, etc.
+   ======================================== */
+
+/* Container utilities */
+@utility fc-container {
+	width: 100%;
+	max-width: 80rem; /* 1280px */
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+@utility fc-container-narrow {
+	max-width: 60rem; /* 960px */
+}
+
+@utility fc-container-wide {
+	max-width: 96rem; /* 1536px */
+}
+
+/* 3px border utilities */
+@utility border-3 {
+	border-width: 3px;
+	border-style: solid;
+}
+
+@utility border-t-3 {
+	border-top-width: 3px;
+	border-top-style: solid;
+}
+
+@utility border-b-3 {
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+}
+
+@utility border-l-3 {
+	border-left-width: 3px;
+	border-left-style: solid;
+}
+
+@utility border-r-3 {
+	border-right-width: 3px;
+	border-right-style: solid;
+}
+
+/* ========================================
+   BRUTALIST FOUNDATION - Zero Compromise
+   ======================================== */
+
+/* CRITICAL: No rounded corners. Everything is a polygon. */
+*,
+*::before,
+*::after {
+	border-radius: 0 !important;
+}
+
+/* Hard cuts only - no soft transitions */
+*:not(.allow-transition) {
+	transition-duration: 0s !important;
+	transition-delay: 0s !important;
+}
+
+/* Allow specific transitions where needed */
+.allow-transition {
+	transition-duration: 150ms !important;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+html {
+	font-family: var(--font-body);
+	background-color: var(--color-cream);
+	color: var(--color-ink);
+	font-size: 16px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background-color: var(--color-cream);
+}
+
+/* Selection style - brutalist highlight */
+::selection {
+	background-color: var(--color-ink);
+	color: var(--color-cream);
+}
+
+/* ========================================
+   TYPOGRAPHY COMPONENT CLASSES
+   (Multi-property, so regular CSS is appropriate)
+   ======================================== */
+.heading {
+	font-family: var(--font-heading);
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: -0.025em;
+	line-height: 1.1;
+}
+
+.heading-display {
+	font-family: var(--font-heading);
+	font-size: 6rem;
+	text-transform: uppercase;
+	letter-spacing: -0.05em;
+	line-height: 1;
+}
+
+.heading-1 {
+	font-family: var(--font-heading);
+	font-size: 3.5rem;
+	text-transform: uppercase;
+	letter-spacing: -0.025em;
+	line-height: 1.1;
+}
+
+.heading-2 {
+	font-family: var(--font-heading);
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	letter-spacing: -0.025em;
+	line-height: 1.1;
+}
+
+.heading-3 {
+	font-family: var(--font-heading);
+	font-size: 2rem;
+	text-transform: uppercase;
+	letter-spacing: -0.025em;
+	line-height: 1.1;
+}
+
+.body-large {
+	font-family: var(--font-body);
+	font-size: 1.125rem;
+	line-height: 1.75;
+}
+
+.body {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.body-small {
+	font-family: var(--font-body);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.label {
+	font-family: var(--font-body);
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+/* ========================================
+   INTERACTIVE STATES - Paper Press Effect
+   ======================================== */
+.paper-press {
+	box-shadow: var(--shadow-brutal-md);
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.paper-press:hover {
+	box-shadow: var(--shadow-brutal-lg);
+	top: -2px;
+	left: -2px;
+}
+
+.paper-press:active {
+	box-shadow: var(--shadow-brutal-xs);
+	top: 3px;
+	left: 3px;
+}
+
+.paper-press-sm {
+	box-shadow: var(--shadow-brutal-sm);
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.paper-press-sm:hover {
+	box-shadow: var(--shadow-brutal-md);
+	top: -1px;
+	left: -1px;
+}
+
+.paper-press-sm:active {
+	box-shadow: var(--shadow-brutal-xs);
+	top: 2px;
+	left: 2px;
+}
+
+/* ========================================
+   BUTTON COMPONENTS
+   ======================================== */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1.5rem;
+	font-family: var(--font-body);
+	font-size: 1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	border: 3px solid var(--color-ink);
+	cursor: pointer;
+	user-select: none;
+	text-decoration: none;
+}
+
+.btn-primary {
+	background-color: var(--color-ink);
+	color: var(--color-cream);
+	border-color: var(--color-ink);
+}
+
+.btn-primary:hover {
+	background-color: var(--color-ink-soft);
+}
+
+.btn-secondary {
+	background-color: var(--color-cream);
+	color: var(--color-ink);
+	border-color: var(--color-ink);
+}
+
+.btn-secondary:hover {
+	background-color: var(--color-cream-warm);
+}
+
+.btn-coral {
+	background-color: var(--color-coral);
+	color: var(--color-paper);
+	border-color: var(--color-ink);
+}
+
+.btn-coral:hover {
+	background-color: var(--color-coral-hover);
+}
+
+.btn-mint {
+	background-color: var(--color-mint);
+	color: var(--color-ink);
+	border-color: var(--color-ink);
+}
+
+.btn-mint:hover {
+	background-color: var(--color-mint-hover);
+}
+
+.btn-lg {
+	padding: 1rem 2rem;
+	font-size: 1.125rem;
+}
+
+.btn-sm {
+	padding: 0.5rem 1rem;
+	font-size: 0.875rem;
+}
+
+/* ========================================
+   CARD COMPONENTS
+   ======================================== */
+.brutal-card {
+	background-color: var(--color-paper);
+	border: 3px solid var(--color-ink);
+	padding: 1.5rem;
+}
+
+.brutal-card-interactive {
+	background-color: var(--color-paper);
+	border: 3px solid var(--color-ink);
+	padding: 1.5rem;
+	cursor: pointer;
+}
+
+.brutal-card-interactive:hover {
+	background-color: var(--color-cream-warm);
+}
+
+.brutal-card-accent {
+	background-color: var(--color-cream-warm);
+	border: 3px solid var(--color-ink);
+	padding: 1.5rem;
+}
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+.input {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	font-family: var(--font-body);
+	font-size: 1rem;
+	background-color: var(--color-paper);
+	border: 2px solid var(--color-ink);
+	color: var(--color-ink);
+}
+
+.input:focus {
+	outline: none;
+	box-shadow: var(--shadow-brutal-sm);
+}
+
+.input::placeholder {
+	color: var(--color-ink-muted);
+}
+
+/* ========================================
+   GEOMETRIC ACCENTS
+   ======================================== */
+.clip-diagonal-br {
+	clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.clip-diagonal-tr {
+	clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%);
+}
+
+.clip-notch-tr {
+	clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+}
+
+.clip-notch-br {
+	clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-cream-warm);
+	border: 1px solid var(--color-ink);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-ink);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-ink-soft);
+}
+
+/* ========================================
+   FOCUS STATES - Accessibility
+   ======================================== */
+:focus-visible {
+	outline: 3px solid var(--color-coral);
+	outline-offset: 2px;
+}
+
+/* ========================================
+   TAG / BADGE COMPONENTS
+   ======================================== */
+.tag {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.75rem;
+	font-family: var(--font-body);
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	border: 2px solid var(--color-ink);
+	background-color: var(--color-paper);
+}
+
+.tag-coral {
+	background-color: var(--color-coral);
+	color: var(--color-paper);
+}
+
+.tag-mint {
+	background-color: var(--color-mint);
+	color: var(--color-ink);
+}
+
+.tag-gold {
+	background-color: var(--color-gold);
+	color: var(--color-ink);
+}
+
+.tag-violet {
+	background-color: var(--color-violet);
+	color: var(--color-paper);
+}
+
+/* ========================================
+   PRICE DISPLAY
+   ======================================== */
+.price {
+	font-family: var(--font-heading);
+	font-size: 1.5rem;
+}
+
+.price-currency {
+	font-size: 1.125rem;
+	vertical-align: super;
+}
+
+.price-old {
+	text-decoration: line-through;
+	color: var(--color-ink-muted);
+	font-size: 1.125rem;
+}
+
+/* ========================================
+   DIVIDERS
+   ======================================== */
+.divider {
+	height: 3px;
+	background-color: var(--color-ink);
+	border: none;
+	margin: 2rem 0;
+}
+
+.divider-thin {
+	height: 1px;
+	background-color: var(--color-ink);
+	border: none;
+	margin: 1rem 0;
+}
