@@ -159,17 +159,17 @@
             <h3 class="heading-2 mb-6">{m.cart_summary()}</h3>
 
             <div class="mb-6 space-y-3">
-              <div class="flex justify-between">
+              <div class="flex justify-between items-center">
                 <span class="body text-ink-muted">{m.cart_subtotal()}</span>
                 <span class="heading">{formatPrice(cartTotal)}</span>
               </div>
-              <div class="flex justify-between">
-                <span class="body text-ink-muted">{m.cart_shipping()}</span>
-                <span class="body text-ink-muted">{m.cart_shipping_calculated()}</span>
+              <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center">
+                <span class="body-small sm:body text-ink-muted">{m.cart_shipping()}</span>
+                <span class="body-small sm:body text-ink-muted">{m.cart_shipping_calculated()}</span>
               </div>
             </div>
 
-            <div class="mb-8 flex justify-between border-t-3 border-ink pt-4">
+            <div class="mb-8 flex justify-between items-center border-t-3 border-ink pt-4">
               <span class="heading">{m.cart_total()}</span>
               <span class="heading text-xl">{formatPrice(cartTotal)}</span>
             </div>
