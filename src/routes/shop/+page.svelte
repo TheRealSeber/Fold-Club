@@ -16,18 +16,18 @@
 </script>
 
 <div class="mb-12 flex flex-wrap gap-3">
-	{#each filters as filter (filter.key)}
-	<a
-		href="?category={filter.key}"
-		class={`btn btn-sm paper-press-sm ${activeCategory === filter.key ? 'btn-primary' : 'btn-secondary'}`}
-	>
-		{filter.label()}
-	</a>
-	{/each}
+  {#each filters as filter (filter.key)}
+    <a
+      href="?category={filter.key}"
+      class={`btn btn-sm paper-press-sm ${activeCategory === filter.key ? 'btn-primary' : 'btn-secondary'}`}
+    >
+      {filter.label()}
+    </a>
+  {/each}
 </div>
 
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-	{#each filteredProducts as product (product.id)}
-	<ProductCard {product} />
-	{/each}
+  {#each filteredProducts as product (product.id)}
+    <ProductCard {product} />
+  {/each}
 </div>
