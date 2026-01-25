@@ -2,11 +2,11 @@ import adapter from '@sveltejs/adapter-vercel';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	kit: {
-		adapter: adapter({ runtime: 'experimental_bun1.x' }) 
-	},
+  kit: {
+    adapter: adapter({ runtime: 'experimental_bun1.x' })
+  },
 
-	extensions: ['.svelte']
+  extensions: ['.svelte']
 };
 
 export default config;

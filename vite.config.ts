@@ -5,10 +5,14 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [
-		tailwindcss(),
-		sveltekit(),
-		paraglideVitePlugin({ project: './project.inlang', outdir: './src/lib/paraglide', strategy: ["localStorage", "preferredLanguage", "url", "baseLocale"] }),
-		devtoolsJson()
-	]
+  plugins: [
+    tailwindcss(),
+    sveltekit(),
+    paraglideVitePlugin({
+      project: './project.inlang',
+      outdir: './src/lib/paraglide',
+      strategy: ['localStorage', 'preferredLanguage', 'url', 'baseLocale']
+    }),
+    devtoolsJson()
+  ]
 });

@@ -46,23 +46,23 @@ While the aesthetic is brutalist, the UX must remain accessible:
 
 ```css
 :root {
-	/* Cream Palette (Backgrounds) */
-	--color-cream: #faf6f1; /* Primary background */
-	--color-cream-warm: #f5ede3; /* Secondary/alternating */
-	--color-cream-deep: #ebe0d2; /* Tertiary/cards */
-	--color-paper: #ffffff; /* Pure white elements */
-	--color-paper-shadow: #e8dfd3; /* Shadow tint */
+  /* Cream Palette (Backgrounds) */
+  --color-cream: #faf6f1; /* Primary background */
+  --color-cream-warm: #f5ede3; /* Secondary/alternating */
+  --color-cream-deep: #ebe0d2; /* Tertiary/cards */
+  --color-paper: #ffffff; /* Pure white elements */
+  --color-paper-shadow: #e8dfd3; /* Shadow tint */
 
-	/* Ink Palette (Text) */
-	--color-ink: #0d0d0d; /* Primary text */
-	--color-ink-soft: #2d2d2d; /* Secondary text */
-	--color-ink-muted: #5c5c5c; /* Muted/placeholder */
+  /* Ink Palette (Text) */
+  --color-ink: #0d0d0d; /* Primary text */
+  --color-ink-soft: #2d2d2d; /* Secondary text */
+  --color-ink-muted: #5c5c5c; /* Muted/placeholder */
 
-	/* Accent Colors */
-	--color-accent-coral: #ff6b5b;
-	--color-accent-mint: #3dd9b3;
-	--color-accent-gold: #ffb830;
-	--color-accent-violet: #7c5cff;
+  /* Accent Colors */
+  --color-accent-coral: #ff6b5b;
+  --color-accent-mint: #3dd9b3;
+  --color-accent-gold: #ffb830;
+  --color-accent-violet: #7c5cff;
 }
 ```
 
@@ -165,16 +165,16 @@ All shadows use **zero blur** and **solid offset**:
 
 ```css
 .paper-shadow-coral {
-	box-shadow: 5px 5px 0 var(--color-accent-coral);
+  box-shadow: 5px 5px 0 var(--color-accent-coral);
 }
 .paper-shadow-mint {
-	box-shadow: 5px 5px 0 var(--color-accent-mint);
+  box-shadow: 5px 5px 0 var(--color-accent-mint);
 }
 .paper-shadow-gold {
-	box-shadow: 5px 5px 0 var(--color-accent-gold);
+  box-shadow: 5px 5px 0 var(--color-accent-gold);
 }
 .paper-shadow-violet {
-	box-shadow: 5px 5px 0 var(--color-accent-violet);
+  box-shadow: 5px 5px 0 var(--color-accent-violet);
 }
 ```
 
@@ -200,16 +200,16 @@ All shadows use **zero blur** and **solid offset**:
 
 ```css
 .fc-container {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .fc-container-narrow {
-	max-width: 960px;
+  max-width: 960px;
 }
 .fc-container-wide {
-	max-width: 1536px;
+  max-width: 1536px;
 }
 ```
 
@@ -239,16 +239,16 @@ All shadows use **zero blur** and **solid offset**:
 
 ```css
 .btn {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
-	padding: 0.75rem 1.5rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	border: 3px solid var(--color-ink);
-	cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 3px solid var(--color-ink);
+  cursor: pointer;
 }
 ```
 
@@ -257,13 +257,13 @@ All shadows use **zero blur** and **solid offset**:
 ```svelte
 <!-- Static Card -->
 <div class="brutal-card paper-shadow-md">
-	<h3 class="heading text-xl">Card Title</h3>
-	<p class="body text-ink-muted">Card content here.</p>
+  <h3 class="heading text-xl">Card Title</h3>
+  <p class="body text-ink-muted">Card content here.</p>
 </div>
 
 <!-- Interactive Card -->
 <article class="brutal-card-interactive paper-press">
-	<h3 class="heading text-xl">Clickable Card</h3>
+  <h3 class="heading text-xl">Clickable Card</h3>
 </article>
 ```
 
@@ -288,23 +288,23 @@ All shadows use **zero blur** and **solid offset**:
 
 ```svelte
 <script>
-	import { Dialog } from 'bits-ui';
-	let open = $state(false);
+  import { Dialog } from 'bits-ui';
+  let open = $state(false);
 </script>
 
 <Dialog.Root bind:open>
-	<Dialog.Portal>
-		<Dialog.Overlay class="fixed inset-0 z-40 bg-ink/80" />
-		<Dialog.Content
-			class="brutal-card paper-shadow-xl fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-paper p-8"
-		>
-			<Dialog.Title class="heading-2">DIALOG TITLE</Dialog.Title>
-			<Dialog.Description class="body mt-2 text-ink-muted">
-				Dialog description here.
-			</Dialog.Description>
-			<Dialog.Close class="btn btn-secondary mt-6">CLOSE</Dialog.Close>
-		</Dialog.Content>
-	</Dialog.Portal>
+  <Dialog.Portal>
+    <Dialog.Overlay class="fixed inset-0 z-40 bg-ink/80" />
+    <Dialog.Content
+      class="brutal-card paper-shadow-xl fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-paper p-8"
+    >
+      <Dialog.Title class="heading-2">DIALOG TITLE</Dialog.Title>
+      <Dialog.Description class="body mt-2 text-ink-muted">
+        Dialog description here.
+      </Dialog.Description>
+      <Dialog.Close class="btn btn-secondary mt-6">CLOSE</Dialog.Close>
+    </Dialog.Content>
+  </Dialog.Portal>
 </Dialog.Root>
 ```
 
@@ -318,10 +318,10 @@ Always use 3px borders for brutalist weight:
 
 <!-- Local style -->
 <style>
-	.border-3 {
-		border-width: 3px;
-		border-style: solid;
-	}
+  .border-3 {
+    border-width: 3px;
+    border-style: solid;
+  }
 </style>
 ```
 
@@ -334,9 +334,9 @@ Always use 3px borders for brutalist weight:
 ```svelte
 <!-- Sharp corners, hard shadow, uppercase heading -->
 <div class="brutal-card paper-shadow-md">
-	<h2 class="heading-2">SECTION TITLE</h2>
-	<p class="body text-ink-muted">Description text.</p>
-	<button class="btn btn-primary paper-press">ACTION</button>
+  <h2 class="heading-2">SECTION TITLE</h2>
+  <p class="body text-ink-muted">Description text.</p>
+  <button class="btn btn-primary paper-press">ACTION</button>
 </div>
 ```
 
@@ -345,8 +345,8 @@ Always use 3px borders for brutalist weight:
 ```svelte
 <!-- WRONG: rounded corners, blur shadow, soft transition -->
 <div class="rounded-lg shadow-lg transition-all duration-300">
-	<h2 class="text-2xl font-bold">Section Title</h2>
-	<button class="rounded-md bg-blue-500 hover:bg-blue-600"> Action </button>
+  <h2 class="text-2xl font-bold">Section Title</h2>
+  <button class="rounded-md bg-blue-500 hover:bg-blue-600"> Action </button>
 </div>
 ```
 
@@ -378,8 +378,8 @@ All color combinations meet WCAG AA:
 
 ```css
 :focus-visible {
-	outline: 3px solid var(--color-accent-coral);
-	outline-offset: 2px;
+  outline: 3px solid var(--color-accent-coral);
+  outline-offset: 2px;
 }
 ```
 
@@ -403,32 +403,32 @@ The `transition-duration: 0s` rule helps users with motion sensitivity, but ensu
 ```svelte
 <!-- Page Section -->
 <section class="bg-cream py-20">
-	<div class="fc-container">
-		<span class="label mb-2 block text-coral">SECTION LABEL</span>
-		<h2 class="heading-2 mb-8">SECTION TITLE</h2>
-		<!-- content -->
-	</div>
+  <div class="fc-container">
+    <span class="label mb-2 block text-coral">SECTION LABEL</span>
+    <h2 class="heading-2 mb-8">SECTION TITLE</h2>
+    <!-- content -->
+  </div>
 </section>
 
 <!-- Product Card -->
 <article class="brutal-card paper-press">
-	<div class="mb-4 aspect-square border-b-3 border-ink bg-cream-deep">
-		<!-- image -->
-	</div>
-	<h3 class="heading text-xl">{name}</h3>
-	<p class="body-small text-ink-muted">{description}</p>
-	<div class="price mt-4">
-		<span class="price-currency">$</span>{price}
-	</div>
+  <div class="mb-4 aspect-square border-b-3 border-ink bg-cream-deep">
+    <!-- image -->
+  </div>
+  <h3 class="heading text-xl">{name}</h3>
+  <p class="body-small text-ink-muted">{description}</p>
+  <div class="price mt-4">
+    <span class="price-currency">$</span>{price}
+  </div>
 </article>
 
 <!-- CTA Section -->
 <section class="bg-coral py-20">
-	<div class="fc-container text-center">
-		<h2 class="heading-1 mb-6 text-paper">CTA HEADLINE</h2>
-		<p class="body-large mx-auto mb-10 max-w-2xl text-paper/90">Supporting text here.</p>
-		<a href="/action" class="btn btn-primary btn-lg paper-press bg-ink text-cream"> TAKE ACTION </a>
-	</div>
+  <div class="fc-container text-center">
+    <h2 class="heading-1 mb-6 text-paper">CTA HEADLINE</h2>
+    <p class="body-large mx-auto mb-10 max-w-2xl text-paper/90">Supporting text here.</p>
+    <a href="/action" class="btn btn-primary btn-lg paper-press bg-ink text-cream"> TAKE ACTION </a>
+  </div>
 </section>
 ```
 

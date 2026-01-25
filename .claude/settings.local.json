@@ -22,7 +22,5 @@
     ]
   },
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "svelte"
-  ]
+  "enabledMcpjsonServers": ["svelte"]
 }

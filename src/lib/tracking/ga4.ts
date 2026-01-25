@@ -8,10 +8,10 @@ import { browser } from '$app/environment';
 import { PUBLIC_GA4_MEASUREMENT_ID } from '$env/static/public';
 
 declare global {
-	interface Window {
-		dataLayer: unknown[];
-		gtag: (...args: unknown[]) => void;
-	}
+  interface Window {
+    dataLayer: unknown[];
+    gtag: (...args: unknown[]) => void;
+  }
 }
 
 let initialized = false;
@@ -20,116 +20,113 @@ let initialized = false;
  * Initialize GA4 - call once in root layout
  */
 export function initGA4(): void {
-	if (!browser || !PUBLIC_GA4_MEASUREMENT_ID || initialized) return;
+  if (!browser || !PUBLIC_GA4_MEASUREMENT_ID || initialized) return;
 
-	// Create dataLayer
-	window.dataLayer = window.dataLayer || [];
+  // Create dataLayer
+  window.dataLayer = window.dataLayer || [];
 
-	// Define gtag function
-	window.gtag = function gtag(...args: unknown[]) {
-		window.dataLayer.push(args);
-	};
+  // Define gtag function
+  window.gtag = function gtag(...args: unknown[]) {
+    window.dataLayer.push(args);
+  };
 
-	window.gtag('js', new Date());
-	window.gtag('config', PUBLIC_GA4_MEASUREMENT_ID, {
-		send_page_view: true
-	});
+  window.gtag('js', new Date());
+  window.gtag('config', PUBLIC_GA4_MEASUREMENT_ID, {
+    send_page_view: true
+  });
 
-	// Load gtag.js script
-	const script = document.createElement('script');
-	script.async = true;
-	script.src = `https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA4_MEASUREMENT_ID}`;
-	document.head.appendChild(script);
+  // Load gtag.js script
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA4_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
 
-	initialized = true;
+  initialized = true;
 }
 
 /**
  * Track page_view on client-side navigation
  */
 export function trackGA4PageView(pagePath: string, pageTitle: string): void {
-	if (!browser || !window.gtag) return;
+  if (!browser || !window.gtag) return;
 
-	window.gtag('event', 'page_view', {
-		page_path: pagePath,
-		page_title: pageTitle
-	});
+  window.gtag('event', 'page_view', {
+    page_path: pagePath,
+    page_title: pageTitle
+  });
 }
 
 /**
  * Track add_to_cart event
  */
 export function trackGA4AddToCart(productId: number, itemName: string, value: number): void {
-	if (!browser || !window.gtag) return;
+  if (!browser || !window.gtag) return;
 
-	window.gtag('event', 'add_to_cart', {
-		currency: 'PLN',
-		value: value,
-		items: [
-			{
-				item_id: productId.toString(),
-				item_name: itemName,
-				price: value,
-				quantity: 1
-			}
-		]
-	});
+  window.gtag('event', 'add_to_cart', {
+    currency: 'PLN',
+    value: value,
+    items: [
+      {
+        item_id: productId.toString(),
+        item_name: itemName,
+        price: value,
+        quantity: 1
+      }
+    ]
+  });
 }
 
 /**
  * Track begin_checkout event for Fake Door
  */
 export function trackGA4BeginCheckout(
-	items: Array<{ id: number; name: string; price: number; quantity: number }>,
-	value: number
+  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  value: number
 ): void {
-	if (!browser || !window.gtag) return;
+  if (!browser || !window.gtag) return;
 
-	window.gtag('event', 'begin_checkout', {
-		currency: 'PLN',
-		value: value,
-		items: items.map((item, index) => ({
-			item_id: item.id.toString(),
-			item_name: item.name,
-			price: item.price,
-			quantity: item.quantity,
-			index: index
-		}))
-	});
+  window.gtag('event', 'begin_checkout', {
+    currency: 'PLN',
+    value: value,
+    items: items.map((item, index) => ({
+      item_id: item.id.toString(),
+      item_name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      index: index
+    }))
+  });
 }
 
 /**
  * Track view_item (product view)
  */
 export function trackGA4ViewItem(productId: number, itemName: string, value: number): void {
-	if (!browser || !window.gtag) return;
+  if (!browser || !window.gtag) return;
 
-	window.gtag('event', 'view_item', {
-		currency: 'PLN',
-		value: value,
-		items: [
-			{
-				item_id: productId.toString(),
-				item_name: itemName,
-				price: value,
-				quantity: 1
-			}
-		]
-	});
+  window.gtag('event', 'view_item', {
+    currency: 'PLN',
+    value: value,
+    items: [
+      {
+        item_id: productId.toString(),
+        item_name: itemName,
+        price: value,
+        quantity: 1
+      }
+    ]
+  });
 }
 
 /**
  * Track custom fake_door_interaction event for funnel analysis
  */
-export function trackGA4FakeDoor(
-	action: 'add_to_cart' | 'checkout',
-	productIds: number[]
-): void {
-	if (!browser || !window.gtag) return;
+export function trackGA4FakeDoor(action: 'add_to_cart' | 'checkout', productIds: number[]): void {
+  if (!browser || !window.gtag) return;
 
-	window.gtag('event', 'fake_door_interaction', {
-		action: action,
-		product_ids: productIds.join(','),
-		timestamp: Date.now()
-	});
+  window.gtag('event', 'fake_door_interaction', {
+    action: action,
+    product_ids: productIds.join(','),
+    timestamp: Date.now()
+  });
 }

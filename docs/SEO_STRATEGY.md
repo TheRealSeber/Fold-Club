@@ -11,35 +11,39 @@ Based on DataForSEO analysis of the Polish papercraft market, this strategy focu
 ### High-Opportunity Keywords (Polish Market)
 
 #### A. Core Product Keywords
-| Keyword | Monthly SV | Competition | Seasonality | Priority |
-|---------|-----------|-------------|-------------|----------|
-| **maska karnawałowa** | 6,600 | HIGH | Feb: 22k, Jan: 33k | **P0** |
-| **stroje karnawałowe** | 6,600 | HIGH | Feb: 40k, Jan: 22k | **P0** |
-| **ozdoba na ścianę** | 6,600 | HIGH | Steady year-round | **P0** |
-| **maska kota** | 2,900 | HIGH | Feb: 8.1k, Jan: 5.4k | **P1** |
-| **papercraft** | 1,300 | **LOW** (KD:19) | Steady | **P0** |
-| **low poly** | 1,000 | **LOW** (KD:6) | Steady | **P0** |
-| **maska dinozaura** | 1,000 | HIGH | Feb: 3.6k, Jan: 1.9k | **P1** |
-| **kreatywny prezent** | 720 | HIGH | Dec: 1.9k | **P1** |
-| **maska lisa** | 590 | HIGH | Oct: 880, Jan: 1.3k | **P2** |
-| **ozdoby z papieru** | 480 | - | Dec: 1,600 | **P1** |
-| **dekoracje na imprezę** | 390 | HIGH | Jan: 590 | **P2** |
-| **diy z papieru** | 390 | **LOW** (KD:0) | Steady | **P1** |
-| **prezent dla chłopaka diy** | 260 | HIGH | Dec: 590 | **P2** |
+
+| Keyword                      | Monthly SV | Competition     | Seasonality          | Priority |
+| ---------------------------- | ---------- | --------------- | -------------------- | -------- |
+| **maska karnawałowa**        | 6,600      | HIGH            | Feb: 22k, Jan: 33k   | **P0**   |
+| **stroje karnawałowe**       | 6,600      | HIGH            | Feb: 40k, Jan: 22k   | **P0**   |
+| **ozdoba na ścianę**         | 6,600      | HIGH            | Steady year-round    | **P0**   |
+| **maska kota**               | 2,900      | HIGH            | Feb: 8.1k, Jan: 5.4k | **P1**   |
+| **papercraft**               | 1,300      | **LOW** (KD:19) | Steady               | **P0**   |
+| **low poly**                 | 1,000      | **LOW** (KD:6)  | Steady               | **P0**   |
+| **maska dinozaura**          | 1,000      | HIGH            | Feb: 3.6k, Jan: 1.9k | **P1**   |
+| **kreatywny prezent**        | 720        | HIGH            | Dec: 1.9k            | **P1**   |
+| **maska lisa**               | 590        | HIGH            | Oct: 880, Jan: 1.3k  | **P2**   |
+| **ozdoby z papieru**         | 480        | -               | Dec: 1,600           | **P1**   |
+| **dekoracje na imprezę**     | 390        | HIGH            | Jan: 590             | **P2**   |
+| **diy z papieru**            | 390        | **LOW** (KD:0)  | Steady               | **P1**   |
+| **prezent dla chłopaka diy** | 260        | HIGH            | Dec: 590             | **P2**   |
 
 #### B. Competitor Gap Analysis
 
 **ipicasso.pl** (painting-by-numbers):
+
 - Dominated by brand terms ("ipicasso")
 - Focus: Home decoration, painting kits
 - **Gap**: Zero papercraft/low poly presence
 
 **nowekartonowe.pl** (educational paper models):
+
 - Focus: Science models ("model komórki zwierzęcej 3d", "dinozaur z kartonu")
 - Audience: Teachers, parents
 - **Gap**: Zero focus on party/gift/decoration use cases
 
 **Fold Club Differentiation**:
+
 - **Low-competition technical terms**: "papercraft", "low poly" (competitors not targeting)
 - **Party/carnival use case**: Capitalize on carnival season (Feb/Jan)
 - **Gift positioning**: "kreatywny prezent" angle (competitors ignore)
@@ -100,27 +104,43 @@ foldclub.pl/
 ### Meta Titles & Descriptions
 
 #### Homepage
+
 ```html
 <title>Papercraft Low Poly - Geometryczne Maski Zwierząt | Fold Club</title>
-<meta name="description" content="Zestawy papercraft do składania geometrycznych masek zwierząt. Low poly DIY - kot, lis, dinozaur, sfinks. Ozdoby ścienne 3D i maski karnawałowe." />
+<meta
+  name="description"
+  content="Zestawy papercraft do składania geometrycznych masek zwierząt. Low poly DIY - kot, lis, dinozaur, sfinks. Ozdoby ścienne 3D i maski karnawałowe."
+/>
 ```
 
 #### Shop Page
+
 ```html
 <title>Sklep z Zestawami Papercraft - Maski Low Poly i Dekoracje 3D | Fold Club</title>
-<meta name="description" content="Kup zestawy papercraft low poly. Geometryczne maski zwierząt, ozdoby ścienne 3D. Kreatywny prezent DIY dla par i dzieci. Dostawa w Polsce." />
+<meta
+  name="description"
+  content="Kup zestawy papercraft low poly. Geometryczne maski zwierząt, ozdoby ścienne 3D. Kreatywny prezent DIY dla par i dzieci. Dostawa w Polsce."
+/>
 ```
 
 #### Carnival Landing Page (NEW - for Feb/Jan spike)
+
 ```html
 <title>Maski Karnawałowe DIY - Geometryczne Zwierzęta Papercraft | Fold Club</title>
-<meta name="description" content="Wyróżnij się na balu karnawałowym! Maski papercraft do samodzielnego składania - kot, lis, sfinks. Low poly 3D z papieru. Szybka wysyłka." />
+<meta
+  name="description"
+  content="Wyróżnij się na balu karnawałowym! Maski papercraft do samodzielnego składania - kot, lis, sfinks. Low poly 3D z papieru. Szybka wysyłka."
+/>
 ```
 
 #### Wall Decoration Landing Page (NEW - 6,600 SV)
+
 ```html
 <title>Ozdoby Ścienne 3D z Papieru - Low Poly Zwierzęta | Fold Club</title>
-<meta name="description" content="Geometryczne ozdoby ścienne DIY. Papierowe rzeźby zwierząt low poly - nowoczesna dekoracja do salonu. Zestaw do składania z instrukcją." />
+<meta
+  name="description"
+  content="Geometryczne ozdoby ścienne DIY. Papierowe rzeźby zwierząt low poly - nowoczesna dekoracja do salonu. Zestaw do składania z instrukcją."
+/>
 ```
 
 ---
@@ -133,25 +153,28 @@ foldclub.pl/
 **Secondary Keywords**: geometryczne maski, diy z papieru, ozdoby ścienne 3d
 
 **Hero Section**:
+
 - H1: "Maski Papercraft Low Poly - Kreatywne Zestawy DIY"
 - Subheading: "Geometryczne zwierzęta z papieru do składania. Od maski kota po sfinksa."
 
 **Products Section**:
+
 - H2: "Nasze Zestawy Papercraft"
 - Each product card mentions "low poly [animal]" + "maska" or "ozdoba ścienna"
 
 **How It Works Section**:
+
 - H2: "Jak Działa Papercraft? 4 Proste Kroki"
 - Content includes "diy z papieru", "składanie", "instrukcja"
 
 **SEO Content Block** (add below fold):
+
 ```html
 <section class="seo-content">
   <h2>Czym Jest Papercraft Low Poly?</h2>
   <p>
-    Papercraft to sztuka składania geometrycznych rzeźb z papieru.
-    Nasze zestawy low poly to gotowe szablony do wycięcia i złożenia
-    efektownych masek zwierząt - od maski kota, przez lisa,
+    Papercraft to sztuka składania geometrycznych rzeźb z papieru. Nasze zestawy low poly to gotowe
+    szablony do wycięcia i złożenia efektownych masek zwierząt - od maski kota, przez lisa,
     dinozaura, aż po egipskiego sfinksa.
   </p>
   <h3>Zastosowania:</h3>
@@ -167,6 +190,7 @@ foldclub.pl/
 ### Product Pages (Future)
 
 Each product page should target specific long-tail:
+
 - **/sklep/maska-kota-low-poly** → "maska kota" (2,900 SV)
 - **/sklep/maska-dinozaura-papercraft** → "maska dinozaura" (1,000 SV)
 - **/sklep/maska-lisa-geometryczna** → "maska lisa" (590 SV)
@@ -191,6 +215,7 @@ Sitemap: https://foldclub.pl/sitemap.xml
 ### 4.2 sitemap.xml (Dynamic Generation)
 
 Create `src/routes/sitemap.xml/+server.ts`:
+
 ```typescript
 import { products } from '$lib/data/products';
 
@@ -212,12 +237,16 @@ export async function GET() {
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticPages.map(page => `  <url>
+${staticPages
+  .map(
+    (page) => `  <url>
     <loc>${baseUrl}/${page.url}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`).join('\n')}
+  </url>`
+  )
+  .join('\n')}
 </urlset>`;
 
   return new Response(sitemap, {
@@ -229,6 +258,7 @@ ${staticPages.map(page => `  <url>
 ### 4.3 Open Graph Tags
 
 Update `src/routes/+layout.svelte`:
+
 ```svelte
 <svelte:head>
   <meta property="og:type" content="website" />
@@ -239,10 +269,17 @@ Update `src/routes/+layout.svelte`:
 ```
 
 Per-page in `+page.svelte`:
+
 ```svelte
 <svelte:head>
-  <meta property="og:title" content="Papercraft Low Poly - Geometryczne Maski Zwierząt | Fold Club" />
-  <meta property="og:description" content="Zestawy papercraft do składania geometrycznych masek zwierząt. Low poly DIY." />
+  <meta
+    property="og:title"
+    content="Papercraft Low Poly - Geometryczne Maski Zwierząt | Fold Club"
+  />
+  <meta
+    property="og:description"
+    content="Zestawy papercraft do składania geometrycznych masek zwierząt. Low poly DIY."
+  />
   <meta property="og:image" content="https://foldclub.pl/og-image.png" />
   <meta property="og:url" content="https://foldclub.pl/" />
 </svelte:head>
@@ -251,6 +288,7 @@ Per-page in `+page.svelte`:
 ### 4.4 Structured Data (JSON-LD)
 
 Add to homepage:
+
 ```svelte
 <svelte:head>
   {@html `
@@ -273,6 +311,7 @@ Add to homepage:
 ```
 
 Add to product pages (future):
+
 ```json
 {
   "@context": "https://schema.org",
@@ -319,37 +358,41 @@ Add to product pages (future):
 
 ## 6. Seasonal SEO Calendar
 
-| Month | Focus | Action |
-|-------|-------|--------|
-| **November** | Gift season prep | Publish gift guide blog, optimize "kreatywny prezent" |
-| **December** | Gifts + Carnival prep | Push "prezent diy" content, prepare carnival landing page |
-| **January** | **CARNIVAL SPIKE** | Launch "/sklep/maski-karnawałowe", Google Ads on "maska karnawałowa" |
-| **February** | **CARNIVAL PEAK** | Max push on carnival keywords, social media campaign |
-| **March-April** | Spring parties | Target "dekoracje na imprezę", Easter themes |
-| **May-June** | Wall decor | Focus "ozdoba na ścianę", home improvement angle |
-| **October** | Halloween prep | Target "maska lisa" (peaks Oct), spooky themes |
+| Month           | Focus                 | Action                                                               |
+| --------------- | --------------------- | -------------------------------------------------------------------- |
+| **November**    | Gift season prep      | Publish gift guide blog, optimize "kreatywny prezent"                |
+| **December**    | Gifts + Carnival prep | Push "prezent diy" content, prepare carnival landing page            |
+| **January**     | **CARNIVAL SPIKE**    | Launch "/sklep/maski-karnawałowe", Google Ads on "maska karnawałowa" |
+| **February**    | **CARNIVAL PEAK**     | Max push on carnival keywords, social media campaign                 |
+| **March-April** | Spring parties        | Target "dekoracje na imprezę", Easter themes                         |
+| **May-June**    | Wall decor            | Focus "ozdoba na ścianę", home improvement angle                     |
+| **October**     | Halloween prep        | Target "maska lisa" (peaks Oct), spooky themes                       |
 
 ---
 
 ## 7. Quick Wins (Implement First)
 
 ### Week 1:
+
 - ✅ Create `robots.txt`
 - ✅ Generate `sitemap.xml`
 - ✅ Add Open Graph tags to layout
 - ✅ Update homepage meta title/description
 
 ### Week 2:
+
 - Create carnival landing page `/sklep/maski-karnawałowe`
 - Create wall decor landing page `/sklep/ozdoby-scienne`
 - Add SEO content block to homepage (below fold)
 
 ### Week 3:
+
 - Create gift landing page `/sklep/prezenty-diy`
 - Add JSON-LD structured data
 - Set up Google Search Console + Analytics 4
 
 ### Week 4:
+
 - Write first blog post ("Jak zrobić maskę z papieru?")
 - Start building backlinks (Reddit r/papercraft, Polish craft forums)
 
@@ -358,16 +401,19 @@ Add to product pages (future):
 ## 8. Success Metrics
 
 ### 3-Month Goals:
+
 - Rank top 10 for "papercraft" (1,300 SV, KD:19)
 - Rank top 10 for "low poly" (1,000 SV, KD:6)
 - Capture 5% of "maska karnawałowa" traffic during Jan/Feb spike (target: 300 sessions)
 
 ### 6-Month Goals:
+
 - Rank top 5 for "diy z papieru" (390 SV, KD:0)
 - Rank top 20 for "ozdoba na ścianę" (6,600 SV)
 - 1,000 organic sessions/month
 
 ### 12-Month Goals:
+
 - Rank top 3 for "papercraft" and "low poly"
 - Rank top 10 for "ozdoba na ścianę"
 - 5,000 organic sessions/month

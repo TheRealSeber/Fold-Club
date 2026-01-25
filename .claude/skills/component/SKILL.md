@@ -22,20 +22,20 @@ Create in `src/lib/components/ComponentName.svelte`:
 
 ```svelte
 <script lang="ts">
-	interface Props {
-		// Define typed props
-	}
+  interface Props {
+    // Define typed props
+  }
 
-	let { prop1, prop2 = 'default' }: Props = $props();
+  let { prop1, prop2 = 'default' }: Props = $props();
 </script>
 
 <!-- Use design system classes -->
 <div class="brutal-card paper-shadow-md">
-	<!-- content -->
+  <!-- content -->
 </div>
 
 <style>
-	/* Only if component-specific styles needed */
+  /* Only if component-specific styles needed */
 </style>
 ```
 

@@ -13,6 +13,5 @@ export { default as HowItWorksDialog } from './landing/HowItWorksDialog.svelte';
 
 // Shared components
 export { default as PageHeader } from './shared/PageHeader.svelte';
-export { default as InfoPageLayout } from './shared/InfoPageLayout.svelte';
 export { default as FakeDoorModal } from './shared/FakeDoorModal.svelte';
 export { default as SEOHead } from './shared/SEOHead.svelte';

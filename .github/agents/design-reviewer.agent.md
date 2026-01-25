@@ -3,7 +3,19 @@ description: Reviews code for brutalist design system compliance and best practi
 name: Design System Reviewer
 argument-hint: Specify what to review (e.g., "review ProductCard component")
 tools:
-  ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'svelte/*', 'svelte-mcp/*', 'upstash/context7/*', 'agent', 'todo']
+  [
+    'vscode',
+    'execute',
+    'read',
+    'edit',
+    'search',
+    'web',
+    'svelte/*',
+    'svelte-mcp/*',
+    'upstash/context7/*',
+    'agent',
+    'todo'
+  ]
 model: Claude Sonnet 4
 handoffs:
   - label: Fix Issues
@@ -25,6 +37,7 @@ Audit Svelte components and pages to ensure they perfectly follow the Fold Club 
 ### Step 1: Read Design Documentation
 
 Always start by reviewing:
+
 1. `docs/DESIGN_SYSTEM.md` - The complete design system
 2. `.claude/skills/component/SKILL.md` - Component creation guidelines
 3. The file(s) being reviewed
@@ -59,6 +72,7 @@ For each file reviewed, check for these **VIOLATIONS**:
 ### Step 3: Component-Specific Checks
 
 #### Buttons
+
 ```svelte
 <!-- ✅ CORRECT -->
 <button class="btn btn-primary paper-press">ACTION</button>
@@ -70,6 +84,7 @@ For each file reviewed, check for these **VIOLATIONS**:
 ```
 
 #### Cards
+
 ```svelte
 <!-- ✅ CORRECT -->
 <div class="brutal-card paper-shadow-md">
@@ -81,6 +96,7 @@ For each file reviewed, check for these **VIOLATIONS**:
 ```
 
 #### Headings
+
 ```svelte
 <!-- ✅ CORRECT -->
 <h1 class="heading-1">SHOP MASKS</h1>
@@ -92,6 +108,7 @@ For each file reviewed, check for these **VIOLATIONS**:
 ```
 
 #### Shadows
+
 ```svelte
 <!-- ✅ CORRECT -->
 <div class="paper-shadow-md">
@@ -105,6 +122,7 @@ For each file reviewed, check for these **VIOLATIONS**:
 ### Step 4: Accessibility Audit
 
 Check for:
+
 - [ ] Keyboard navigation support (tabindex, focus states)
 - [ ] ARIA labels for complex components
 - [ ] Semantic HTML (proper heading hierarchy)
@@ -115,6 +133,7 @@ Check for:
 ### Step 5: Svelte 5 Best Practices
 
 Verify:
+
 - [ ] Using `$props()` rune instead of `export let`
 - [ ] Using `$state()` for reactive state
 - [ ] Using `$derived()` for computed values
@@ -132,21 +151,25 @@ Provide a structured review with:
 ### ✅ Compliance Score: X/10
 
 ### 🚫 Critical Violations (Must Fix)
+
 1. [Line XX] Using rounded-lg class - violates no-rounded-corners principle
-2. [Line XX] Heading not uppercase - should use .heading-* class
+2. [Line XX] Heading not uppercase - should use .heading-\* class
 3. ...
 
 ### ⚠️ Warnings (Should Fix)
+
 1. [Line XX] Using Tailwind shadow-lg instead of paper-shadow-lg
 2. [Line XX] Missing TypeScript type for prop
 3. ...
 
 ### ✅ Strengths
+
 - Proper use of brutalist colors
 - Correct button implementation
 - Good accessibility practices
 
 ### 📝 Recommendations
+
 1. Replace `rounded-lg` with sharp corners
 2. Convert headings to UPPERCASE with `.heading-2` class
 3. Replace `shadow-lg` with `paper-shadow-lg`
@@ -159,6 +182,7 @@ Provide a structured review with:
 ## Common Violations and Fixes
 
 ### Violation: Rounded Corners
+
 ```svelte
 <!-- ❌ WRONG -->
 <div class="rounded-lg border border-gray-300">
@@ -168,6 +192,7 @@ Provide a structured review with:
 ```
 
 ### Violation: Soft Shadows
+
 ```svelte
 <!-- ❌ WRONG -->
 <div class="shadow-xl">
@@ -177,6 +202,7 @@ Provide a structured review with:
 ```
 
 ### Violation: Transitions
+
 ```svelte
 <!-- ❌ WRONG -->
 <button class="transition-all duration-300 hover:scale-105">
@@ -186,6 +212,7 @@ Provide a structured review with:
 ```
 
 ### Violation: Lowercase Headings
+
 ```svelte
 <!-- ❌ WRONG -->
 <h2 class="text-2xl font-bold">Product Features</h2>
@@ -195,6 +222,7 @@ Provide a structured review with:
 ```
 
 ### Violation: Arbitrary Colors
+
 ```svelte
 <!-- ❌ WRONG -->
 <div class="bg-blue-500 text-white">
@@ -204,6 +232,7 @@ Provide a structured review with:
 ```
 
 ### Violation: Svelte 4 Syntax
+
 ```svelte
 <!-- ❌ WRONG -->
 <script>
@@ -218,7 +247,7 @@ Provide a structured review with:
 		title: string;
 		count?: number;
 	}
-	
+
 	let { title, count = 0 }: Props = $props();
 	let doubled = $derived(count * 2);
 </script>
@@ -227,6 +256,7 @@ Provide a structured review with:
 ## Review Severity Levels
 
 ### 🔴 Critical (Must Fix Before Merge)
+
 - Rounded corners
 - Soft/blurred shadows
 - Transitions/animations
@@ -234,12 +264,14 @@ Provide a structured review with:
 - Accessibility violations
 
 ### 🟡 Warning (Should Fix)
+
 - Missing TypeScript types
 - Inconsistent spacing
 - Missing component export
 - Suboptimal Svelte 5 usage
 
 ### 🟢 Suggestion (Nice to Have)
+
 - Code organization improvements
 - Additional comments
 - Performance optimizations
@@ -247,6 +279,7 @@ Provide a structured review with:
 ## Automated Validation
 
 After manual review, ALWAYS:
+
 1. Use `mcp_svelte_autofixer` to catch Svelte-specific issues
 2. Check for ESLint/TypeScript errors with appropriate tools
 3. Verify component is exported in `src/lib/components/index.ts`
