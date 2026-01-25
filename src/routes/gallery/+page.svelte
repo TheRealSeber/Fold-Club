@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import LandingNav from '$lib/components/landing/LandingNav.svelte';
 	import FooterSection from '$lib/components/landing/FooterSection.svelte';
 	import PageHeader from '$lib/components/shared/PageHeader.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { cart } from '$lib/stores/cart.svelte.ts';
-	import { analytics } from '$lib/stores/analytics';
+	import { cart } from '$lib/stores/cart.svelte';
 
 	let email = $state('');
 
@@ -13,17 +11,13 @@
 		e.preventDefault();
 		// Email signup is non-functional for now
 	}
-
-	onMount(() => {
-		analytics.trackPageView('gallery');
-	});
 </script>
 
 <div class="flex min-h-screen flex-col">
 	<LandingNav cartCount={cart.count} />
 	<PageHeader title={m.gallery_title()} subtitle={m.gallery_subtitle()} />
 
-	<main class="flex-grow bg-cream py-16">
+	<main class="grow bg-cream py-16">
 		<div class="fc-container">
 			<div class="mb-16 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 				{#each Array(8) as _, i}
@@ -48,7 +42,7 @@
 							type="email"
 							bind:value={email}
 							placeholder={m.gallery_email_placeholder()}
-							class="input flex-grow"
+							class="input grow"
 							required
 						/>
 						<button type="submit" class="btn btn-primary paper-press">

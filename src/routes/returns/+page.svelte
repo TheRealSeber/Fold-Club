@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import InfoPageLayout from '$lib/components/shared/InfoPageLayout.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { analytics } from '$lib/stores/analytics';
 
 	const steps = [
 		() => m.returns_step1(),
@@ -16,14 +13,9 @@
 		() => m.returns_condition2(),
 		() => m.returns_condition3()
 	];
-
-	onMount(() => {
-		analytics.trackPageView('returns');
-	});
 </script>
 
-<InfoPageLayout title={m.returns_title()} subtitle={m.returns_subtitle()}>
-	<div class="max-w-3xl space-y-12">
+<div class="max-w-3xl space-y-12">
 		<section>
 			<h2 class="heading-2 mb-4">{m.returns_policy_title()}</h2>
 			<p class="body text-ink-muted">{m.returns_policy_desc()}</p>
@@ -57,5 +49,4 @@
 				{/each}
 			</ul>
 		</section>
-	</div>
-</InfoPageLayout>
+</div>

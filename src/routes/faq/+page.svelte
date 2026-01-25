@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import InfoPageLayout from '$lib/components/shared/InfoPageLayout.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { analytics } from '$lib/stores/analytics';
 	import { Accordion } from 'bits-ui';
 
 	const faqs = [
@@ -13,14 +10,9 @@
 		{ id: 5, q: () => m.faq_q5(), a: () => m.faq_a5() },
 		{ id: 6, q: () => m.faq_q6(), a: () => m.faq_a6() }
 	];
-
-	onMount(() => {
-		analytics.trackPageView('faq');
-	});
 </script>
 
-<InfoPageLayout title={m.faq_title()} subtitle={m.faq_subtitle()}>
-	<div class="max-w-3xl">
+<div class="max-w-3xl">
 		<Accordion.Root type="single" class="space-y-4">
 			{#each faqs as faq (faq.id)}
 				<Accordion.Item value="item-{faq.id}" class="brutal-card paper-shadow-sm">
@@ -36,5 +28,4 @@
 				</Accordion.Item>
 			{/each}
 		</Accordion.Root>
-	</div>
-</InfoPageLayout>
+</div>

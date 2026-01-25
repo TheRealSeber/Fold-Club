@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
-	import { cart } from '$lib/stores/cart.svelte.ts';
-	import { analytics } from '$lib/stores/analytics';
 
 	type Props = {
 		cartCount?: number;
@@ -11,16 +9,6 @@
 	let { cartCount = 0 }: Props = $props();
 
 	const locale = getLocale();
-
-	let showToast = $state(false);
-
-	function handleCheckoutClick() {
-		analytics.trackCheckoutClick(cart.getProductIds());
-		showToast = true;
-		setTimeout(() => {
-			showToast = false;
-		}, 3000);
-	}
 </script>
 
 <header class="border-b-3 border-ink bg-paper">
@@ -60,28 +48,13 @@
 				</button>
 			</div>
 
-			<button class="btn btn-secondary btn-sm paper-press-sm" aria-label={m.nav_cart_aria()}>
+			<a
+				href={localizeHref('/cart')}
+				class={`btn btn-sm paper-press-sm ${cartCount > 0 ? 'btn-coral' : 'btn-secondary'}`}
+				aria-label={m.nav_cart_aria()}
+			>
 				{m.nav_cart({ count: cartCount })}
-			</button>
-
-			{#if cartCount > 0}
-				<button
-					class="btn btn-coral btn-sm paper-press-sm"
-					aria-label={m.nav_checkout_aria()}
-					onclick={handleCheckoutClick}
-				>
-					{m.nav_checkout()}
-				</button>
-			{/if}
+			</a>
 		</div>
 	</nav>
 </header>
-
-{#if showToast}
-	<div class="fixed right-6 bottom-6 z-50">
-		<div class="brutal-card paper-shadow-md max-w-sm bg-coral p-6 text-paper">
-			<h4 class="heading mb-2 text-lg">{m.checkout_toast_title()}</h4>
-			<p class="body-small">{m.checkout_toast_desc()}</p>
-		</div>
-	</div>
-{/if}

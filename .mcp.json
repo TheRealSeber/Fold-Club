@@ -3,6 +3,15 @@
 		"svelte": {
 			"type": "http",
 			"url": "https://mcp.svelte.dev/mcp"
+		},
+		"dataforseo": {
+			"type": "stdio",
+			"command": "node",
+			"args": ["C:/Users/PC/Desktop/dataforseo-mcp-server/dist/index.js"],
+			"env": {
+				"DATAFORSEO_LOGIN": "s.rydz@aiclearing.com",
+				"DATAFORSEO_PASSWORD": "5cc8229ba27cfd66"
+			}
 		}
 	}
 }

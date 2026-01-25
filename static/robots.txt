@@ -1,3 +1,11 @@
-# allow crawling everything by default
+# Fold Club - robots.txt
+# Allow search engines to crawl the site
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /order/
+Disallow: /cart/
+Disallow: /analytics/
+
+Sitemap: https://foldclub.pl/sitemap.xml

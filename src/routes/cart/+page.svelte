@@ -1,0 +1,227 @@
+<script lang="ts">
+	import { AlertDialog } from 'bits-ui';
+	import LandingNav from '$lib/components/landing/LandingNav.svelte';
+	import FooterSection from '$lib/components/landing/FooterSection.svelte';
+	import PageHeader from '$lib/components/shared/PageHeader.svelte';
+	import FakeDoorModal from '$lib/components/shared/FakeDoorModal.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
+	import { m } from '$lib/paraglide/messages';
+	import { cart } from '$lib/stores/cart.svelte';
+	import { trackCheckoutClick } from '$lib/tracking';
+	import { getProductById, formatPrice } from '$lib/data/products';
+
+	let showFakeDoor = $state(false);
+	let showRemoveConfirm = $state(false);
+	let pendingRemoveId = $state<number | null>(null);
+
+	// Check if removing this item would empty the cart
+	let isLastItem = $derived(
+		cart.items.length === 1 && pendingRemoveId !== null
+	);
+
+	let cartTotal = $derived(
+		cart.items.reduce((sum, item) => {
+			const product = getProductById(item.productId);
+			return sum + (product ? product.price * item.quantity : 0);
+		}, 0)
+	);
+
+	// Build cart items for tracking
+	let cartItemsForTracking = $derived(
+		cart.items
+			.map((item) => {
+				const product = getProductById(item.productId);
+				if (!product) return null;
+				return {
+					id: product.id,
+					name: product.name(),
+					price: product.price,
+					quantity: item.quantity
+				};
+			})
+			.filter((item): item is NonNullable<typeof item> => item !== null)
+	);
+
+	function handleRemove(productId: number) {
+		// Always show confirmation when removing an item
+		pendingRemoveId = productId;
+		showRemoveConfirm = true;
+	}
+
+	function confirmRemove() {
+		if (pendingRemoveId !== null) {
+			cart.removeFromCart(pendingRemoveId);
+			pendingRemoveId = null;
+		}
+		showRemoveConfirm = false;
+	}
+
+	function cancelRemove() {
+		pendingRemoveId = null;
+		showRemoveConfirm = false;
+	}
+
+	function handleQuantityChange(productId: number, delta: number) {
+		const item = cart.items.find((i) => i.productId === productId);
+		if (item) {
+			// If decreasing to 0 (last quantity), show confirmation
+			if (delta < 0 && item.quantity + delta <= 0) {
+				pendingRemoveId = productId;
+				showRemoveConfirm = true;
+				return;
+			}
+			cart.updateQuantity(productId, item.quantity + delta);
+		}
+	}
+
+	function handleCheckoutClick(e: Event) {
+		e.preventDefault();
+
+		// Fire tracking events IMMEDIATELY (before showing modal)
+		trackCheckoutClick(cartItemsForTracking, cartTotal);
+
+		// Show Fake Door modal instead of navigating
+		showFakeDoor = true;
+	}
+</script>
+
+<div class="flex min-h-screen flex-col">
+	<LandingNav cartCount={cart.count} />
+	<PageHeader title={m.cart_title()} subtitle={m.cart_subtitle()} />
+
+	<main class="grow bg-cream py-16">
+		<div class="fc-container">
+			{#if cart.items.length === 0}
+				<div class="brutal-card paper-shadow-md p-12 text-center">
+					<div class="heading mb-4 text-6xl text-ink/20">:(</div>
+					<h2 class="heading-2 mb-4">{m.cart_empty_title()}</h2>
+					<p class="body mb-8 text-ink-muted">{m.cart_empty_desc()}</p>
+					<a href={localizeHref('/shop')} class="btn btn-primary paper-press">
+						{m.cart_browse_shop()}
+					</a>
+				</div>
+			{:else}
+				<div class="grid gap-8 lg:grid-cols-3">
+					<div class="space-y-4 lg:col-span-2">
+						{#each cart.items as item (item.productId)}
+							{@const product = getProductById(item.productId)}
+							{#if product}
+								<div class="brutal-card paper-shadow-sm flex items-center gap-6 p-6">
+									<div class="flex h-20 w-20 items-center justify-center border-3 border-ink bg-cream-deep">
+										<span class="heading text-3xl text-ink/20">
+											{product.name().charAt(0)}
+										</span>
+									</div>
+
+									<div class="grow">
+										<h3 class="heading text-lg">{product.name()}</h3>
+										<p class="body-small text-ink-muted">{formatPrice(product.price)}</p>
+									</div>
+
+									<div class="flex items-center gap-2">
+										<button
+											class="btn btn-secondary btn-sm paper-press-sm"
+											onclick={() => handleQuantityChange(item.productId, -1)}
+											aria-label={m.cart_decrease_aria()}
+										>
+											-
+										</button>
+										<span class="heading w-8 text-center">{item.quantity}</span>
+										<button
+											class="btn btn-secondary btn-sm paper-press-sm"
+											onclick={() => handleQuantityChange(item.productId, 1)}
+											aria-label={m.cart_increase_aria()}
+										>
+											+
+										</button>
+									</div>
+
+									<div class="heading w-24 text-right">
+										{formatPrice(product.price * item.quantity)}
+									</div>
+
+									<button
+										class="btn btn-secondary btn-sm paper-press-sm text-coral"
+										onclick={() => handleRemove(item.productId)}
+										aria-label={m.cart_remove_aria()}
+									>
+										X
+									</button>
+								</div>
+							{/if}
+						{/each}
+					</div>
+
+					<div class="lg:col-span-1">
+						<div class="brutal-card paper-shadow-md sticky top-8 p-8">
+							<h3 class="heading-2 mb-6">{m.cart_summary()}</h3>
+
+							<div class="mb-6 space-y-3">
+								<div class="flex justify-between">
+									<span class="body text-ink-muted">{m.cart_subtotal()}</span>
+									<span class="heading">{formatPrice(cartTotal)}</span>
+								</div>
+								<div class="flex justify-between">
+									<span class="body text-ink-muted">{m.cart_shipping()}</span>
+									<span class="body text-ink-muted">{m.cart_shipping_calculated()}</span>
+								</div>
+							</div>
+
+							<div class="mb-8 flex justify-between border-t-3 border-ink pt-4">
+								<span class="heading">{m.cart_total()}</span>
+								<span class="heading text-xl">{formatPrice(cartTotal)}</span>
+							</div>
+
+							<button
+								class="btn btn-primary paper-press w-full text-center"
+								onclick={handleCheckoutClick}
+							>
+								{m.cart_checkout()}
+							</button>
+
+							<a
+								href={localizeHref('/shop')}
+								class="btn btn-secondary paper-press-sm mt-4 w-full text-center"
+							>
+								{m.cart_continue_shopping()}
+							</a>
+						</div>
+					</div>
+				</div>
+			{/if}
+		</div>
+	</main>
+
+	<FooterSection />
+</div>
+
+<FakeDoorModal bind:open={showFakeDoor} />
+
+<!-- Remove Last Item Confirmation Dialog -->
+<AlertDialog.Root bind:open={showRemoveConfirm}>
+	<AlertDialog.Portal>
+		<AlertDialog.Overlay class="fixed inset-0 z-40 bg-ink/80" />
+		<AlertDialog.Content
+			class="brutal-card paper-shadow-xl fixed top-1/2 left-1/2 z-50 max-w-md -translate-x-1/2 -translate-y-1/2 bg-paper p-8"
+		>
+			<div class="heading mb-4 text-center text-6xl text-coral">⚠</div>
+			
+			<AlertDialog.Title class="heading-2 mb-4 text-center">
+				{isLastItem ? m.cart_remove_last_title() : m.cart_remove_title()}
+			</AlertDialog.Title>
+			
+			<AlertDialog.Description class="body mb-8 text-center text-ink-muted">
+				{isLastItem ? m.cart_remove_last_confirm() : m.cart_remove_confirm_msg()}
+			</AlertDialog.Description>
+
+			<div class="flex gap-3">
+				<AlertDialog.Cancel class="btn btn-secondary paper-press-sm flex-1" onclick={cancelRemove}>
+					{m.cart_remove_cancel()}
+				</AlertDialog.Cancel>
+				<AlertDialog.Action class="btn btn-primary paper-press flex-1 bg-coral" onclick={confirmRemove}>
+					{m.cart_remove_confirm()}
+				</AlertDialog.Action>
+			</div>
+		</AlertDialog.Content>
+	</AlertDialog.Portal>
+</AlertDialog.Root>

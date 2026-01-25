@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import InfoPageLayout from '$lib/components/shared/InfoPageLayout.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { analytics } from '$lib/stores/analytics';
 
 	const zones = [
 		{
@@ -21,14 +18,9 @@
 			cost: () => m.shipping_international_cost()
 		}
 	];
-
-	onMount(() => {
-		analytics.trackPageView('shipping');
-	});
 </script>
 
-<InfoPageLayout title={m.shipping_title()} subtitle={m.shipping_subtitle()}>
-	<div class="max-w-3xl space-y-12">
+<div class="max-w-3xl space-y-12">
 		<section>
 			<h2 class="heading-2 mb-6">{m.shipping_zones_title()}</h2>
 			<div class="space-y-4">
@@ -52,5 +44,4 @@
 				<p class="body text-ink-muted">{m.shipping_tracking_desc()}</p>
 			</div>
 		</section>
-	</div>
-</InfoPageLayout>
+</div>

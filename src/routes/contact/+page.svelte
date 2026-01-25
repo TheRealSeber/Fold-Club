@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import InfoPageLayout from '$lib/components/shared/InfoPageLayout.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { analytics } from '$lib/stores/analytics';
 
 	let name = $state('');
 	let email = $state('');
@@ -12,14 +9,9 @@
 		e.preventDefault();
 		// Form is non-functional for now - just prevents default
 	}
-
-	onMount(() => {
-		analytics.trackPageView('contact');
-	});
 </script>
 
-<InfoPageLayout title={m.contact_title()} subtitle={m.contact_subtitle()}>
-	<div class="max-w-3xl">
+<div class="max-w-3xl">
 		<div class="grid grid-cols-1 gap-12 md:grid-cols-2">
 			<div>
 				<form onsubmit={handleSubmit} class="space-y-6">
@@ -84,5 +76,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</InfoPageLayout>
+</div>
