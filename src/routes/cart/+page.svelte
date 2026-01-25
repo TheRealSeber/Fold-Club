@@ -98,9 +98,9 @@
             {@const product = getProductById(item.productId)}
             {#if product}
               <div
-                class="brutal-card paper-shadow-sm flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:gap-6 sm:p-6"
+                class="brutal-card paper-shadow-sm flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:gap-6 sm:p-6"
               >
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 sm:gap-4">
                   <div
                     class="flex h-16 w-16 shrink-0 items-center justify-center border-3 border-ink bg-cream-deep sm:h-20 sm:w-20"
                   >
@@ -109,14 +109,14 @@
                     </span>
                   </div>
 
-                  <div class="grow sm:grow-0">
-                    <h3 class="heading text-base sm:text-lg">{product.name()}</h3>
+                  <div class="min-w-0 grow sm:grow-0">
+                    <h3 class="heading truncate text-base sm:text-lg">{product.name()}</h3>
                     <p class="body-small text-ink-muted">{formatPrice(product.price)}</p>
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between gap-3 sm:ml-auto sm:gap-4">
-                  <div class="flex items-center gap-2">
+                <div class="flex flex-col gap-2 sm:ml-auto sm:flex-row sm:items-center sm:gap-4">
+                  <div class="flex items-center gap-1.5 sm:gap-2">
                     <button
                       class="btn btn-secondary btn-sm paper-press-sm"
                       onclick={() => handleQuantityChange(item.productId, -1)}
@@ -124,7 +124,7 @@
                     >
                       -
                     </button>
-                    <span class="heading w-8 text-center">{item.quantity}</span>
+                    <span class="heading w-6 text-center sm:w-8">{item.quantity}</span>
                     <button
                       class="btn btn-secondary btn-sm paper-press-sm"
                       onclick={() => handleQuantityChange(item.productId, 1)}
@@ -134,17 +134,20 @@
                     </button>
                   </div>
 
-                  <div class="heading min-w-[4rem] text-right">
-                    {formatPrice(product.price * item.quantity)}
-                  </div>
+                  <div class="flex items-center justify-between gap-2 sm:gap-4">
+                    <div class="heading text-right">
+                      <span>{m.cart_total()}</span>
+                      <span>{formatPrice(product.price * item.quantity)}</span>
+                    </div>
 
-                  <button
-                    class="btn btn-secondary btn-sm paper-press-sm text-coral"
-                    onclick={() => handleRemove(item.productId)}
-                    aria-label={m.cart_remove_aria()}
-                  >
-                    X
-                  </button>
+                    <button
+                      class="btn btn-secondary btn-sm paper-press-sm text-coral"
+                      onclick={() => handleRemove(item.productId)}
+                      aria-label={m.cart_remove_aria()}
+                    >
+                      X
+                    </button>
+                  </div>
                 </div>
               </div>
             {/if}
