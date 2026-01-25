@@ -10,22 +10,6 @@
 
   let { product }: Props = $props();
 
-  let touchStartY = $state(0);
-  let touchMoved = $state(false);
-
-  function handleTouchStart(e: TouchEvent) {
-    touchStartY = e.touches[0].clientY;
-    touchMoved = false;
-  }
-
-  function handleTouchMove(e: TouchEvent) {
-    const touchEndY = e.touches[0].clientY;
-    // If moved more than 10px, consider it a scroll
-    if (Math.abs(touchEndY - touchStartY) > 10) {
-      touchMoved = true;
-    }
-  }
-
   function handleAddToCart(e: Event) {
     e.stopPropagation();
 
@@ -37,11 +21,6 @@
   }
 
   function handleProductClick() {
-    // Don't trigger if user was scrolling
-    if (touchMoved) {
-      touchMoved = false;
-      return;
-    }
     trackProductView(product.id, product.name(), product.price);
   }
 
@@ -56,8 +35,6 @@
   class="brutal-card paper-press-hover group flex cursor-pointer flex-col"
   onclick={handleProductClick}
   onkeydown={handleKeydown}
-  ontouchstart={handleTouchStart}
-  ontouchmove={handleTouchMove}
   role="button"
   tabindex="0"
 >
