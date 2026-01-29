@@ -121,7 +121,7 @@ export function trackGA4ViewItem(productId: number, itemName: string, value: num
 /**
  * Track custom fake_door_interaction event for funnel analysis
  */
-export function trackGA4FakeDoor(action: 'add_to_cart' | 'checkout', productIds: number[]): void {
+export function trackGA4FakeDoor(action: 'add_to_cart' | 'checkout' | 'payment_click', productIds: number[]): void {
   if (!browser || !window.gtag) return;
 
   window.gtag('event', 'fake_door_interaction', {
@@ -129,4 +129,53 @@ export function trackGA4FakeDoor(action: 'add_to_cart' | 'checkout', productIds:
     product_ids: productIds.join(','),
     timestamp: Date.now()
   });
+}
+
+/**
+ * Track checkout page view (separate from begin_checkout)
+ */
+export function trackGA4ViewCheckout(
+  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  value: number
+): void {
+  if (!browser || !window.gtag) return;
+
+  window.gtag('event', 'view_checkout', {
+    currency: 'PLN',
+    value: value,
+    items: items.map((item, index) => ({
+      item_id: item.id.toString(),
+      item_name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      index: index
+    }))
+  });
+}
+
+/**
+ * Track payment button click (Przelewy24)
+ */
+export function trackGA4PaymentClick(
+  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  value: number
+): void {
+  if (!browser || !window.gtag) return;
+
+  window.gtag('event', 'add_payment_info', {
+    currency: 'PLN',
+    value: value,
+    payment_type: 'przelewy24',
+    items: items.map((item, index) => ({
+      item_id: item.id.toString(),
+      item_name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      index: index
+    }))
+  });
+
+  // Also track as fake door interaction
+  const productIds = items.map((item) => item.id);
+  trackGA4FakeDoor('payment_click', productIds);
 }

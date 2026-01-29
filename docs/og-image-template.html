@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fold Club OG Image Generator</title>
+  <style>
+    /* Brutalist design matching your app */
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #e8e4df;
+      padding: 20px;
+    }
+
+    .og-image {
+      width: 1200px;
+      height: 630px;
+      background: #faf6f1;
+      border: 6px solid #1a1614;
+      box-shadow: 10px 10px 0 #1a1614;
+      padding: 45px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #ff6b5a;
+      color: #1a1614;
+      padding: 8px 20px;
+      font-weight: 700;
+      font-size: 20px;
+      border: 3px solid #1a1614;
+      box-shadow: 4px 4px 0 #1a1614;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 76px;
+      line-height: 1.05;
+      color: #1a1614;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+      max-width: 900px;
+    }
+
+    p {
+      font-size: 30px;
+      color: #6b6662;
+      line-height: 1.35;
+      max-width: 800px;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 35px;
+      right: 60px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 36px;
+      color: #1a1614;
+      letter-spacing: -1px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 25px;
+      margin-top: 0;
+    }
+
+    .stat {
+      border: 3px solid #1a1614;
+      background: #fff9f4;
+      padding: 16px 26px;
+    }
+
+    .stat-value {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 28px;
+      color: #1a1614;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #6b6662;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Different tag colors */
+    .tag-coral { background: #ff6b5a; }
+    .tag-mint { background: #a7e8bd; }
+    .tag-gold { background: #ffd369; }
+    .tag-violet { background: #c49bff; }
+
+    button {
+      margin: 20px 10px;
+      padding: 10px 20px;
+      background: #1a1614;
+      color: #faf6f1;
+      border: 3px solid #1a1614;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: #ff6b5a;
+      color: #1a1614;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: #fff;
+      border: 3px solid #1a1614;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <h2 style="margin-bottom: 20px; font-family: 'Archivo Black', sans-serif;">OG Image Generator</h2>
+    <p style="font-size: 14px; margin-bottom: 10px;">Right-click on image below and "Save as PNG" (1200x630)</p>
+    <button onclick="generateHome()">Home PL</button>
+    <button onclick="generateHomeEN()">Home EN</button>
+    <button onclick="generatePuzzle3D()">Puzzle 3D PL</button>
+    <button onclick="generatePuzzle3DEN()">Puzzle 3D EN</button>
+    <button onclick="generateAssembly()">Assembly PL</button>
+    <button onclick="generateAssemblyEN()">Assembly EN</button>
+    <button onclick="generatePapercraft()">Papercraft PL</button>
+    <button onclick="generatePapercraftEN()">Papercraft EN</button>
+  </div>
+
+  <div id="og-canvas" class="og-image">
+    <span class="tag tag-coral">PAPERCRAFT</span>
+    <h1>PUZZLE 3D I MODELE DO SKLEJANIA</h1>
+    <p>Pre-cut gotowe zestawy z papieru. Sklejanie bez wycinania - dla dorosłych i dzieci.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">PRE-CUT</div>
+        <div class="stat-label">Bez wycinania</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Modele</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">3D</div>
+        <div class="stat-label">Dekoracje</div>
+      </div>
+    </div>
+    <div class="logo">FOLD CLUB</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('og-canvas');
+
+    function generateHome() {
+      canvas.innerHTML = `
+        <span class="tag tag-coral">PAPERCRAFT</span>
+        <h1>PUZZLE 3D I MODELE DO SKLEJANIA</h1>
+        <p>Pre-cut gotowe zestawy z papieru. Sklejanie bez wycinania - dla dorosłych i dzieci.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">PRE-CUT</div>
+            <div class="stat-label">Bez wycinania</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Modele</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3D</div>
+            <div class="stat-label">Dekoracje</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generateHomeEN() {
+      canvas.innerHTML = `
+        <span class="tag tag-coral">PAPERCRAFT</span>
+        <h1>3D PUZZLES & ASSEMBLY MODELS</h1>
+        <p>Pre-cut paper kits ready to build. No cutting required - for adults and kids.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">PRE-CUT</div>
+            <div class="stat-label">No cutting</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Models</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3D</div>
+            <div class="stat-label">Decorations</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generatePuzzle3D() {
+      canvas.innerHTML = `
+        <span class="tag tag-coral">PUZZLE 3D</span>
+        <h1>PUZZLE 3D Z PAPIERU</h1>
+        <p>Geometryczne modele zwierząt do sklejania. Pre-cut, gotowe do złożenia. Dekoracje 3D na ścianę.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">PRE-CUT</div>
+            <div class="stat-label">Bez wycinania</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Modele</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">LOW-POLY</div>
+            <div class="stat-label">Styl</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generatePuzzle3DEN() {
+      canvas.innerHTML = `
+        <span class="tag tag-coral">PUZZLE 3D</span>
+        <h1>3D PAPER PUZZLES</h1>
+        <p>Geometric animal models to assemble. Pre-cut, ready to build. 3D wall decorations.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">PRE-CUT</div>
+            <div class="stat-label">No cutting</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Models</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">LOW-POLY</div>
+            <div class="stat-label">Style</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generateAssembly() {
+      canvas.innerHTML = `
+        <span class="tag tag-mint">MODELE DO SKLEJANIA</span>
+        <h1>MODELE DO SKLEJANIA Z PAPIERU</h1>
+        <p>Modele 3D z papieru do sklejania. Pre-cut - wystarczy skleić i podziwiać. Hobby dla dorosłych i dzieci.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">KLEJ</div>
+            <div class="stat-label">Tylko sklejanie</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">PAPIER</div>
+            <div class="stat-label">Ekologiczny</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">DIY</div>
+            <div class="stat-label">Zrób sam</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generateAssemblyEN() {
+      canvas.innerHTML = `
+        <span class="tag tag-mint">ASSEMBLY MODELS</span>
+        <h1>PAPER MODELS TO ASSEMBLE</h1>
+        <p>Paper 3D models to assemble. Pre-cut - just glue and admire. Hobby for adults and kids.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">GLUE</div>
+            <div class="stat-label">Just gluing</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">PAPER</div>
+            <div class="stat-label">Eco-friendly</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">DIY</div>
+            <div class="stat-label">Handmade</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generatePapercraft() {
+      canvas.innerHTML = `
+        <span class="tag tag-gold">PAPERCRAFT</span>
+        <h1>PAPERCRAFT - MODELE Z PAPIERU</h1>
+        <p>Sztuka tworzenia modeli 3D z papieru. Geometryczny design, proste składanie. Low-poly zwierzęta.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">LOW-POLY</div>
+            <div class="stat-label">Geometryczny</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">PAPIER</div>
+            <div class="stat-label">Ekologiczny</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">ART</div>
+            <div class="stat-label">Dekoracje</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+
+    function generatePapercraftEN() {
+      canvas.innerHTML = `
+        <span class="tag tag-gold">PAPERCRAFT</span>
+        <h1>PAPERCRAFT - PAPER MODELS</h1>
+        <p>Art of creating 3D models from paper. Geometric design, simple assembly. Low-poly animals.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">LOW-POLY</div>
+            <div class="stat-label">Geometric</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">PAPER</div>
+            <div class="stat-label">Eco-friendly</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">ART</div>
+            <div class="stat-label">Decorations</div>
+          </div>
+        </div>
+        <div class="logo">FOLD CLUB</div>
+      `;
+    }
+  </script>
+</body>
+</html>

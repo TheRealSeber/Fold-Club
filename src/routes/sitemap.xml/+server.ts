@@ -1,51 +1,82 @@
 import type { RequestHandler } from './$types';
+import { products } from '$lib/data/products';
 
 export const GET: RequestHandler = async () => {
   const baseUrl = 'https://foldclub.pl';
   const lastmod = new Date().toISOString().split('T')[0];
 
+  // Static pages with Polish translations
   const staticPages = [
-    { url: '', priority: 1.0, changefreq: 'daily' },
-    { url: 'shop', priority: 0.9, changefreq: 'daily' },
-    { url: 'gallery', priority: 0.6, changefreq: 'weekly' },
-    { url: 'faq', priority: 0.5, changefreq: 'monthly' },
-    { url: 'shipping', priority: 0.4, changefreq: 'monthly' },
-    { url: 'contact', priority: 0.4, changefreq: 'monthly' },
-    { url: 'returns', priority: 0.4, changefreq: 'monthly' },
-    { url: 'privacy', priority: 0.3, changefreq: 'yearly' },
-    { url: 'terms', priority: 0.3, changefreq: 'yearly' }
+    { urlPL: '', urlEN: '', priority: 1.0, changefreq: 'daily' },
+    { urlPL: 'sklep', urlEN: 'shop', priority: 0.9, changefreq: 'daily' },
+    { urlPL: 'galeria', urlEN: 'gallery', priority: 0.6, changefreq: 'weekly' },
+    { urlPL: 'faq', urlEN: 'faq', priority: 0.5, changefreq: 'monthly' },
+    { urlPL: 'wysylka', urlEN: 'shipping', priority: 0.4, changefreq: 'monthly' },
+    { urlPL: 'kontakt', urlEN: 'contact', priority: 0.4, changefreq: 'monthly' },
+    { urlPL: 'zwroty', urlEN: 'returns', priority: 0.4, changefreq: 'monthly' },
+    { urlPL: 'prywatnosc', urlEN: 'privacy', priority: 0.3, changefreq: 'yearly' },
+    { urlPL: 'regulamin', urlEN: 'terms', priority: 0.3, changefreq: 'yearly' }
   ];
 
-  const locales = ['pl', 'en'];
+  // SEO Landing Pages with Polish translations
+  const landingPages = [
+    {
+      urlPL: 'sklep/puzzle-3d',
+      urlEN: 'shop/puzzle-3d',
+      priority: 0.9,
+      changefreq: 'weekly'
+    },
+    {
+      urlPL: 'sklep/modele-do-sklejania',
+      urlEN: 'shop/assembly-models',
+      priority: 0.9,
+      changefreq: 'weekly'
+    },
+    {
+      urlPL: 'sklep/papercraft',
+      urlEN: 'shop/papercraft',
+      priority: 0.8,
+      changefreq: 'weekly'
+    }
+  ];
 
-  // Generate URLs for all pages in all languages
-  const urls = staticPages.flatMap((page) => {
-    return locales.map((locale) => {
-      const path = page.url ? `/${page.url}` : '/';
-      // Default locale (pl) has no prefix, en has /en prefix
-      const localizedPath = locale === 'pl' ? path : `/en${path}`;
-      const loc = `${baseUrl}${localizedPath}`;
+  // Dynamic Product Pages with Polish translations
+  const productPages = products.map((product) => ({
+    urlPL: `produkty/${product.slugPL}`,
+    urlEN: `products/${product.slugEN}`,
+    priority: 0.8,
+    changefreq: 'weekly'
+  }));
 
-      // Generate alternate links for hreflang
-      const alternates = locales
-        .map((altLocale) => {
-          const altPath = altLocale === 'pl' ? path : `/en${path}`;
-          const altUrl = `${baseUrl}${altPath}`;
-          return `    <xhtml:link rel="alternate" hreflang="${altLocale}" href="${altUrl}"/>`;
-        })
-        .join('\n');
+  // Generate URLs for all pages in both languages
+  const allPages = [...staticPages, ...landingPages, ...productPages];
 
-      // Add x-default pointing to Polish (default) version
-      const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${path}"/>`;
+  const urls = allPages.flatMap((page) => {
+    const pathPL = page.urlPL ? `/${page.urlPL}` : '/';
+    const pathEN = page.urlEN ? `/${page.urlEN}` : '/';
 
-      return {
-        loc,
+    return [
+      // Polish version (no prefix)
+      {
+        loc: `${baseUrl}${pathPL}`,
         lastmod,
         changefreq: page.changefreq,
         priority: page.priority,
-        alternates: `${alternates}\n${xDefault}`
-      };
-    });
+        alternates: `    <xhtml:link rel="alternate" hreflang="pl" href="${baseUrl}${pathPL}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/en/${pathEN}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${pathPL}"/>`
+      },
+      // English version (with /en prefix)
+      {
+        loc: `${baseUrl}/en/${pathEN}`,
+        lastmod,
+        changefreq: page.changefreq,
+        priority: page.priority,
+        alternates: `    <xhtml:link rel="alternate" hreflang="pl" href="${baseUrl}${pathPL}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/en/${pathEN}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${pathPL}"/>`
+      }
+    ];
   });
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

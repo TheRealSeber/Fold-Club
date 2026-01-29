@@ -10,6 +10,9 @@ export type Product = {
   tag: () => string;
   tagColor: 'coral' | 'mint' | 'gold' | 'violet';
   category: 'couples' | 'kids' | 'statement';
+  seoKey: 'moai' | 'dino' | 'swans' | 'sphinx';
+  slugPL: string;
+  slugEN: string;
 };
 
 export const products: Product[] = [
@@ -22,7 +25,10 @@ export const products: Product[] = [
     time: () => m.product_time_2_3(),
     tag: () => m.product_tag_date_night(),
     tagColor: 'coral',
-    category: 'couples'
+    category: 'couples',
+    seoKey: 'swans',
+    slugPL: 'labedzie-milosci',
+    slugEN: 'love-swans'
   },
   {
     id: 2,
@@ -33,7 +39,10 @@ export const products: Product[] = [
     time: () => m.product_time_2_3(),
     tag: () => m.product_tag_iconic(),
     tagColor: 'mint',
-    category: 'statement'
+    category: 'statement',
+    seoKey: 'moai',
+    slugPL: 'moai-glowa',
+    slugEN: 'moai-head'
   },
   {
     id: 3,
@@ -44,7 +53,10 @@ export const products: Product[] = [
     time: () => m.product_time_1_2(),
     tag: () => m.product_tag_kids(),
     tagColor: 'gold',
-    category: 'kids'
+    category: 'kids',
+    seoKey: 'dino',
+    slugPL: 'baby-dinozaur',
+    slugEN: 'baby-dinosaur'
   },
   {
     id: 4,
@@ -55,7 +67,10 @@ export const products: Product[] = [
     time: () => m.product_time_3_4(),
     tag: () => m.product_tag_mystical(),
     tagColor: 'violet',
-    category: 'statement'
+    category: 'statement',
+    seoKey: 'sphinx',
+    slugPL: 'sfinks-kot',
+    slugEN: 'sphinx-cat'
   }
 ];
 
@@ -73,4 +88,9 @@ export function getProductById(id: number): Product | undefined {
 export function getProductsByCategory(category: string): Product[] {
   if (category === 'all') return products;
   return products.filter((p) => p.category === category);
+}
+
+export function getProductBySlug(slug: string, locale: 'pl' | 'en' = 'pl'): Product | undefined {
+  const slugField = locale === 'pl' ? 'slugPL' : 'slugEN';
+  return products.find((p) => p[slugField] === slug);
 }

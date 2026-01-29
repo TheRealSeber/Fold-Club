@@ -6,6 +6,7 @@
   import { cart } from '$lib/stores/cart.svelte';
   import { trackCheckoutClick } from '$lib/tracking';
   import { getProductById, formatPrice } from '$lib/data/products';
+  import { goto } from '$app/navigation';
 
   let showFakeDoor = $state(false);
   let showRemoveConfirm = $state(false);
@@ -72,11 +73,11 @@
   function handleCheckoutClick(e: Event) {
     e.preventDefault();
 
-    // Fire tracking events IMMEDIATELY (before showing modal)
+    // Fire tracking events IMMEDIATELY (before navigating)
     trackCheckoutClick(cartItemsForTracking, cartTotal);
 
-    // Show Fake Door modal instead of navigating
-    showFakeDoor = true;
+    // Navigate to checkout page
+    goto(localizeHref('/checkout'));
   }
 </script>
 
@@ -169,7 +170,7 @@
           <span class="heading text-xl">{formatPrice(cartTotal)}</span>
         </div>
 
-        <button class="btn btn-primary paper-press text-center" onclick={handleCheckoutClick}>
+        <button class="btn btn-primary paper-press text-center w-full" onclick={handleCheckoutClick}>
           {m.cart_checkout()}
         </button>
 

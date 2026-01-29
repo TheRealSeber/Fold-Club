@@ -1,5 +1,6 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
+  import { getLocale, localizeHref } from '$lib/paraglide/runtime';
   import { cart } from '$lib/stores/cart.svelte';
   import { trackAddToCart, trackProductView } from '$lib/tracking';
   import { formatPrice, type Product } from '$lib/data/products';
@@ -10,7 +11,12 @@
 
   let { product }: Props = $props();
 
+  let locale = $derived(getLocale());
+  let productSlug = $derived(locale === 'pl' ? product.slugPL : product.slugEN);
+  let productUrl = $derived(localizeHref(`/products/${productSlug}`));
+
   function handleAddToCart(e: Event) {
+    e.preventDefault();
     e.stopPropagation();
 
     // 1. Fire all tracking events IMMEDIATELY (before any UI updates)
@@ -23,20 +29,12 @@
   function handleProductClick() {
     trackProductView(product.id, product.name(), product.price);
   }
-
-  function handleKeydown(e: KeyboardEvent) {
-    if (e.key === 'Enter') {
-      handleProductClick();
-    }
-  }
 </script>
 
-<div
+<a
+  href={productUrl}
   class="brutal-card paper-press-hover group flex cursor-pointer flex-col"
   onclick={handleProductClick}
-  onkeydown={handleKeydown}
-  role="button"
-  tabindex="0"
 >
   <div
     class="relative mb-4 flex aspect-square items-center justify-center overflow-hidden border-b-3 border-ink bg-cream-deep"
@@ -71,4 +69,4 @@
       </div>
     </div>
   </div>
-</div>
+</a>

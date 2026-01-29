@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import ProductCard from '$lib/components/ProductCard.svelte';
   import { m } from '$lib/paraglide/messages';
   import { products, getProductsByCategory } from '$lib/data/products';
 
-  let activeCategory = $derived($page.url.searchParams.get('category') || 'all');
+  let activeCategory = $derived(page.url.searchParams.get('category') || 'all');
   let filteredProducts = $derived(getProductsByCategory(activeCategory));
 
   const filters = [

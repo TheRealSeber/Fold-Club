@@ -9,8 +9,8 @@
       "command": "node",
       "args": ["C:/Users/PC/Desktop/dataforseo-mcp-server/dist/index.js"],
       "env": {
-        "DATAFORSEO_LOGIN": "s.rydz@aiclearing.com",
-        "DATAFORSEO_PASSWORD": "5cc8229ba27cfd66"
+        "DATAFORSEO_LOGIN": "thzuqdyvtbkvfottcv@nespj.com",
+        "DATAFORSEO_PASSWORD": "c81ee03352120135"
       }
     }
   }

@@ -18,9 +18,16 @@
       "mcp__dataforseo__labs_google_keyword_ideas",
       "mcp__dataforseo__labs_google_related_keywords",
       "mcp__dataforseo__labs_google_bulk_keyword_difficulty",
-      "mcp__dataforseo__keywords_google_ads_search_volume"
+      "mcp__dataforseo__keywords_google_ads_search_volume",
+      "Bash(ls:*)",
+      "mcp__dataforseo__labs_google_keyword_suggestions",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs",
+      "Bash(git checkout:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": ["svelte"]
+  "enabledMcpjsonServers": [
+    "svelte"
+  ]
 }

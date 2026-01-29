@@ -15,11 +15,15 @@
 
   let { children } = $props();
 
-  // Pages that should NOT show PageHeader (only home page has custom hero section)
-  const pagesWithoutHeader = ['/'];
+  // Pages that should NOT show PageHeader (home, shop children, product pages have custom layouts)
   let shouldShowPageHeader = $derived(() => {
     const pathWithoutLocale = page.url.pathname.replace(/^\/(en|pl)/, '') || '/';
-    return !pagesWithoutHeader.includes(pathWithoutLocale);
+    const isHome = pathWithoutLocale === '/';
+    const isShopChild = (pathWithoutLocale.startsWith('/shop/') || pathWithoutLocale.startsWith('/sklep/'));
+    const isProductPage = (pathWithoutLocale.startsWith('/products/') || pathWithoutLocale.startsWith('/produkty/'));
+
+    // Exclude home, shop children (landing pages), and product pages - they have custom layouts
+    return !isHome && !isShopChild && !isProductPage;
   });
 
   // Dynamically get page metadata for pages with headers
@@ -49,6 +53,9 @@
 
 <svelte:head>
   <meta name="theme-color" content="#faf6f1" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />

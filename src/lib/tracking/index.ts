@@ -17,7 +17,9 @@ export {
   trackGA4AddToCart,
   trackGA4BeginCheckout,
   trackGA4ViewItem,
-  trackGA4FakeDoor
+  trackGA4FakeDoor,
+  trackGA4ViewCheckout,
+  trackGA4PaymentClick
 } from './ga4';
 
 import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';

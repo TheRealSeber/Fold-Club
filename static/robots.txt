@@ -1,11 +1,41 @@
 # Fold Club - robots.txt
-# Allow search engines to crawl the site
+# Allow search engines to crawl both Polish and English versions
 
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /order/
-Disallow: /cart/
+
+# Polish pages (default, no prefix)
+Allow: /sklep
+Allow: /sklep/puzzle-3d
+Allow: /sklep/modele-do-sklejania
+Allow: /sklep/papercraft
+Allow: /produkty/
+Allow: /galeria
+Allow: /faq
+Allow: /kontakt
+Allow: /wysylka
+Allow: /zwroty
+
+# English pages (/en prefix)
+Allow: /en/
+Allow: /en/shop
+Allow: /en/shop/puzzle-3d
+Allow: /en/shop/assembly-models
+Allow: /en/shop/papercraft
+Allow: /en/products/
+Allow: /en/gallery
+Allow: /en/faq
+Allow: /en/contact
+Allow: /en/shipping
+Allow: /en/returns
+
+# Disallow private pages (both locales)
+Disallow: /zamowienie/
+Disallow: /en/order/
+Disallow: /koszyk/
+Disallow: /en/cart/
+Disallow: /kasa/
+Disallow: /en/checkout/
 Disallow: /analytics/
 
 Sitemap: https://foldclub.pl/sitemap.xml
