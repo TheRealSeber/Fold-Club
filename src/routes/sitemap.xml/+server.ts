@@ -52,8 +52,8 @@ export const GET: RequestHandler = async () => {
   const allPages = [...staticPages, ...landingPages, ...productPages];
 
   const urls = allPages.flatMap((page) => {
-    const pathPL = page.urlPL ? `/${page.urlPL}` : '/';
-    const pathEN = page.urlEN ? `/${page.urlEN}` : '/';
+    const pathPL = page.urlPL ? `/${page.urlPL}` : '';
+    const pathEN = page.urlEN ? `/${page.urlEN}` : '';
 
     return [
       // Polish version (no prefix)
