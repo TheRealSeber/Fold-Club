@@ -8,7 +8,7 @@ import { ROUTES } from './routes';
 
 export const SITE_CONFIG = {
   name: 'Fold Club',
-  domain: 'foldclub.pl',
+  domain: 'www.foldclub.pl',
   defaultLocale: 'pl',
   locales: ['pl', 'en'] as const
 } as const;
