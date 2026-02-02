@@ -6,18 +6,22 @@
 ## Issues Identified
 
 ### 1. Alternative Page with Valid Canonical Tag
+
 **Affected URLs:**
+
 - `https://www.foldclub.pl/`
 - `https://www.foldclub.pl/en/products/sphinx-cat`
 
 **Root Cause:**
 The site is served from `www.foldclub.pl` (with www), but the code was generating canonical URLs pointing to `foldclub.pl` (without www). This created a mismatch where:
+
 - Actual URL: `https://www.foldclub.pl/`
 - Canonical tag: `<link rel="canonical" href="https://foldclub.pl/" />`
 
 Google interpreted the www version as an "alternative" instead of the canonical, causing indexing confusion.
 
 **Verification:**
+
 ```bash
 # Non-www redirects to www
 curl -sI https://foldclub.pl/
@@ -30,18 +34,22 @@ curl -sI https://www.foldclub.pl/
 ```
 
 ### 2. Page Contains Redirect
+
 **Affected URLs:**
+
 - `https://foldclub.pl/en//` (double slash)
 - `http://foldclub.pl/` (HTTP)
 - `http://www.foldclub.pl/` (HTTP with www)
 
 **Analysis:**
 These are legitimate redirects that are working correctly:
+
 - HTTP → HTTPS (automatic via Vercel)
 - `foldclub.pl` → `www.foldclub.pl` (automatic via Vercel)
 - `/en//` → `/en/` (SvelteKit URL normalization)
 
 Google reports these as "Page contains redirect" which is informational, not an error. These URLs were likely discovered from:
+
 - Old external links
 - Crawling artifacts
 - Historical sitemap data
@@ -49,6 +57,7 @@ Google reports these as "Page contains redirect" which is informational, not an 
 ## Fix Applied
 
 ### Changed Domain Configuration
+
 **File:** `src/lib/config/seo.ts:10`
 
 ```typescript
@@ -74,6 +83,7 @@ export const SITE_CONFIG = {
 This single change fixes all canonical URL generation across the site:
 
 ### Canonical URLs (SEOHead.svelte)
+
 ```typescript
 // Now generates
 <link rel="canonical" href="https://www.foldclub.pl/" />
@@ -81,17 +91,20 @@ This single change fixes all canonical URL generation across the site:
 ```
 
 ### Open Graph URLs
+
 ```html
 <meta property="og:url" content="https://www.foldclub.pl/" />
 ```
 
 ### Hreflang Tags
+
 ```html
 <link rel="alternate" hreflang="pl" href="https://www.foldclub.pl/" />
 <link rel="alternate" hreflang="en" href="https://www.foldclub.pl/en" />
 ```
 
 ### OG Images
+
 ```html
 <meta property="og:image" content="https://www.foldclub.pl/og-image.png" />
 ```
@@ -113,7 +126,9 @@ After deploying this fix and requesting reindexing in Search Console:
 ## Additional Recommendations
 
 ### Optional: Add Sitemap
+
 Consider adding a sitemap.xml to help Google discover and index pages more efficiently:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -128,7 +143,9 @@ Consider adding a sitemap.xml to help Google discover and index pages more effic
 ```
 
 ### Optional: Vercel Configuration
+
 While not necessary (redirects work correctly), you could explicitly document the redirect behavior in a `vercel.json`:
+
 ```json
 {
   "redirects": [
@@ -150,10 +167,13 @@ While not necessary (redirects work correctly), you could explicitly document th
 ## Technical Notes
 
 ### How getFullUrl Works
+
 The `getFullUrl()` function in `src/lib/config/seo.ts:355-374` generates all canonical and alternate URLs. By changing `SITE_CONFIG.domain`, all generated URLs now use `www.foldclub.pl`.
 
 ### Internationalization Handling
+
 The site uses Paraglide for i18n with:
+
 - Default locale (Polish): `https://www.foldclub.pl/`
 - English locale: `https://www.foldclub.pl/en/`
 - Localized paths: `/sklep` (pl) vs `/en/shop` (en)

@@ -121,7 +121,10 @@ export function trackGA4ViewItem(productId: number, itemName: string, value: num
 /**
  * Track custom fake_door_interaction event for funnel analysis
  */
-export function trackGA4FakeDoor(action: 'add_to_cart' | 'checkout' | 'payment_click', productIds: number[]): void {
+export function trackGA4FakeDoor(
+  action: 'add_to_cart' | 'checkout' | 'payment_click',
+  productIds: number[]
+): void {
   if (!browser || !window.gtag) return;
 
   window.gtag('event', 'fake_door_interaction', {

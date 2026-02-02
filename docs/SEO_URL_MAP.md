@@ -1,4 +1,5 @@
 # SEO URL Structure
+
 ## Fold Club - Complete URL Map
 
 **Last Updated:** January 29, 2026
@@ -8,9 +9,11 @@
 ## 🌍 URL PATTERN
 
 ### Polish (Default - No Prefix)
+
 `https://foldclub.pl/[route]`
 
 ### English (EN Prefix)
+
 `https://foldclub.pl/en/[route]`
 
 ---
@@ -18,18 +21,21 @@
 ## 📄 LANDING PAGES
 
 ### 1. Puzzle 3D (18,100 SV/mo)
+
 - **Polish:** `https://foldclub.pl/sklep/puzzle-3d`
 - **English:** `https://foldclub.pl/en/shop/puzzle-3d`
 - **Target Keywords:** puzzle 3d, modele 3d, dekoracje 3d
 - **File:** `src/routes/sklep/puzzle-3d/+page.svelte`
 
 ### 2. Modele do Sklejania (6,600 SV/mo)
+
 - **Polish:** `https://foldclub.pl/sklep/modele-do-sklejania`
 - **English:** `https://foldclub.pl/en/shop/assembly-models`
 - **Target Keywords:** modele do sklejania, modele z papieru, modele z kartonu
 - **File:** `src/routes/sklep/modele-do-sklejania/+page.svelte`
 
 ### 3. Papercraft (1,300 SV/mo) - TODO
+
 - **Polish:** `https://foldclub.pl/sklep/papercraft`
 - **English:** `https://foldclub.pl/en/shop/papercraft`
 - **Target Keywords:** papercraft, papercraft zwierzęta
@@ -43,6 +49,7 @@ All product pages follow the pattern:
 `/sklep/[category]/[product-slug]`
 
 ### Love Swans (Łabędzie Miłości)
+
 - **Polish:** `https://foldclub.pl/sklep/puzzle-3d/labedzie-milosci`
 - **English:** `https://foldclub.pl/en/shop/puzzle-3d/love-swans`
 - **Category:** puzzle-3d
@@ -50,6 +57,7 @@ All product pages follow the pattern:
 - **Price:** 69 PLN
 
 ### Moai Head (Głowa Moai)
+
 - **Polish:** `https://foldclub.pl/sklep/modele-do-sklejania/moai-glowa`
 - **English:** `https://foldclub.pl/en/shop/assembly-models/moai-head`
 - **Category:** modele-do-sklejania / assembly-models
@@ -57,6 +65,7 @@ All product pages follow the pattern:
 - **Price:** 59 PLN
 
 ### Baby Dinosaur (Baby Dinozaur)
+
 - **Polish:** `https://foldclub.pl/sklep/puzzle-3d/baby-dinozaur`
 - **English:** `https://foldclub.pl/en/shop/puzzle-3d/baby-dinosaur`
 - **Category:** puzzle-3d
@@ -64,6 +73,7 @@ All product pages follow the pattern:
 - **Price:** 39 PLN
 
 ### Sphinx Cat (Sfinks Kot)
+
 - **Polish:** `https://foldclub.pl/sklep/modele-do-sklejania/sfinks-kot`
 - **English:** `https://foldclub.pl/en/shop/assembly-models/sphinx-cat`
 - **Category:** modele-do-sklejania / assembly-models
@@ -75,19 +85,23 @@ All product pages follow the pattern:
 ## 🔗 INTERNAL LINKING STRUCTURE
 
 ### Homepage
+
 - Links to: `/sklep/puzzle-3d`, `/sklep/modele-do-sklejania`, `/sklep`
 - Should include: Top keywords in hero section
 
 ### Shop Page (`/sklep`)
+
 - Links to: Both category landing pages
 - Links to: All 4 product detail pages
 
 ### Category Landing Pages
+
 - **puzzle-3d** links to: Swans, Dino
 - **modele-do-sklejania** links to: Moai, Sphinx
 - Breadcrumb: Home → Shop → Category
 
 ### Product Detail Pages
+
 - Breadcrumb: Home → Shop → Category → Product
 - Related products section (TODO)
 - Back to category link
@@ -126,21 +140,22 @@ All product pages follow the pattern:
 
 ## 📊 KEYWORD MAPPING
 
-| URL | Primary Keyword | Monthly SV | KD | Status |
-|-----|----------------|-----------|-----|---------|
-| `/sklep/puzzle-3d` | puzzle 3d | 18,100 | 1 | ✅ Live |
-| `/sklep/modele-do-sklejania` | modele do sklejania | 6,600 | - | ✅ Live |
-| `/sklep/papercraft` | papercraft | 1,300 | 18 | ❌ TODO |
-| `/sklep/puzzle-3d/labedzie-milosci` | puzzle 3d labedzie | - | - | ✅ Live |
-| `/sklep/puzzle-3d/baby-dinozaur` | puzzle 3d dinozaur | - | - | ✅ Live |
-| `/sklep/modele-do-sklejania/moai-glowa` | model moai | - | - | ✅ Live |
-| `/sklep/modele-do-sklejania/sfinks-kot` | model sfinks | - | - | ✅ Live |
+| URL                                     | Primary Keyword     | Monthly SV | KD  | Status  |
+| --------------------------------------- | ------------------- | ---------- | --- | ------- |
+| `/sklep/puzzle-3d`                      | puzzle 3d           | 18,100     | 1   | ✅ Live |
+| `/sklep/modele-do-sklejania`            | modele do sklejania | 6,600      | -   | ✅ Live |
+| `/sklep/papercraft`                     | papercraft          | 1,300      | 18  | ❌ TODO |
+| `/sklep/puzzle-3d/labedzie-milosci`     | puzzle 3d labedzie  | -          | -   | ✅ Live |
+| `/sklep/puzzle-3d/baby-dinozaur`        | puzzle 3d dinozaur  | -          | -   | ✅ Live |
+| `/sklep/modele-do-sklejania/moai-glowa` | model moai          | -          | -   | ✅ Live |
+| `/sklep/modele-do-sklejania/sfinks-kot` | model sfinks        | -          | -   | ✅ Live |
 
 ---
 
 ## 🔍 HREFLANG IMPLEMENTATION
 
 Every page includes:
+
 ```html
 <link rel="alternate" hreflang="pl" href="https://foldclub.pl/[url-pl]" />
 <link rel="alternate" hreflang="en" href="https://foldclub.pl/en/[url-en]" />
@@ -155,6 +170,7 @@ Every page includes:
 ## 🎯 SEO CHECKLIST PER PAGE
 
 ✅ **Landing Pages (puzzle-3d, modele-do-sklejania):**
+
 - [x] Title tag with target keyword
 - [x] Meta description (150-160 chars)
 - [x] Meta keywords
@@ -168,6 +184,7 @@ Every page includes:
 - [x] Brutalist design maintained
 
 ✅ **Product Detail Pages:**
+
 - [x] Dynamic title from `m.seo_[product]_title()`
 - [x] Dynamic description from `m.seo_[product]_description()`
 - [x] Canonical URL
@@ -214,6 +231,7 @@ Checkout
 ## 🚀 NEXT STEPS
 
 1. **Test All URLs Locally**
+
    ```bash
    bun run dev
    # Visit each URL and verify:
@@ -225,6 +243,7 @@ Checkout
    ```
 
 2. **Update robots.txt**
+
    ```
    User-agent: *
    Allow: /

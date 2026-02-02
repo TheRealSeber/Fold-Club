@@ -224,7 +224,7 @@
 
         <!-- Przelewy24 Payment Button -->
         <button
-          class="flex flex-col gap-2 brutal-card paper-press cursor-pointer w-full overflow-hidden border-3 border-ink bg-white p-0 transition-transform"
+          class="brutal-card paper-press flex w-full cursor-pointer flex-col gap-2 overflow-hidden border-3 border-ink bg-white p-0 transition-transform"
           onclick={handlePaymentClick}
           aria-label={m.checkout_pay_with_przelewy24()}
         >

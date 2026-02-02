@@ -94,3 +94,7 @@ export function getProductBySlug(slug: string, locale: 'pl' | 'en' = 'pl'): Prod
   const slugField = locale === 'pl' ? 'slugPL' : 'slugEN';
   return products.find((p) => p[slugField] === slug);
 }
+
+export function getProductBySlugFallback(slug: string): Product | undefined {
+  return products.find((p) => p.slugPL === slug) || products.find((p) => p.slugEN === slug);
+}

@@ -1,4 +1,5 @@
 # FOLD CLUB - SEO IMPLEMENTATION PLAN
+
 ## Complete Roadmap: Paraglide i18n + SEO Optimization
 
 **Last Updated:** January 29, 2026
@@ -11,17 +12,21 @@
 ## 📊 EXECUTIVE SUMMARY
 
 ### **Primary Keywords (Real Search Volumes)**
+
 1. **puzzle 3d** - 18,100/mo (60,500 Dec spike) - KD: 1 🥇
 2. **modele do sklejania** - 6,600/mo (12,100 Dec spike) 🥈
 3. **papercraft** - 1,300/mo - Competition: LOW (18) 🥉
 
 ### **Quick Wins (Low Competition)**
+
 - modele z kartonu (210/mo, KD: 0)
 - składanki z papieru (260/mo, Comp: LOW 30)
 - modele z papieru (110/mo, KD: 3)
 
 ### **Product Inventory**
+
 4 products only:
+
 - Moai Head (Sigma/Statement)
 - Baby Dino (Kids)
 - Love Swans (Couples)
@@ -32,6 +37,7 @@
 ## 🎯 IMPLEMENTATION PHASES
 
 ### **Phase 1: Foundation (Week 1) ✅ PRIORITY**
+
 - [x] Create this plan document
 - [ ] Configure Paraglide URL patterns
 - [ ] Update homepage meta tags (PL + EN)
@@ -39,24 +45,28 @@
 - [ ] Test i18n routing locally
 
 ### **Phase 2: Landing Pages (Week 2)**
+
 - [ ] `/sklep/puzzle-3d` (18,100 SV target)
 - [ ] `/sklep/modele-do-sklejania` (6,600 SV target)
 - [ ] `/sklep/papercraft` (1,300 SV, brand)
 - [ ] English equivalents with hreflang
 
 ### **Phase 3: Product Pages (Week 2-3)**
+
 - [ ] Dynamic product page template
 - [ ] SEO meta for all 4 products
 - [ ] Schema.org Product markup
 - [ ] Breadcrumb navigation
 
 ### **Phase 4: Content (Week 3-4)**
+
 - [ ] Blog landing page
 - [ ] Article 1: "Modele do Sklejania - Top 7"
 - [ ] Article 2: "Puzzle 3D - Czym Są?"
 - [ ] FAQ page expansion
 
 ### **Phase 5: Technical SEO (Week 4)**
+
 - [ ] Dynamic sitemap.xml generation
 - [ ] robots.txt optimization
 - [ ] Hreflang validation
@@ -124,6 +134,7 @@ src/
 ## 📝 SVELTE 5 PATTERNS (RUNES)
 
 ### **State Management**
+
 ```svelte
 <script>
   // ✅ CORRECT (Svelte 5)
@@ -142,6 +153,7 @@ src/
 ```
 
 ### **Props & Bindable**
+
 ```svelte
 <script>
   let { product, onAddToCart } = $props();
@@ -150,6 +162,7 @@ src/
 ```
 
 ### **Event Handlers**
+
 ```svelte
 <!-- ✅ CORRECT (Svelte 5) -->
 <button onclick={() => count++}>Click</button>
@@ -165,45 +178,45 @@ src/
 ### **paraglide.config.js**
 
 ```javascript
-import { compile } from "@inlang/paraglide-js-adapter-sveltekit";
+import { compile } from '@inlang/paraglide-js-adapter-sveltekit';
 
 compile({
-  project: "./project.inlang",
-  outdir: "./src/lib/paraglide",
-  strategy: ["url", "cookie", "baseLocale"],
+  project: './project.inlang',
+  outdir: './src/lib/paraglide',
+  strategy: ['url', 'cookie', 'baseLocale'],
   urlPatterns: [
     // Specific routes first
     {
-      pattern: "/sklep/puzzle-3d",
+      pattern: '/sklep/puzzle-3d',
       localized: [
-        ["pl", "/sklep/puzzle-3d"],
-        ["en", "/shop/puzzle-3d"],
-      ],
+        ['pl', '/sklep/puzzle-3d'],
+        ['en', '/shop/puzzle-3d']
+      ]
     },
     {
-      pattern: "/sklep/modele-do-sklejania",
+      pattern: '/sklep/modele-do-sklejania',
       localized: [
-        ["pl", "/sklep/modele-do-sklejania"],
-        ["en", "/shop/assembly-models"],
-      ],
+        ['pl', '/sklep/modele-do-sklejania'],
+        ['en', '/shop/assembly-models']
+      ]
     },
     // Product pages
     {
-      pattern: "/sklep/:category/:product",
+      pattern: '/sklep/:category/:product',
       localized: [
-        ["pl", "/sklep/:category/:product"],
-        ["en", "/shop/:category/:product"],
-      ],
+        ['pl', '/sklep/:category/:product'],
+        ['en', '/shop/:category/:product']
+      ]
     },
     // Wildcard last
     {
-      pattern: "/:path(.*)?",
+      pattern: '/:path(.*)?',
       localized: [
-        ["en", "/en/:path(.*)?"],
-        ["pl", "/:path(.*)?"],
-      ],
-    },
-  ],
+        ['en', '/en/:path(.*)?'],
+        ['pl', '/:path(.*)?']
+      ]
+    }
+  ]
 });
 ```
 
@@ -219,14 +232,14 @@ compile({
 
   const metaTitle = $derived(
     languageTag() === 'pl'
-      ? "Puzzle 3D i Modele do Sklejania z Papieru | Fold Club"
-      : "3D Puzzles & Paper Assembly Models | Fold Club"
+      ? 'Puzzle 3D i Modele do Sklejania z Papieru | Fold Club'
+      : '3D Puzzles & Paper Assembly Models | Fold Club'
   );
 
   const metaDescription = $derived(
     languageTag() === 'pl'
-      ? "Puzzle 3D papercraft - geometryczne modele do sklejania z kartonu. Moai 🗿, dinozaur, sfinks. Pre-cut, gotowe zestawy. Sklejanie bez wycinania."
-      : "3D papercraft puzzles - geometric assembly models from cardboard. Moai 🗿, dinosaur, sphinx. Pre-cut kits ready to build."
+      ? 'Puzzle 3D papercraft - geometryczne modele do sklejania z kartonu. Moai 🗿, dinozaur, sfinks. Pre-cut, gotowe zestawy. Sklejanie bez wycinania.'
+      : '3D papercraft puzzles - geometric assembly models from cardboard. Moai 🗿, dinosaur, sphinx. Pre-cut kits ready to build.'
   );
 </script>
 
@@ -284,8 +297,8 @@ export const products: Product[] = [
     slugPL: 'labedzie-3d',
     slugEN: 'swans-3d',
     categoryPL: 'puzzle-3d',
-    categoryEN: 'puzzle-3d',
-  },
+    categoryEN: 'puzzle-3d'
+  }
   // ... other products
 ];
 ```
@@ -295,6 +308,7 @@ export const products: Product[] = [
 ## 🗺️ URL MAPPING
 
 ### **Polish (Base Locale - Unprefixed)**
+
 ```
 /                                    # Homepage
 /sklep                               # Shop
@@ -308,6 +322,7 @@ export const products: Product[] = [
 ```
 
 ### **English (Prefixed with /en)**
+
 ```
 /en                                  # Homepage
 /en/shop                             # Shop
@@ -325,17 +340,20 @@ export const products: Product[] = [
 ## 📊 KEYWORD STRATEGY
 
 ### **Primary Focus (Homepage + Main Landings)**
+
 1. puzzle 3d (18,100/mo)
 2. modele do sklejania (6,600/mo)
 3. papercraft (1,300/mo)
 
 ### **Secondary (Category Pages)**
+
 4. modele z kartonu (210/mo, KD:0)
 5. składanki z papieru (260/mo, LOW comp)
 6. modele papierowe (140/mo)
 7. modele z papieru (110/mo, KD:3)
 
 ### **Long-Tail (Product Pages)**
+
 8. modele do sklejania z papieru (70/mo)
 9. modele papierowe do sklejania (50/mo, spike 110 Dec)
 10. papierowe modele zwierząt (10/mo, Comp:0)
@@ -416,19 +434,19 @@ export const products: Product[] = [
   let {
     title,
     description,
-    keywords = "",
-    canonical = "",
-    ogImage = "https://foldclub.pl/og-image.jpg",
-    type = "website",
+    keywords = '',
+    canonical = '',
+    ogImage = 'https://foldclub.pl/og-image.jpg',
+    type = 'website'
   } = $props();
 
-  const baseUrl = "https://foldclub.pl";
+  const baseUrl = 'https://foldclub.pl';
 
   const fullUrl = $derived(
     canonical ||
-    (languageTag() === 'pl'
-      ? `${baseUrl}${$page.url.pathname}`
-      : `${baseUrl}${$page.url.pathname}`)
+      (languageTag() === 'pl'
+        ? `${baseUrl}${$page.url.pathname}`
+        : `${baseUrl}${$page.url.pathname}`)
   );
 
   const hreflangPL = $derived(
@@ -480,6 +498,7 @@ export const products: Product[] = [
 ## ✅ IMPLEMENTATION CHECKLIST
 
 ### **Phase 1: Foundation (This Week)**
+
 - [x] ✅ Create SEO_IMPLEMENTATION_PLAN.md
 - [ ] Install Paraglide dependencies
 - [ ] Configure paraglide.config.js
@@ -489,6 +508,7 @@ export const products: Product[] = [
 - [ ] Test homepage with new meta tags
 
 ### **Phase 2: Landing Pages (Next Week)**
+
 - [ ] Create `/sklep/puzzle-3d/+page.svelte`
 - [ ] Create `/sklep/modele-do-sklejania/+page.svelte`
 - [ ] Create `/sklep/papercraft/+page.svelte`
@@ -496,18 +516,21 @@ export const products: Product[] = [
 - [ ] Add structured data (Breadcrumb schema)
 
 ### **Phase 3: Product Pages**
+
 - [ ] Create dynamic product route
 - [ ] Implement Product schema markup
 - [ ] Add product-specific meta tags
 - [ ] Test all 4 product pages
 
 ### **Phase 4: Blog**
+
 - [ ] Create blog landing page
 - [ ] Write Article 1: Modele do Sklejania
 - [ ] Write Article 2: Puzzle 3D Guide
 - [ ] Add Article schema markup
 
 ### **Phase 5: Technical SEO**
+
 - [ ] Generate sitemap.xml dynamically
 - [ ] Update robots.txt
 - [ ] Validate hreflang tags
@@ -518,35 +541,39 @@ export const products: Product[] = [
 
 ## 📈 SUCCESS METRICS (6 Months)
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Organic Traffic | 800-1,200/mo | Google Analytics |
-| "puzzle 3d" Rank | Top 20 | Google Search Console |
-| "modele do sklejania" Rank | Top 30 | Google Search Console |
-| Indexed Pages | 15-20 | GSC Coverage |
-| Organic Sales | 3-5/week | GA4 Ecommerce |
-| Page Speed | <3s | PageSpeed Insights |
+| Metric                     | Target       | Measurement           |
+| -------------------------- | ------------ | --------------------- |
+| Organic Traffic            | 800-1,200/mo | Google Analytics      |
+| "puzzle 3d" Rank           | Top 20       | Google Search Console |
+| "modele do sklejania" Rank | Top 30       | Google Search Console |
+| Indexed Pages              | 15-20        | GSC Coverage          |
+| Organic Sales              | 3-5/week     | GA4 Ecommerce         |
+| Page Speed                 | <3s          | PageSpeed Insights    |
 
 ---
 
 ## 🚀 DEPLOYMENT TIMELINE
 
 ### **Week 1 (Jan 29 - Feb 4)**
+
 - Foundation setup
 - Homepage optimization
 - Product data updates
 
 ### **Week 2 (Feb 5 - Feb 11)**
+
 - Landing pages creation
 - Internal linking structure
 - Local testing
 
 ### **Week 3 (Feb 12 - Feb 18)**
+
 - Product pages finalization
 - Blog content creation
 - Schema markup
 
 ### **Week 4 (Feb 19 - Feb 25)**
+
 - Technical SEO
 - Sitemap generation
 - Production deployment
@@ -557,6 +584,7 @@ export const products: Product[] = [
 ## 🎯 BRUTALIST DESIGN COMPLIANCE
 
 ### **Key Principles (NEVER Violate)**
+
 1. ❌ NO rounded corners (`border-radius: 0 !important`)
 2. ✅ Hard shadows only (no blur: `box-shadow: 5px 5px 0 var(--color-ink)`)
 3. ⚡ Instant transitions (`transition-duration: 0s !important`)
@@ -565,6 +593,7 @@ export const products: Product[] = [
 6. 🔲 Polygon aesthetic (no soft curves)
 
 ### **Component Classes**
+
 ```css
 .brutal-card        /* Card with hard borders */
 .paper-shadow-sm    /* Small hard shadow */
@@ -583,17 +612,20 @@ export const products: Product[] = [
 ## 📚 RESOURCES
 
 ### **DataForSEO Research**
+
 - Polish market analysis: Complete ✅
 - Competitor data: nowekartonowe.pl analyzed ✅
 - Keyword difficulty scores: Retrieved ✅
 - Search volume data: Real numbers used ✅
 
 ### **Documentation**
+
 - [Paraglide JS Routing Docs](https://inlang.com/m/dxnzrydw/paraglide-sveltekit-i18n)
 - [Svelte 5 Runes Guide](https://svelte.dev/docs/svelte/$state)
 - [Schema.org Product Markup](https://schema.org/Product)
 
 ### **Tools Used**
+
 - DataForSEO API (keyword research)
 - Google Search Console (monitoring)
 - PageSpeed Insights (performance)
@@ -604,6 +636,7 @@ export const products: Product[] = [
 ## 🎉 COMPLETION CRITERIA
 
 Implementation is COMPLETE when:
+
 - [x] Plan document created
 - [ ] All 4 products have unique SEO meta tags
 - [ ] 3 landing pages live (puzzle-3d, modele-do-sklejania, papercraft)

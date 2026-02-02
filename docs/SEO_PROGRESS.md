@@ -1,4 +1,5 @@
 # SEO Implementation Progress
+
 ## Fold Club - Paraglide i18n + SEO Optimization
 
 **Last Updated:** January 29, 2026
@@ -8,17 +9,20 @@
 ## ✅ COMPLETED (Phase 1 - Foundation)
 
 ### 1. **Planning & Documentation**
+
 - [x] Created comprehensive `SEO_IMPLEMENTATION_PLAN.md`
 - [x] Defined keyword strategy based on real DataForSEO data
 - [x] Mapped URL structure (PL unprefixed, EN /en prefixed)
 
 ### 2. **SEO Configuration Updates**
+
 - [x] Updated `src/lib/config/seo.ts` with new keyword-optimized copy
   - Homepage: "Puzzle 3D i Modele do Sklejania z Papieru"
   - Shop: "Puzzle 3D i Modele do Sklejania"
   - Keywords updated to target: puzzle 3d (18K SV), modele do sklejania (6.6K SV)
 
 ### 3. **i18n Messages (Polish & English)**
+
 - [x] Added SEO-specific product meta tags (4 products):
   - `seo_moai_title` / `seo_moai_description`
   - `seo_dino_title` / `seo_dino_description`
@@ -31,6 +35,7 @@
   - Content includes: titles, descriptions, features, steps
 
 ### 4. **Existing Infrastructure Validated**
+
 - [x] `SEOHead.svelte` component already implements:
   - Dynamic meta tags
   - Hreflang tags (all locales)
@@ -48,6 +53,7 @@
 ### **Homepage Meta Tags (Before → After)**
 
 #### Polish (PL)
+
 ```
 BEFORE:
 Title: "Papercraft Low Poly - Geometryczne Maski Zwierząt"
@@ -59,11 +65,13 @@ Keywords: "puzzle 3d, modele do sklejania, papercraft, modele z kartonu, składa
 ```
 
 **Impact:**
+
 - Target keyword "puzzle 3d" (18,100 SV/mo) now in title
 - Target keyword "modele do sklejania" (6,600 SV/mo) in title
 - Combined monthly search potential: 24,700 → 72,600 in December!
 
 #### English (EN)
+
 ```
 BEFORE:
 Title: "Low Poly Papercraft - Geometric Animal Masks"
@@ -77,11 +85,13 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ## 🎯 KEYWORD STRATEGY RECAP
 
 ### **Primary Keywords (Implemented in SEO config)**
+
 1. **puzzle 3d** - 18,100/mo (KD:1) ✅ In homepage title
 2. **modele do sklejania** - 6,600/mo ✅ In homepage title
 3. **papercraft** - 1,300/mo (Comp: LOW 18) ✅ In description
 
 ### **Secondary Keywords (Ready for landing pages)**
+
 4. modele z kartonu (210/mo, KD:0)
 5. składanki z papieru (260/mo, LOW comp)
 6. modele z papieru (110/mo, KD:3)
@@ -94,11 +104,13 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ### **Priority 1: Create Landing Pages**
 
 #### 1. `/sklep/puzzle-3d/+page.svelte`
+
 **Target:** 18,100 SV/mo keyword
 **Status:** ✅ COMPLETED
 **Messages ready:** ✅ Yes (`landing_puzzle3d_*`)
 
 **What was created:**
+
 - Full landing page with SEO meta tags
 - Svelte 5 runes ($derived) for reactive locale
 - Hreflang tags (pl/en/x-default)
@@ -112,11 +124,13 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 - Maintains brutalist design (hard shadows, 3px borders, no rounded corners)
 
 #### 2. `/sklep/modele-do-sklejania/+page.svelte`
+
 **Target:** 6,600 SV/mo keyword
 **Status:** ✅ COMPLETED
 **Messages ready:** ✅ Yes (`landing_assembly_*`)
 
 **What was created:**
+
 - Full landing page targeting "modele do sklejania" keyword
 - All SEO meta tags (title, description, keywords, hreflang, canonical)
 - Svelte 5 runes for reactive content
@@ -128,6 +142,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 - Brutalist design maintained
 
 #### 3. `/sklep/papercraft/+page.svelte`
+
 **Target:** 1,300 SV/mo (brand term)
 **Status:** ❌ Not created yet
 **Messages ready:** ⚠️ Need to add
@@ -141,6 +156,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 **Status:** ✅ COMPLETED
 
 **What was updated:**
+
 - Added SEO fields to Product type: `seoKey`, `slugPL`, `slugEN`, `categoryPL`, `categoryEN`
 - Updated all 4 products with SEO data:
   - Swans: `labedzie-milosci` / `love-swans` → puzzle-3d
@@ -160,6 +176,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 **Status:** ✅ COMPLETED
 
 **What was created:**
+
 - Dynamic routing using SvelteKit `[category]/[product]` pattern
 - SEO meta tags using product's `seoKey` (e.g., `m.seo_moai_title()`)
 - Schema.org Product markup with:
@@ -187,6 +204,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ## 📊 TESTING CHECKLIST
 
 ### **Local Testing (Before Moving Forward)**
+
 - [ ] Run `bun run dev`
 - [ ] Visit homepage: check `<title>` in view source
 - [ ] Verify keywords in `<meta name="keywords">`
@@ -196,6 +214,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 - [ ] Verify brutalist design intact (no rounded corners!)
 
 ### **Messages Validation**
+
 - [x] Polish messages compile
 - [x] English messages compile
 - [ ] All `landing_puzzle3d_*` messages work in component
@@ -206,7 +225,9 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ## 🎨 DESIGN COMPLIANCE
 
 ### **Brutalist Principles (MUST MAINTAIN)**
+
 ✅ All changes maintain brutalist aesthetic:
+
 - No rounded corners (`border-radius: 0`)
 - Hard shadows only (no blur)
 - Instant transitions
@@ -219,11 +240,13 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ## 📈 EXPECTED IMPACT (6 Months)
 
 ### **Current State**
+
 - Organic Traffic: ~0/mo
 - Indexed Pages: 0
 - Ranking Keywords: 0
 
 ### **After Full Implementation**
+
 - Organic Traffic: 800-1,200/mo
 - Indexed Pages: 15-20
 - Top 10 Rankings: 8-12 keywords
@@ -237,6 +260,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ### **This Week (Jan 29 - Feb 4)**
 
 **Day 1 (Today):**
+
 - [x] Create implementation plan
 - [x] Update SEO config
 - [x] Add i18n messages
@@ -249,11 +273,13 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 - [ ] Test routing (PL/EN)
 
 **Day 2-3:**
+
 - [ ] Create `/sklep/papercraft/+page.svelte` (optional third landing page)
 - [ ] Update internal linking structure
 - [ ] Test all product detail pages
 
 **Day 6-7:**
+
 - [ ] Testing & validation
 - [ ] Performance check
 - [ ] Brutalist design review
@@ -277,6 +303,7 @@ Title: "3D Puzzles & Paper Assembly Models | Fold Club"
 ## 🎯 SUCCESS CRITERIA
 
 Implementation is successful when:
+
 - [x] Plan documented
 - [x] Homepage meta tags updated with target keywords
 - [x] i18n messages for landing pages ready
@@ -294,6 +321,7 @@ Implementation is successful when:
 **Status:** Phase 2 MAJOR MILESTONES COMPLETE ✅
 
 ### What's Done (Jan 29, 2026):
+
 1. ✅ **2 High-Value Landing Pages Created**
    - `/sklep/puzzle-3d` - Targeting 18,100 SV/mo
    - `/sklep/modele-do-sklejania` - Targeting 6,600 SV/mo
@@ -314,11 +342,13 @@ Implementation is successful when:
    - Brutalist design maintained
 
 ### Current Traffic Potential:
+
 - **Addressable Market:** 24,700 searches/month (base), 72,600 in December
 - **Pages Created:** 6 SEO-optimized pages (2 landing + 4 product detail)
 - **Schema Markup:** ✅ Product + Breadcrumb on all pages
 
 ### Next Steps:
+
 - [ ] Local testing (bun run dev)
 - [ ] Verify all routes work correctly
 - [ ] Test PL/EN language switching

@@ -170,7 +170,10 @@
           <span class="heading text-xl">{formatPrice(cartTotal)}</span>
         </div>
 
-        <button class="btn btn-primary paper-press text-center w-full" onclick={handleCheckoutClick}>
+        <button
+          class="btn btn-primary paper-press w-full text-center"
+          onclick={handleCheckoutClick}
+        >
           {m.cart_checkout()}
         </button>
 

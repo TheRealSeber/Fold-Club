@@ -2,7 +2,7 @@ import type { RequestHandler } from './$types';
 import { products } from '$lib/data/products';
 
 export const GET: RequestHandler = async () => {
-  const baseUrl = 'https://foldclub.pl';
+  const baseUrl = 'https://www.foldclub.pl';
   const lastmod = new Date().toISOString().split('T')[0];
 
   // Static pages with Polish translations
@@ -63,17 +63,17 @@ export const GET: RequestHandler = async () => {
         changefreq: page.changefreq,
         priority: page.priority,
         alternates: `    <xhtml:link rel="alternate" hreflang="pl" href="${baseUrl}${pathPL}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/en/${pathEN}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/en${pathEN}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${pathPL}"/>`
       },
       // English version (with /en prefix)
       {
-        loc: `${baseUrl}/en/${pathEN}`,
+        loc: `${baseUrl}/en${pathEN}`,
         lastmod,
         changefreq: page.changefreq,
         priority: page.priority,
         alternates: `    <xhtml:link rel="alternate" hreflang="pl" href="${baseUrl}${pathPL}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/en/${pathEN}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/en${pathEN}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${pathPL}"/>`
       }
     ];

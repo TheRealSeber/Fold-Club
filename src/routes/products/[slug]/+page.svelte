@@ -1,14 +1,11 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { getLocale } from '$lib/paraglide/runtime';
-  import { getProductBySlug, formatPrice } from '$lib/data/products';
+  import { formatPrice } from '$lib/data/products';
   import { m } from '$lib/paraglide/messages';
   import { cart } from '$lib/stores/cart.svelte';
   import { trackAddToCart } from '$lib/tracking';
 
-  let slug = $derived(page.params.slug);
-  let locale = $derived(getLocale());
-  let product = $derived(getProductBySlug(slug!, locale));
+  let product = $derived(page.data.product);
 
   function handleAddToCart() {
     if (!product) return;
@@ -21,7 +18,9 @@
   <div class="fc-container py-16">
     <div class="grid gap-8 lg:grid-cols-2">
       <!-- Product Image Placeholder -->
-      <div class="brutal-card paper-shadow-md aspect-square flex items-center justify-center bg-cream-deep">
+      <div
+        class="brutal-card paper-shadow-md flex aspect-square items-center justify-center bg-cream-deep"
+      >
         <div class="heading text-9xl text-ink/10">
           {product.name().charAt(0)}
         </div>
@@ -51,10 +50,7 @@
         <div class="mt-auto space-y-4">
           <div class="flex items-center justify-between border-t-3 border-ink pt-4">
             <div class="heading-2">{formatPrice(product.price)}</div>
-            <button
-              class="btn btn-primary paper-press"
-              onclick={handleAddToCart}
-            >
+            <button class="btn btn-primary paper-press" onclick={handleAddToCart}>
               {m.product_detail_add_to_cart()}
             </button>
           </div>

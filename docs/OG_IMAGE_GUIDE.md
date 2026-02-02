@@ -3,6 +3,7 @@
 ## ✅ What's Done
 
 ### Favicon
+
 - **Created**: `static/favicon.svg`
 - **Type**: SVG (scalable, works on all devices)
 - **Design**: Brutalist "F" letter made of geometric paper folds
@@ -17,6 +18,7 @@ The favicon will now show in browser tabs!
 Open Graph images are used when sharing links on social media (Facebook, Twitter, LinkedIn, etc.).
 
 ### Required Images (1200x630px each):
+
 1. `og-image-pl.png` - Home page (Polish)
 2. `og-image-en.png` - Home page (English)
 3. `og-puzzle3d-pl.png` - Puzzle 3D landing (Polish)
@@ -33,6 +35,7 @@ Open Graph images are used when sharing links on social media (Facebook, Twitter
 I created `static/og-image-template.html` for you!
 
 ### Steps:
+
 1. Open `static/og-image-template.html` in your browser
 2. Click the buttons to switch between different versions (Home PL, Puzzle 3D EN, etc.)
 3. **Right-click on the image** → "Save image as..."
@@ -59,6 +62,7 @@ I created `static/og-image-template.html` for you!
 ## 🛠️ Method 3: Use Figma/Canva (BEST QUALITY)
 
 ### Design Specs:
+
 - **Size**: 1200x630px
 - **Fonts**:
   - Headers: Archivo Black (uppercase, tight spacing)
@@ -74,6 +78,7 @@ I created `static/og-image-template.html` for you!
 - **Content**: Copy text from the HTML template buttons
 
 ### Figma Quick Start:
+
 1. Create 1200x630 frame
 2. Add rectangle: Fill `#faf6f1`, Stroke 6px `#1a1614`
 3. Add hard shadow: X=10, Y=10, Blur=0, Color=`#1a1614`
@@ -91,6 +96,7 @@ bun add @vercel/og
 ```
 
 Create `src/routes/og/[type]/+server.ts`:
+
 ```typescript
 import { ImageResponse } from '@vercel/og';
 
@@ -116,30 +122,34 @@ export async function GET({ params }) {
 Use these texts (already in the HTML template):
 
 ### Home PL (`og-image-pl.png`)
+
 - Tag: PAPERCRAFT (coral)
 - Title: PUZZLE 3D I MODELE DO SKLEJANIA
 - Description: Geometryczne zwierzęta z papieru. Pre-cut, bez wycinania - tylko sklejanie.
 - Stats: PRE-CUT, 1-4H, 3D
 
 ### Home EN (`og-image-en.png`)
+
 - Tag: PAPERCRAFT (coral)
 - Title: 3D PUZZLES & ASSEMBLY MODELS
 - Description: Geometric animals from paper. Pre-cut, no cutting - just gluing.
 - Stats: PRE-CUT, 1-4H, 3D
 
 ### Puzzle 3D PL (`og-puzzle3d-pl.png`)
+
 - Tag: PUZZLE 3D (coral)
 - Title: PUZZLE 3D Z PAPIERU
 - Description: Geometryczne modele zwierząt do sklejania. Pre-cut, gotowe do złożenia.
 - Stats: PRE-CUT, 4 Modele, LOW-POLY
 
 ### Puzzle 3D EN (`og-puzzle3d-en.png`)
+
 - Tag: PUZZLE 3D (coral)
 - Title: 3D PAPER PUZZLES
 - Description: Geometric animal models to assemble. Pre-cut, ready to build.
 - Stats: PRE-CUT, 4 Models, LOW-POLY
 
-*(Continue with Assembly and Papercraft versions - see template HTML)*
+_(Continue with Assembly and Papercraft versions - see template HTML)_
 
 ---
 
@@ -160,6 +170,7 @@ After generating all images:
 ## 🚀 Quick Win
 
 **If you're in a hurry:**
+
 1. Open the HTML template
 2. Screenshot only 2 versions: `og-image-pl.png` and `og-image-en.png`
 3. Copy these for the landing pages temporarily

@@ -33,56 +33,56 @@ export interface LocalizedSEO {
  */
 export const PATH_MAPPINGS: Record<string, { pl: string; en: string }> = {
   // Landing pages
-  'landing_puzzle3d': {
+  landing_puzzle3d: {
     pl: '/sklep/puzzle-3d',
     en: '/shop/puzzle-3d'
   },
-  'landing_assembly': {
+  landing_assembly: {
     pl: '/sklep/modele-do-sklejania',
     en: '/shop/assembly-models'
   },
-  'landing_papercraft': {
+  landing_papercraft: {
     pl: '/sklep/papercraft',
     en: '/shop/papercraft'
   },
   // Main routes with Polish translations
-  'shop_route': {
+  shop_route: {
     pl: '/sklep',
     en: '/shop'
   },
-  'cart_route': {
+  cart_route: {
     pl: '/koszyk',
     en: '/cart'
   },
-  'checkout_route': {
+  checkout_route: {
     pl: '/kasa',
     en: '/checkout'
   },
-  'order_route': {
+  order_route: {
     pl: '/zamowienie',
     en: '/order'
   },
-  'gallery_route': {
+  gallery_route: {
     pl: '/galeria',
     en: '/gallery'
   },
-  'contact_route': {
+  contact_route: {
     pl: '/kontakt',
     en: '/contact'
   },
-  'privacy_route': {
+  privacy_route: {
     pl: '/prywatnosc',
     en: '/privacy'
   },
-  'terms_route': {
+  terms_route: {
     pl: '/warunki',
     en: '/terms'
   },
-  'shipping_route': {
+  shipping_route: {
     pl: '/wysylka',
     en: '/shipping'
   },
-  'returns_route': {
+  returns_route: {
     pl: '/zwroty',
     en: '/returns'
   }
@@ -249,7 +249,7 @@ export const SEO_DATA: Record<SEOKey, LocalizedSEO> = {
     }
   },
   // Landing pages with internationalized URLs
-  'landing_puzzle3d': {
+  landing_puzzle3d: {
     pl: {
       title: 'Puzzle 3D z Papieru - Geometryczne Modele do Sklejania | Fold Club',
       description:
@@ -267,7 +267,7 @@ export const SEO_DATA: Record<SEOKey, LocalizedSEO> = {
       ogImage: '/og-puzzle3d-en.png'
     }
   },
-  'landing_assembly': {
+  landing_assembly: {
     pl: {
       title: 'Modele do Sklejania z Papieru - Pre-Cut Zestawy DIY | Fold Club',
       description:
@@ -280,12 +280,11 @@ export const SEO_DATA: Record<SEOKey, LocalizedSEO> = {
       title: 'Paper Models to Assemble - Pre-Cut DIY Kits | Fold Club',
       description:
         'Paper 3D models to assemble. All pieces pre-cut - just glue and admire. Perfect hobby for adults, couples, and kids.',
-      keywords:
-        'assembly models, paper models, paper crafts, diy kits, papercraft, model building',
+      keywords: 'assembly models, paper models, paper crafts, diy kits, papercraft, model building',
       ogImage: '/og-assembly-en.png'
     }
   },
-  'landing_papercraft': {
+  landing_papercraft: {
     pl: {
       title: 'Papercraft - Modele z Papieru Geometryczne Zestawy DIY | Fold Club',
       description:
@@ -309,16 +308,16 @@ export const SEO_DATA: Record<SEOKey, LocalizedSEO> = {
  * Map route keys to ROUTES constants
  */
 const ROUTE_KEY_TO_CONSTANT: Record<string, RouteValue> = {
-  'shop_route': ROUTES.SHOP,
-  'cart_route': ROUTES.CART,
-  'checkout_route': ROUTES.CHECKOUT,
-  'order_route': ROUTES.ORDER,
-  'gallery_route': ROUTES.GALLERY,
-  'contact_route': ROUTES.CONTACT,
-  'privacy_route': ROUTES.PRIVACY,
-  'terms_route': ROUTES.TERMS,
-  'shipping_route': ROUTES.SHIPPING,
-  'returns_route': ROUTES.RETURNS
+  shop_route: ROUTES.SHOP,
+  cart_route: ROUTES.CART,
+  checkout_route: ROUTES.CHECKOUT,
+  order_route: ROUTES.ORDER,
+  gallery_route: ROUTES.GALLERY,
+  contact_route: ROUTES.CONTACT,
+  privacy_route: ROUTES.PRIVACY,
+  terms_route: ROUTES.TERMS,
+  shipping_route: ROUTES.SHIPPING,
+  returns_route: ROUTES.RETURNS
 };
 
 /**

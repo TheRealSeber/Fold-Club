@@ -19,8 +19,10 @@
   let shouldShowPageHeader = $derived(() => {
     const pathWithoutLocale = page.url.pathname.replace(/^\/(en|pl)/, '') || '/';
     const isHome = pathWithoutLocale === '/';
-    const isShopChild = (pathWithoutLocale.startsWith('/shop/') || pathWithoutLocale.startsWith('/sklep/'));
-    const isProductPage = (pathWithoutLocale.startsWith('/products/') || pathWithoutLocale.startsWith('/produkty/'));
+    const isShopChild =
+      pathWithoutLocale.startsWith('/shop/') || pathWithoutLocale.startsWith('/sklep/');
+    const isProductPage =
+      pathWithoutLocale.startsWith('/products/') || pathWithoutLocale.startsWith('/produkty/');
 
     // Exclude home, shop children (landing pages), and product pages - they have custom layouts
     return !isHome && !isShopChild && !isProductPage;
