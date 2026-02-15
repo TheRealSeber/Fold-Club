@@ -8,7 +8,7 @@ import { browser } from '$app/environment';
 const STORAGE_KEY = 'fold-club-cart';
 
 type CartItem = {
-  productId: number;
+  productId: string;
   quantity: number;
 };
 
@@ -34,7 +34,7 @@ function createCartStore() {
     }
   }
 
-  function addToCart(productId: number) {
+  function addToCart(productId: string) {
     const existing = items.find((item) => item.productId === productId);
     if (existing) {
       existing.quantity += 1;
@@ -44,7 +44,7 @@ function createCartStore() {
     saveToStorage();
   }
 
-  function removeFromCart(productId: number) {
+  function removeFromCart(productId: string) {
     const index = items.findIndex((item) => item.productId === productId);
     if (index !== -1) {
       items.splice(index, 1);
@@ -52,7 +52,7 @@ function createCartStore() {
     }
   }
 
-  function updateQuantity(productId: number, quantity: number) {
+  function updateQuantity(productId: string, quantity: number) {
     const existing = items.find((item) => item.productId === productId);
     if (existing) {
       if (quantity <= 0) {
@@ -77,7 +77,7 @@ function createCartStore() {
     return items;
   }
 
-  function getProductIds(): number[] {
+  function getProductIds(): string[] {
     return items.map((item) => item.productId);
   }
 

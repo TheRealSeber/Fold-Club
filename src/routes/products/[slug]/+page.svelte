@@ -1,18 +1,40 @@
 <script lang="ts">
-  import { page } from '$app/state';
-  import { formatPrice } from '$lib/data/products';
+  import { formatPrice } from '$lib/utils/format';
   import { m } from '$lib/paraglide/messages';
   import { cart } from '$lib/stores/cart.svelte';
   import { trackAddToCart } from '$lib/tracking';
 
-  let product = $derived(page.data.product);
+  let { data } = $props();
+  let { product, seoTitle, seoDescription } = $derived(data);
+
+  const difficultyLabels = {
+    easy: m.product_difficulty_easy,
+    medium: m.product_difficulty_medium,
+    hard: m.product_difficulty_hard
+  };
+  const timeLabels = {
+    '1-2': m.product_time_1_2,
+    '2-3': m.product_time_2_3,
+    '3-4': m.product_time_3_4
+  };
 
   function handleAddToCart() {
-    if (!product) return;
-    trackAddToCart(product.id, product.name(), product.price);
+    trackAddToCart(product.id, product.name, product.priceAmount);
     cart.addToCart(product.id);
   }
 </script>
+
+<svelte:head>
+  {#if seoTitle}
+    <title>{seoTitle}</title>
+    <meta name="title" content={seoTitle} />
+    <meta name="description" content={seoDescription} />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={seoDescription} />
+  {/if}
+</svelte:head>
 
 {#if product}
   <div class="fc-container py-16">
@@ -22,7 +44,7 @@
         class="brutal-card paper-shadow-md flex aspect-square items-center justify-center bg-cream-deep"
       >
         <div class="heading text-9xl text-ink/10">
-          {product.name().charAt(0)}
+          {product.name.charAt(0)}
         </div>
       </div>
 
@@ -30,26 +52,26 @@
       <div class="flex flex-col gap-6">
         <div>
           <span class={`tag tag-${product.tagColor} mb-3 inline-block`}>
-            {product.tag()}
+            {product.tag}
           </span>
-          <h1 class="heading-1 mb-4">{product.name()}</h1>
-          <p class="body-large text-ink-muted">{product.description()}</p>
+          <h1 class="heading-1 mb-4">{product.name}</h1>
+          <p class="body-large text-ink-muted">{product.description}</p>
         </div>
 
         <div class="flex gap-6">
           <div>
             <div class="label text-ink-muted">{m.product_detail_difficulty_label()}</div>
-            <div class="body">{product.difficulty()}</div>
+            <div class="body">{difficultyLabels[product.difficulty]()}</div>
           </div>
           <div>
             <div class="label text-ink-muted">{m.product_detail_time_label()}</div>
-            <div class="body">{product.time()}</div>
+            <div class="body">{timeLabels[product.timeEstimate]()}</div>
           </div>
         </div>
 
         <div class="mt-auto space-y-4">
           <div class="flex items-center justify-between border-t-3 border-ink pt-4">
-            <div class="heading-2">{formatPrice(product.price)}</div>
+            <div class="heading-2">{formatPrice(product.priceAmount)}</div>
             <button class="btn btn-primary paper-press" onclick={handleAddToCart}>
               {m.product_detail_add_to_cart()}
             </button>

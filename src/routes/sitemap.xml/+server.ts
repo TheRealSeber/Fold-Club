@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { products } from '$lib/data/products';
+import { getAllProducts } from '$lib/server/db/products';
 
 export const GET: RequestHandler = async () => {
   const baseUrl = 'https://www.foldclub.pl';
@@ -40,10 +40,15 @@ export const GET: RequestHandler = async () => {
     }
   ];
 
-  // Dynamic Product Pages with Polish translations
-  const productPages = products.map((product) => ({
-    urlPL: `produkty/${product.slugPL}`,
-    urlEN: `products/${product.slugEN}`,
+  // Dynamic Product Pages from DB — pair EN and PL slugs by product ID
+  const [productsEN, productsPL] = await Promise.all([
+    getAllProducts('en'),
+    getAllProducts('pl'),
+  ]);
+  const plByProductId = new Map(productsPL.map((p) => [p.id, p.localizedSlug]));
+  const productPages = productsEN.map((product) => ({
+    urlPL: `produkty/${plByProductId.get(product.id) ?? product.slug}`,
+    urlEN: `products/${product.localizedSlug}`,
     priority: 0.8,
     changefreq: 'weekly'
   }));
@@ -52,7 +57,7 @@ export const GET: RequestHandler = async () => {
   const allPages = [...staticPages, ...landingPages, ...productPages];
 
   const urls = allPages.flatMap((page) => {
-    const pathPL = page.urlPL ? `/${page.urlPL}` : '';
+    const pathPL = page.urlPL ? `/${page.urlPL}` : '/';
     const pathEN = page.urlEN ? `/${page.urlEN}` : '';
 
     return [
