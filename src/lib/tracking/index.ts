@@ -33,7 +33,7 @@ import {
 /**
  * Unified tracking for Add to Cart (fires all pixels)
  */
-export function trackAddToCart(productId: number, productName: string, price: number): void {
+export function trackAddToCart(productId: string, productName: string, price: number): void {
   // Meta Pixel
   trackMetaAddToCart(productId, productName, price);
 
@@ -46,7 +46,7 @@ export function trackAddToCart(productId: number, productName: string, price: nu
  * Unified tracking for Checkout Click (fires all pixels)
  */
 export function trackCheckoutClick(
-  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  items: Array<{ id: string; name: string; price: number; quantity: number }>,
   totalValue: number
 ): void {
   const productIds = items.map((item) => item.id);
@@ -62,7 +62,7 @@ export function trackCheckoutClick(
 /**
  * Unified tracking for Product View
  */
-export function trackProductView(productId: number, productName: string, price: number): void {
+export function trackProductView(productId: string, productName: string, price: number): void {
   // Meta Pixel
   trackMetaViewContent(productId, productName, price);
 

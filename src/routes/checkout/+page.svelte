@@ -6,7 +6,9 @@
   import { cart } from '$lib/stores/cart.svelte';
   import FakeDoorModal from '$lib/components/shared/FakeDoorModal.svelte';
   import { trackGA4ViewCheckout, trackGA4PaymentClick } from '$lib/tracking';
-  import { getProductById, formatPrice } from '$lib/data/products';
+  import { formatPrice } from '$lib/utils/format';
+
+  let { data } = $props();
 
   let showFakeDoor = $state(false);
 
@@ -25,20 +27,20 @@
   // Cart calculations
   let cartTotal = $derived(
     cart.items.reduce((sum, item) => {
-      const product = getProductById(item.productId);
-      return sum + (product ? product.price * item.quantity : 0);
+      const product = data.products.find((p) => p.id === item.productId);
+      return sum + (product ? product.priceAmount * item.quantity : 0);
     }, 0)
   );
 
   let cartItemsForTracking = $derived(
     cart.items
       .map((item) => {
-        const product = getProductById(item.productId);
+        const product = data.products.find((p) => p.id === item.productId);
         if (!product) return null;
         return {
           id: product.id,
-          name: product.name(),
-          price: product.price,
+          name: product.name,
+          price: product.priceAmount,
           quantity: item.quantity
         };
       })
@@ -190,16 +192,16 @@
         <!-- Cart Items -->
         <div class="mb-6 space-y-3">
           {#each cart.items as item (item.productId)}
-            {@const product = getProductById(item.productId)}
+            {@const product = data.products.find((p) => p.id === item.productId)}
             {#if product}
               <div class="flex items-center justify-between">
                 <div class="flex-1">
-                  <p class="body text-ink">{product.name()}</p>
+                  <p class="body text-ink">{product.name}</p>
                   <p class="body-small text-ink-muted">
                     {m.checkout_quantity()}: {item.quantity}
                   </p>
                 </div>
-                <span class="heading">{formatPrice(product.price * item.quantity)}</span>
+                <span class="heading">{formatPrice(product.priceAmount * item.quantity)}</span>
               </div>
             {/if}
           {/each}
@@ -220,6 +222,7 @@
         <div class="mb-8 flex items-center justify-between border-t-3 border-ink pt-4">
           <span class="heading">{m.checkout_total()}</span>
           <span class="heading text-xl">{formatPrice(cartTotal)}</span>
+
         </div>
 
         <!-- Przelewy24 Payment Button -->

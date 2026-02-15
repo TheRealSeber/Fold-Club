@@ -1,32 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "mcp__svelte__list-sections",
-      "mcp__svelte__get-documentation",
-      "Bash(bun add:*)",
-      "mcp__svelte__svelte-autofixer",
-      "Bash(bun run check:*)",
-      "Bash(timeout 10 bun run dev:*)",
-      "Bash(powershell -Command:*)",
-      "Bash(git clone:*)",
-      "Bash(npm install:*)",
-      "Bash(npm run build:*)",
-      "mcp__dataforseo__serp_google_locations",
-      "mcp__dataforseo__labs_google_ranked_keywords",
-      "Bash(winget install:*)",
-      "Bash(.tools/jq.exe:*)",
-      "mcp__dataforseo__labs_google_keyword_ideas",
-      "mcp__dataforseo__labs_google_related_keywords",
-      "mcp__dataforseo__labs_google_bulk_keyword_difficulty",
-      "mcp__dataforseo__keywords_google_ads_search_volume",
-      "Bash(ls:*)",
-      "mcp__dataforseo__labs_google_keyword_suggestions",
-      "mcp__plugin_context7_context7__resolve-library-id",
-      "mcp__plugin_context7_context7__query-docs",
-      "Bash(git checkout:*)",
-      "Bash(git log:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(bun run:*)",
+      "Bash(grep:*)"
     ]
   },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": ["svelte"]
+  "enabledMcpjsonServers": [
+    "svelte",
+    "dataforseo",
+    "supabase"
+  ]
 }

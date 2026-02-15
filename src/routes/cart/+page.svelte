@@ -5,20 +5,22 @@
   import { m } from '$lib/paraglide/messages';
   import { cart } from '$lib/stores/cart.svelte';
   import { trackCheckoutClick } from '$lib/tracking';
-  import { getProductById, formatPrice } from '$lib/data/products';
+  import { formatPrice } from '$lib/utils/format';
   import { goto } from '$app/navigation';
+
+  let { data } = $props();
 
   let showFakeDoor = $state(false);
   let showRemoveConfirm = $state(false);
-  let pendingRemoveId = $state<number | null>(null);
+  let pendingRemoveId = $state<string | null>(null);
 
   // Check if removing this item would empty the cart
   let isLastItem = $derived(cart.items.length === 1 && pendingRemoveId !== null);
 
   let cartTotal = $derived(
     cart.items.reduce((sum, item) => {
-      const product = getProductById(item.productId);
-      return sum + (product ? product.price * item.quantity : 0);
+      const product = data.products.find((p) => p.id === item.productId);
+      return sum + (product ? product.priceAmount * item.quantity : 0);
     }, 0)
   );
 
@@ -26,20 +28,19 @@
   let cartItemsForTracking = $derived(
     cart.items
       .map((item) => {
-        const product = getProductById(item.productId);
+        const product = data.products.find((p) => p.id === item.productId);
         if (!product) return null;
         return {
           id: product.id,
-          name: product.name(),
-          price: product.price,
+          name: product.name,
+          price: product.priceAmount,
           quantity: item.quantity
         };
       })
       .filter((item): item is NonNullable<typeof item> => item !== null)
   );
 
-  function handleRemove(productId: number) {
-    // Always show confirmation when removing an item
+  function handleRemove(productId: string) {
     pendingRemoveId = productId;
     showRemoveConfirm = true;
   }
@@ -57,10 +58,9 @@
     showRemoveConfirm = false;
   }
 
-  function handleQuantityChange(productId: number, delta: number) {
+  function handleQuantityChange(productId: string, delta: number) {
     const item = cart.items.find((i) => i.productId === productId);
     if (item) {
-      // If decreasing to 0 (last quantity), show confirmation
       if (delta < 0 && item.quantity + delta <= 0) {
         pendingRemoveId = productId;
         showRemoveConfirm = true;
@@ -72,11 +72,7 @@
 
   function handleCheckoutClick(e: Event) {
     e.preventDefault();
-
-    // Fire tracking events IMMEDIATELY (before navigating)
     trackCheckoutClick(cartItemsForTracking, cartTotal);
-
-    // Navigate to checkout page
     goto(localizeHref('/checkout'));
   }
 </script>
@@ -94,7 +90,7 @@
   <div class="grid gap-6 lg:grid-cols-3">
     <div class="space-y-6 lg:col-span-2">
       {#each cart.items as item (item.productId)}
-        {@const product = getProductById(item.productId)}
+        {@const product = data.products.find((p) => p.id === item.productId)}
         {#if product}
           <div
             class="brutal-card paper-shadow-sm flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:gap-6 sm:p-6"
@@ -104,13 +100,13 @@
                 class="flex h-16 w-16 shrink-0 items-center justify-center border-3 border-ink bg-cream-deep sm:h-20 sm:w-20"
               >
                 <span class="heading text-2xl text-ink/20 sm:text-3xl">
-                  {product.name().charAt(0)}
+                  {product.name.charAt(0)}
                 </span>
               </div>
 
               <div class="min-w-0 grow sm:grow-0">
-                <h3 class="heading text-base sm:text-lg">{product.name()}</h3>
-                <p class="body-small text-ink-muted">{formatPrice(product.price)}</p>
+                <h3 class="heading text-base sm:text-lg">{product.name}</h3>
+                <p class="body-small text-ink-muted">{formatPrice(product.priceAmount)}</p>
               </div>
             </div>
 
@@ -134,7 +130,7 @@
               </div>
 
               <div class="heading flex-1 text-right sm:flex-none">
-                {formatPrice(product.price * item.quantity)}
+                {formatPrice(product.priceAmount * item.quantity)}
               </div>
 
               <button

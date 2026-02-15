@@ -7,6 +7,8 @@
   import CtaSection from '$lib/components/landing/CtaSection.svelte';
   import HowItWorksDialog from '$lib/components/landing/HowItWorksDialog.svelte';
 
+  let { data } = $props();
+
   let dialogOpen = $state(false);
 
   const steps = [
@@ -19,7 +21,7 @@
 
 <HeroSection onOpenHowItWorks={() => (dialogOpen = true)} />
 <StatsBar />
-<ProductsSection />
+<ProductsSection products={data.products} />
 <HowItWorksSection {steps} />
 <CtaSection />
 <HowItWorksDialog bind:open={dialogOpen} {steps} />

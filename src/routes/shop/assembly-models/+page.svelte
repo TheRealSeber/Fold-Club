@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { products } from '$lib/data/products';
   import { m } from '$lib/paraglide/messages';
   import { localizeHref } from '$lib/paraglide/runtime';
   import ProductCard from '$lib/components/ProductCard.svelte';
+
+  let { data } = $props();
 </script>
 
 <!-- SEO handled by global SEOHead component in layout -->
@@ -55,7 +56,7 @@
       </h2>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {#each products as product (product.id)}
+        {#each data.products as product (product.id)}
           <ProductCard {product} />
         {/each}
       </div>

@@ -81,7 +81,7 @@ export function trackMetaPageView(): void {
 /**
  * Track AddToCart event
  */
-export function trackMetaAddToCart(productId: number, productName: string, value: number): void {
+export function trackMetaAddToCart(productId: string, productName: string, value: number): void {
   if (!browser || !window.fbq) return;
 
   window.fbq('track', 'AddToCart', {
@@ -96,7 +96,7 @@ export function trackMetaAddToCart(productId: number, productName: string, value
 /**
  * Track InitiateCheckout event for Fake Door
  */
-export function trackMetaInitiateCheckout(productIds: number[], value: number): void {
+export function trackMetaInitiateCheckout(productIds: string[], value: number): void {
   if (!browser || !window.fbq) return;
 
   window.fbq('track', 'InitiateCheckout', {
@@ -111,7 +111,7 @@ export function trackMetaInitiateCheckout(productIds: number[], value: number): 
 /**
  * Track ViewContent (product view)
  */
-export function trackMetaViewContent(productId: number, productName: string, value: number): void {
+export function trackMetaViewContent(productId: string, productName: string, value: number): void {
   if (!browser || !window.fbq) return;
 
   window.fbq('track', 'ViewContent', {

@@ -59,7 +59,7 @@ export function trackGA4PageView(pagePath: string, pageTitle: string): void {
 /**
  * Track add_to_cart event
  */
-export function trackGA4AddToCart(productId: number, itemName: string, value: number): void {
+export function trackGA4AddToCart(productId: string, itemName: string, value: number): void {
   if (!browser || !window.gtag) return;
 
   window.gtag('event', 'add_to_cart', {
@@ -80,7 +80,7 @@ export function trackGA4AddToCart(productId: number, itemName: string, value: nu
  * Track begin_checkout event for Fake Door
  */
 export function trackGA4BeginCheckout(
-  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  items: Array<{ id: string; name: string; price: number; quantity: number }>,
   value: number
 ): void {
   if (!browser || !window.gtag) return;
@@ -101,7 +101,7 @@ export function trackGA4BeginCheckout(
 /**
  * Track view_item (product view)
  */
-export function trackGA4ViewItem(productId: number, itemName: string, value: number): void {
+export function trackGA4ViewItem(productId: string, itemName: string, value: number): void {
   if (!browser || !window.gtag) return;
 
   window.gtag('event', 'view_item', {
@@ -123,7 +123,7 @@ export function trackGA4ViewItem(productId: number, itemName: string, value: num
  */
 export function trackGA4FakeDoor(
   action: 'add_to_cart' | 'checkout' | 'payment_click',
-  productIds: number[]
+  productIds: string[]
 ): void {
   if (!browser || !window.gtag) return;
 
@@ -138,7 +138,7 @@ export function trackGA4FakeDoor(
  * Track checkout page view (separate from begin_checkout)
  */
 export function trackGA4ViewCheckout(
-  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  items: Array<{ id: string; name: string; price: number; quantity: number }>,
   value: number
 ): void {
   if (!browser || !window.gtag) return;
@@ -160,7 +160,7 @@ export function trackGA4ViewCheckout(
  * Track payment button click (Przelewy24)
  */
 export function trackGA4PaymentClick(
-  items: Array<{ id: number; name: string; price: number; quantity: number }>,
+  items: Array<{ id: string; name: string; price: number; quantity: number }>,
   value: number
 ): void {
   if (!browser || !window.gtag) return;
