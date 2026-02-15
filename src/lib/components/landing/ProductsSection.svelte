@@ -2,7 +2,9 @@
   import { localizeHref } from '$lib/paraglide/runtime';
   import { m } from '$lib/paraglide/messages';
   import ProductCard from '$lib/components/ProductCard.svelte';
-  import { products } from '$lib/data/products';
+  import type { ProductWithTranslation } from '$lib/server/db/products';
+
+  let { products }: { products: ProductWithTranslation[] } = $props();
 </script>
 
 <section class="bg-cream-warm py-20">

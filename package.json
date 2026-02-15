@@ -14,7 +14,6 @@
     "format": "prettier --write .",
     "test:e2e": "playwright test",
     "test": "npm run test:e2e",
-    "db:start": "docker compose up",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

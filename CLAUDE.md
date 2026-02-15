@@ -135,6 +135,6 @@ docs/
 bun run dev        # Start dev server
 bun run build      # Production build
 bun run check      # Type checking
-bun run db:push    # Push schema to database
-bun run db:studio  # Open Drizzle Studio
+bun run db:push    # Push schema to Supabase
+bun run db:studio  # Open Drizzle Studio (connects to Supabase)
 ```

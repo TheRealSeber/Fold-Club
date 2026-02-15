@@ -2,10 +2,15 @@
   import { page } from '$app/state';
   import ProductCard from '$lib/components/ProductCard.svelte';
   import { m } from '$lib/paraglide/messages';
-  import { products, getProductsByCategory } from '$lib/data/products';
+
+  let { data } = $props();
 
   let activeCategory = $derived(page.url.searchParams.get('category') || 'all');
-  let filteredProducts = $derived(getProductsByCategory(activeCategory));
+  let filteredProducts = $derived(
+    activeCategory === 'all'
+      ? data.products
+      : data.products.filter((p) => p.category === activeCategory)
+  );
 
   const filters = [
     { key: 'all', label: () => m.shop_filter_all() },
