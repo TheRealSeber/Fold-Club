@@ -22,6 +22,8 @@ export {
   trackGA4PaymentClick
 } from './ga4';
 
+export { consent } from './consent.svelte';
+
 import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';
 import {
   trackGA4AddToCart,
