@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { browser } from '$app/environment';
   import { page } from '$app/state';
   import { locales, localizeHref } from '$lib/paraglide/runtime';
-  import { initMetaPixel, initGA4, trackMetaPageView, trackGA4PageView } from '$lib/tracking';
+  import { initMetaPixel, initGA4, trackMetaPageView, trackGA4PageView, consent } from '$lib/tracking';
   import { getPageMetadata } from '$lib/config/routes';
   import { m } from '$lib/paraglide/messages';
   import LandingNav from '$lib/components/landing/LandingNav.svelte';
@@ -37,16 +36,27 @@
     metadata?.subtitleKey ? (m as any)[metadata.subtitleKey]?.() : undefined
   );
 
-  onMount(() => {
-    initMetaPixel();
-    initGA4();
+  // Initialize tracking based on consent
+  $effect(() => {
+    if (browser) {
+      if (consent.marketing) {
+        initMetaPixel();
+      }
+      if (consent.analytics) {
+        initGA4();
+      }
+    }
   });
 
-  // Track page views on client-side navigation
+  // Track page views on client-side navigation (only if consented)
   $effect(() => {
     if (browser && page.url) {
-      trackMetaPageView();
-      trackGA4PageView(page.url.pathname, document.title);
+      if (consent.marketing) {
+        trackMetaPageView();
+      }
+      if (consent.analytics) {
+        trackGA4PageView(page.url.pathname, document.title);
+      }
     }
   });
 </script>
