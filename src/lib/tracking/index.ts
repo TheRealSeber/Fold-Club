@@ -11,6 +11,8 @@ export {
 export {
   initGA4,
   trackGA4PageView,
+  trackGA4ViewCheckout,
+  trackGA4PaymentClick,
 } from './ga4';
 
 export { consent } from './consent.svelte';
