@@ -81,44 +81,58 @@ export function trackMetaPageView(): void {
 /**
  * Track AddToCart event
  */
-export function trackMetaAddToCart(productId: string, productName: string, value: number): void {
+export function trackMetaAddToCart(
+  productId: string,
+  productName: string,
+  value: number,
+  eventId?: string
+): void {
   if (!browser || !window.fbq) return;
 
   window.fbq('track', 'AddToCart', {
     content_ids: [productId.toString()],
     content_name: productName,
     content_type: 'product',
-    value: value,
+    value: value / 100,
     currency: 'PLN'
-  });
+  }, eventId ? { eventID: eventId } : undefined);
 }
 
 /**
  * Track InitiateCheckout event for Fake Door
  */
-export function trackMetaInitiateCheckout(productIds: string[], value: number): void {
+export function trackMetaInitiateCheckout(
+  productIds: string[],
+  value: number,
+  eventId?: string
+): void {
   if (!browser || !window.fbq) return;
 
   window.fbq('track', 'InitiateCheckout', {
     content_ids: productIds.map((id) => id.toString()),
     content_type: 'product',
-    value: value,
+    value: value / 100,
     currency: 'PLN',
     num_items: productIds.length
-  });
+  }, eventId ? { eventID: eventId } : undefined);
 }
 
 /**
  * Track ViewContent (product view)
  */
-export function trackMetaViewContent(productId: string, productName: string, value: number): void {
+export function trackMetaViewContent(
+  productId: string,
+  productName: string,
+  value: number,
+  eventId?: string
+): void {
   if (!browser || !window.fbq) return;
 
   window.fbq('track', 'ViewContent', {
     content_ids: [productId.toString()],
     content_name: productName,
     content_type: 'product',
-    value: value,
+    value: value / 100,
     currency: 'PLN'
-  });
+  }, eventId ? { eventID: eventId } : undefined);
 }
