@@ -10,6 +10,7 @@
   import FooterSection from '$lib/components/landing/FooterSection.svelte';
   import PageHeader from '$lib/components/shared/PageHeader.svelte';
   import SEOHead from '$lib/components/shared/SEOHead.svelte';
+  import ConsentBanner from '$lib/components/tracking/ConsentBanner.svelte';
   import { cart } from '$lib/stores/cart.svelte';
   import '../app.css';
 
@@ -84,6 +85,9 @@
 
   <!-- Footer appears on all pages -->
   <FooterSection />
+
+  <!-- GDPR consent banner -->
+  <ConsentBanner />
 </div>
 
 <!-- Hidden language switcher for i18n -->

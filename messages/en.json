@@ -350,5 +350,19 @@
   "shop_category_assembly_desc": "Pre-cut paper kits",
   "shop_category_papercraft": "Papercraft",
   "shop_category_papercraft_desc": "Low-poly paper art",
-  "shop_intro_description": "Discover our collection of DIY papercraft kits. Geometric 3D paper models - swans, dinosaur, moai, sphinx. Pre-cut kits ready to assemble. No cutting required, just folding and gluing. Perfect as a gift or creative activity."
+  "shop_intro_description": "Discover our collection of DIY papercraft kits. Geometric 3D paper models - swans, dinosaur, moai, sphinx. Pre-cut kits ready to assemble. No cutting required, just folding and gluing. Perfect as a gift or creative activity.",
+
+  "consent_banner_text": "We use cookies to improve your experience and measure advertising effectiveness.",
+  "consent_accept_all": "Accept All",
+  "consent_reject_all": "Reject All",
+  "consent_customize": "Customize",
+  "consent_preferences_title": "Cookie Preferences",
+  "consent_necessary_label": "Necessary",
+  "consent_necessary_desc": "Shopping cart, authentication, security",
+  "consent_necessary_always": "Always active",
+  "consent_analytics_label": "Analytics",
+  "consent_analytics_desc": "Google Analytics — helps us understand how you use the site",
+  "consent_marketing_label": "Marketing",
+  "consent_marketing_desc": "Facebook Pixel — helps us show you relevant ads",
+  "consent_save": "Save Preferences"
 }

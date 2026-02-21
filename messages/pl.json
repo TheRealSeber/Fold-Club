@@ -351,5 +351,19 @@
   "shop_category_assembly_desc": "Pre-cut papierowe zestawy DIY",
   "shop_category_papercraft": "Papercraft",
   "shop_category_papercraft_desc": "Low-poly sztuka z papieru",
-  "shop_intro_description": "Odkryj naszą kolekcję zestawów papercraft DIY. Geometryczne modele 3D z papieru - łabędzie, dinozaur, moai, sfinks. Pre-cut zestawy gotowe do sklejania. Bez wycinania, tylko składanie i sklejanie. Idealne na prezent lub kreatywną aktywność."
+  "shop_intro_description": "Odkryj naszą kolekcję zestawów papercraft DIY. Geometryczne modele 3D z papieru - łabędzie, dinozaur, moai, sfinks. Pre-cut zestawy gotowe do sklejania. Bez wycinania, tylko składanie i sklejanie. Idealne na prezent lub kreatywną aktywność.",
+
+  "consent_banner_text": "Używamy ciasteczek, aby poprawić Twoje doświadczenie i mierzyć skuteczność reklam.",
+  "consent_accept_all": "Akceptuj wszystkie",
+  "consent_reject_all": "Odrzuć wszystkie",
+  "consent_customize": "Dostosuj",
+  "consent_preferences_title": "Preferencje ciasteczek",
+  "consent_necessary_label": "Niezbędne",
+  "consent_necessary_desc": "Koszyk, uwierzytelnianie, bezpieczeństwo",
+  "consent_necessary_always": "Zawsze aktywne",
+  "consent_analytics_label": "Analityczne",
+  "consent_analytics_desc": "Google Analytics — pomaga nam zrozumieć, jak korzystasz ze strony",
+  "consent_marketing_label": "Marketingowe",
+  "consent_marketing_desc": "Facebook Pixel — pomaga nam pokazywać Ci odpowiednie reklamy",
+  "consent_save": "Zapisz preferencje"
 }
