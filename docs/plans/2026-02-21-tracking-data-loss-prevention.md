@@ -10,6 +10,14 @@
 
 **Design Doc:** `docs/plans/2026-02-21-tracking-data-loss-prevention-design.md`
 
+**Required Skills:**
+- `@svelte-skills:svelte-runes` — Task 9 (consent store: `$state`, `$derived`), Task 11 (layout: `$effect` for consent-gated init). Invoke before writing any reactive code.
+- `@svelte-skills:sveltekit-remote-functions` — Task 8 (tracking remote functions: `command()`, `getRequestEvent()`, Valibot schemas). Invoke before writing `.remote.ts` files.
+- `@svelte-skills:sveltekit-structure` — Task 4 (hooks.server.ts: `sequence()` handler chain). Invoke before modifying hooks.
+- `@svelte-skills:sveltekit-data-flow` — Task 8 (understanding server/client boundary for remote functions vs load functions).
+- `@component` — Task 10 (ConsentBanner.svelte: must follow brutalist design system from `docs/DESIGN_SYSTEM.md` and `src/app.css`). Invoke before creating UI components.
+- `svelte-autofixer` MCP tool — Tasks 10, 14 (run on all `.svelte` files before committing).
+
 ---
 
 ## Pre-requisites (manual, ~5 min)
@@ -347,6 +355,8 @@ git commit -m "feat: add URL parameter capture and tracking session management"
 ---
 
 ### Task 4: Integrate Parameter Capture into Hooks
+
+> **Skill:** Invoke `@svelte-skills:sveltekit-structure` before starting — covers hooks.server.ts patterns and `sequence()` handler chaining.
 
 **Files:**
 - Modify: `src/hooks.server.ts`
@@ -764,6 +774,8 @@ git commit -m "feat: add ServerTracker orchestrator with Meta CAPI singleton"
 
 ### Task 8: Remote Functions for Server-Side Event Tracking
 
+> **Skill:** Invoke `@svelte-skills:sveltekit-remote-functions` before starting — covers `command()`, `getRequestEvent()`, Valibot validation, and cookie limitations.
+
 **Files:**
 - Create: `src/lib/tracking/tracking.remote.ts`
 
@@ -964,6 +976,8 @@ git commit -m "feat: add server-side tracking remote functions"
 
 ### Task 9: Consent State Store (Svelte 5 Runes)
 
+> **Skill:** Invoke `@svelte-skills:svelte-runes` before starting — covers `$state()`, `$derived()`, reactive store patterns, and common mistakes to avoid.
+
 **Files:**
 - Create: `src/lib/tracking/consent.svelte.ts`
 
@@ -1070,6 +1084,10 @@ git commit -m "feat: add GDPR consent state store with Svelte 5 runes"
 
 ### Task 10: Consent Banner Component
 
+> **Skill:** Invoke `@component` before starting — guides Svelte component creation following the Fold Club brutalist design system.
+> **Skill:** Invoke `@svelte-skills:svelte-runes` — component uses `$state()` for toggle state and `$props()` if needed.
+> **Tool:** Run `svelte-autofixer` MCP tool on the component before committing.
+
 **Files:**
 - Create: `src/lib/components/tracking/ConsentBanner.svelte`
 
@@ -1123,6 +1141,8 @@ git commit -m "feat: add GDPR consent banner with granular cookie controls"
 ---
 
 ### Task 11: Consent-Gate Tracking Initialization in Layout
+
+> **Skill:** Invoke `@svelte-skills:svelte-runes` — uses `$effect()` for reactive consent-gated initialization (replaces `onMount`).
 
 **Files:**
 - Modify: `src/routes/+layout.svelte`
