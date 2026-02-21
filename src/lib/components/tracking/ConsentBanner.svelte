@@ -26,7 +26,7 @@
   }
 </script>
 
-{#if !consent.hasConsented}
+{#if consent.bannerVisible}
   <div class="fixed bottom-0 left-0 right-0 z-50 bg-cream border-t-3 border-ink paper-shadow-lg">
     <div class="fc-container py-6">
       {#if !showCustomize}

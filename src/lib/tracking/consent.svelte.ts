@@ -43,6 +43,7 @@ async function persistToServer(state: ConsentState): Promise<void> {
 
 function createConsentStore() {
   let state = $state<ConsentState | null>(readFromCookie());
+  let bannerVisible = $state(false);
 
   const hasConsented = $derived(state !== null);
   const marketing = $derived(state?.marketing ?? false);
@@ -52,6 +53,7 @@ function createConsentStore() {
     state = newState;
     writeToCookie(newState);
     persistToServer(newState);
+    bannerVisible = false;
   }
 
   return {
@@ -59,6 +61,10 @@ function createConsentStore() {
     get hasConsented() { return hasConsented; },
     get marketing() { return marketing; },
     get analytics() { return analytics; },
+    get bannerVisible() { return bannerVisible || !hasConsented; },
+
+    showBanner() { bannerVisible = true; },
+    hideBanner() { bannerVisible = false; },
 
     grantAll(): void {
       apply({ necessary: true, analytics: true, marketing: true });
