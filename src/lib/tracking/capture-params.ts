@@ -79,12 +79,15 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
       if (ipAddress) updateData.ipAddress = ipAddress;
       if (userAgent) updateData.userAgent = userAgent;
 
-      if (Object.keys(updateData).length > 0) {
-        await db
-          .update(trackingSessions)
-          .set(updateData)
-          .where(eq(trackingSessions.sessionId, existingSessionId));
-      }
+      // Extend session expiry on re-attribution
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + SESSION_EXPIRY_DAYS);
+      updateData.expiresAt = expiresAt;
+
+      await db
+        .update(trackingSessions)
+        .set(updateData)
+        .where(eq(trackingSessions.sessionId, existingSessionId));
     }
     return;
   }
@@ -116,7 +119,7 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
     path: '/',
     httpOnly: true,
     sameSite: 'lax',
-    secure: true,
+    secure: event.url.protocol === 'https:',
     maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
   });
 }

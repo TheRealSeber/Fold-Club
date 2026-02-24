@@ -31,10 +31,6 @@ CREATE TABLE IF NOT EXISTS "consent_records" (
 
 -- Add tracking columns to orders table
 ALTER TABLE "orders" ADD COLUMN IF NOT EXISTS "tracking_session_id" uuid;
-ALTER TABLE "orders" ADD COLUMN IF NOT EXISTS "fbclid" text;
-ALTER TABLE "orders" ADD COLUMN IF NOT EXISTS "utm_source" text;
-ALTER TABLE "orders" ADD COLUMN IF NOT EXISTS "utm_medium" text;
-ALTER TABLE "orders" ADD COLUMN IF NOT EXISTS "utm_campaign" text;
 ALTER TABLE "orders" ADD COLUMN IF NOT EXISTS "event_id" text;
 
 -- Add foreign keys

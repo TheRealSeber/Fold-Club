@@ -15,6 +15,10 @@
   }
 
   function handleCustomize() {
+    if (!showCustomize) {
+      localAnalytics = consent.analytics;
+      localMarketing = consent.marketing;
+    }
     showCustomize = !showCustomize;
   }
 

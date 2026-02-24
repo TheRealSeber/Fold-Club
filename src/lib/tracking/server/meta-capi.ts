@@ -36,6 +36,7 @@ function buildUserData(params: { userData: ViewContentParams['userData'] }): Rec
   if (params.userData.userAgent) ud.client_user_agent = params.userData.userAgent;
   if (params.userData.fbc) ud.fbc = params.userData.fbc;
   if (params.userData.fbp) ud.fbp = params.userData.fbp;
+  if (params.userData.fbclid) ud.fbclid = params.userData.fbclid;
   return ud;
 }
 
