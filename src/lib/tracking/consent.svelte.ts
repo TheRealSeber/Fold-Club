@@ -68,7 +68,7 @@ function createConsentStore() {
     get hasConsented() { return hasConsented; },
     get marketing() { return marketing; },
     get analytics() { return analytics; },
-    get bannerVisible() { return bannerVisible || !hasConsented; },
+    get bannerVisible() { return browser && (bannerVisible || !hasConsented); },
 
     showBanner() { bannerVisible = true; },
     hideBanner() { bannerVisible = false; },
