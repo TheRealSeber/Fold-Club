@@ -20,10 +20,11 @@ export function generateEventId(
 }
 
 /**
- * Read fc_session cookie value from document.cookie (client-side).
+ * Read fc_session_id cookie value from document.cookie (client-side).
+ * Uses the non-httpOnly fc_session_id cookie (fc_session is httpOnly).
  */
 export function getSessionIdFromCookie(): string {
   if (typeof document === 'undefined') return 'unknown';
-  const match = document.cookie.match(/(?:^|;\s*)fc_session=([^;]*)/);
+  const match = document.cookie.match(/(?:^|;\s*)fc_session_id=([^;]*)/);
   return match?.[1] ?? 'unknown';
 }

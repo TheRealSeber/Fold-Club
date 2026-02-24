@@ -119,6 +119,15 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
     secure: true,
     maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
   });
+
+  // Non-httpOnly cookie for client-side event deduplication
+  event.cookies.set(SESSION_COOKIE + '_id', sessionId, {
+    path: '/',
+    httpOnly: false,
+    sameSite: 'lax',
+    secure: true,
+    maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
+  });
 }
 
 /**
