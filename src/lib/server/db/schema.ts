@@ -10,7 +10,6 @@ import {
   uniqueIndex,
   index,
   check,
-  jsonb,
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { v7 as uuidv7 } from 'uuid';

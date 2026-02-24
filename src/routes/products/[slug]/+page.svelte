@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { formatPrice } from '$lib/utils/format';
   import { m } from '$lib/paraglide/messages';
   import { cart } from '$lib/stores/cart.svelte';
-  import { trackAddToCart } from '$lib/tracking';
+  import { trackAddToCart, trackProductView } from '$lib/tracking';
 
   let { data } = $props();
   let { product, seoTitle, seoDescription } = $derived(data);
@@ -17,6 +18,12 @@
     '2-3': m.product_time_2_3,
     '3-4': m.product_time_3_4
   };
+
+  onMount(() => {
+    if (product) {
+      trackProductView(product.id, product.name, product.priceAmount);
+    }
+  });
 
   function handleAddToCart() {
     trackAddToCart(product.id, product.name, product.priceAmount);

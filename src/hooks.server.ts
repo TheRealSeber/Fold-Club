@@ -13,6 +13,16 @@ const handleParaglide: Handle = ({ event, resolve }) =>
   });
 
 const handleTracking: Handle = async ({ event, resolve }) => {
+  const path = event.url.pathname;
+
+  // Skip non-page requests: static assets, API routes, internal SvelteKit routes
+  if (
+    path.startsWith('/_app/') ||
+    path.startsWith('/api/')
+  ) {
+    return resolve(event);
+  }
+
   try {
     await captureTrackingParams(event);
   } catch (error) {

@@ -2,7 +2,9 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-> **Patch applied:** `docs/plans/2026-02-24-fix-event-id-security.md` — Replaced session-based deterministic event IDs with `crypto.randomUUID()`. Removed `getSessionIdFromCookie()` and any dual-cookie pattern. `fc_session` stays httpOnly (server-only). Also removed denormalized tracking columns (`fbclid`, `utm_source`, `utm_medium`, `utm_campaign`) from `orders` table — `tracking_session_id` FK is sufficient.
+> **Patches applied:**
+> - `docs/plans/2026-02-24-fix-event-id-security.md` — Replaced session-based deterministic event IDs with `crypto.randomUUID()`. Removed `getSessionIdFromCookie()` and any dual-cookie pattern. `fc_session` stays httpOnly (server-only). Also removed denormalized tracking columns (`fbclid`, `utm_source`, `utm_medium`, `utm_campaign`) from `orders` table — `tracking_session_id` FK is sufficient.
+> - `docs/plans/2026-02-24-code-review-fixes.md` — Critical/high/medium fixes from code review: removed unused jsonb import, added ViewContent tracking on product page mount, normalized GA4 values from grosze to PLN, restored fake-door tracking calls, added SSR warning + secure flag to consent store, added path filter to hooks, parallelized ServerTracker with Promise.allSettled, split tracking init effects, fixed design doc.
 
 **Goal:** Implement dual-layer tracking (client-side Meta Pixel + server-side Conversions API) with GDPR consent management, event deduplication, and modular multi-platform architecture to prevent ~60% tracking data loss from ad blockers and iOS privacy restrictions.
 

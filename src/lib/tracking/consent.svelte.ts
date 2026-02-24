@@ -2,6 +2,12 @@
  * Consent State — Svelte 5 Runes Store
  * Manages GDPR cookie consent with reactive state.
  * Reads from cookie on init, updates cookie + POSTs to server on change.
+ *
+ * SSR WARNING: This module-scope singleton is shared across all server
+ * requests during SSR. The store reads from cookies (client-side only)
+ * and returns null state on the server. ONLY read consent state in
+ * client-side contexts ($effect, onMount, event handlers).
+ * NEVER use consent.hasConsented in server-rendered template conditionals.
  */
 
 import { browser } from '$app/environment';
@@ -29,7 +35,8 @@ function readFromCookie(): ConsentState | null {
 function writeToCookie(state: ConsentState): void {
   if (!browser) return;
   const value = encodeURIComponent(JSON.stringify(state));
-  document.cookie = `${COOKIE_NAME}=${value};path=/;max-age=${COOKIE_MAX_AGE};samesite=lax`;
+  const secure = location.protocol === 'https:' ? ';secure' : '';
+  document.cookie = `${COOKIE_NAME}=${value};path=/;max-age=${COOKIE_MAX_AGE};samesite=lax${secure}`;
 }
 
 async function persistToServer(state: ConsentState): Promise<void> {

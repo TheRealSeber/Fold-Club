@@ -36,19 +36,23 @@
     metadata?.subtitleKey ? (m as any)[metadata.subtitleKey]?.() : undefined
   );
 
-  // Initialize tracking based on consent
+  // Initialize Meta Pixel when marketing consent is granted
+  // Note: Once loaded, scripts persist until page reload.
+  // Revoking consent stops NEW events from firing but does not unload the script.
   $effect(() => {
-    if (browser) {
-      if (consent.marketing) {
-        initMetaPixel();
-      }
-      if (consent.analytics) {
-        initGA4();
-      }
+    if (browser && consent.marketing) {
+      initMetaPixel();
     }
   });
 
-  // Track page views on client-side navigation (only if consented)
+  // Initialize GA4 when analytics consent is granted
+  $effect(() => {
+    if (browser && consent.analytics) {
+      initGA4();
+    }
+  });
+
+  // Track page views on navigation (consent-gated)
   $effect(() => {
     if (browser && page.url) {
       if (consent.marketing) {

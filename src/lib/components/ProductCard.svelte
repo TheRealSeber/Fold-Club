@@ -2,7 +2,7 @@
   import { m } from '$lib/paraglide/messages';
   import { localizeHref } from '$lib/paraglide/runtime';
   import { cart } from '$lib/stores/cart.svelte';
-  import { trackAddToCart, trackProductView } from '$lib/tracking';
+  import { trackAddToCart } from '$lib/tracking';
   import { formatPrice } from '$lib/utils/format';
   import type { ProductWithTranslation } from '$lib/server/db/products';
 
@@ -35,16 +35,11 @@
     // 2. Add to cart (for UI state)
     cart.addToCart(product.id);
   }
-
-  function handleProductClick() {
-    trackProductView(product.id, product.name, product.priceAmount);
-  }
 </script>
 
 <a
   href={productUrl}
   class="brutal-card paper-press-hover group flex cursor-pointer flex-col"
-  onclick={handleProductClick}
 >
   <div
     class="relative mb-4 flex aspect-square items-center justify-center overflow-hidden border-b-3 border-ink bg-cream-deep"

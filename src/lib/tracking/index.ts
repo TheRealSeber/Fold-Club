@@ -18,7 +18,7 @@ export {
 export { consent } from './consent.svelte';
 
 import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';
-import { trackGA4AddToCart, trackGA4BeginCheckout, trackGA4ViewItem } from './ga4';
+import { trackGA4AddToCart, trackGA4BeginCheckout, trackGA4ViewItem, trackGA4FakeDoor } from './ga4';
 import { generateEventId } from './dedup';
 import { track_add_to_cart, track_view_content, track_checkout } from './tracking.remote';
 import { browser } from '$app/environment';
@@ -48,6 +48,7 @@ export function trackAddToCart(productId: string, productName: string, price: nu
   // Client-side
   trackMetaAddToCart(productId, productName, price, eventId);
   trackGA4AddToCart(productId, productName, price);
+  trackGA4FakeDoor('add_to_cart', [productId]);
 
   // Server-side (fire-and-forget)
   track_add_to_cart({ productId, productName, price, eventId, sourceUrl }).catch(() => {});
@@ -67,6 +68,7 @@ export function trackCheckoutClick(
   // Client-side
   trackMetaInitiateCheckout(productIds, totalValue, eventId);
   trackGA4BeginCheckout(items, totalValue);
+  trackGA4FakeDoor('checkout', productIds);
 
   // Server-side (fire-and-forget)
   track_checkout({

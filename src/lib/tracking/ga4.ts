@@ -64,12 +64,12 @@ export function trackGA4AddToCart(productId: string, itemName: string, value: nu
 
   window.gtag('event', 'add_to_cart', {
     currency: 'PLN',
-    value: value,
+    value: value / 100,
     items: [
       {
         item_id: productId.toString(),
         item_name: itemName,
-        price: value,
+        price: value / 100,
         quantity: 1
       }
     ]
@@ -87,11 +87,11 @@ export function trackGA4BeginCheckout(
 
   window.gtag('event', 'begin_checkout', {
     currency: 'PLN',
-    value: value,
+    value: value / 100,
     items: items.map((item, index) => ({
       item_id: item.id.toString(),
       item_name: item.name,
-      price: item.price,
+      price: item.price / 100,
       quantity: item.quantity,
       index: index
     }))
@@ -106,12 +106,12 @@ export function trackGA4ViewItem(productId: string, itemName: string, value: num
 
   window.gtag('event', 'view_item', {
     currency: 'PLN',
-    value: value,
+    value: value / 100,
     items: [
       {
         item_id: productId.toString(),
         item_name: itemName,
-        price: value,
+        price: value / 100,
         quantity: 1
       }
     ]
@@ -145,11 +145,11 @@ export function trackGA4ViewCheckout(
 
   window.gtag('event', 'view_checkout', {
     currency: 'PLN',
-    value: value,
+    value: value / 100,
     items: items.map((item, index) => ({
       item_id: item.id.toString(),
       item_name: item.name,
-      price: item.price,
+      price: item.price / 100,
       quantity: item.quantity,
       index: index
     }))
@@ -167,12 +167,12 @@ export function trackGA4PaymentClick(
 
   window.gtag('event', 'add_payment_info', {
     currency: 'PLN',
-    value: value,
+    value: value / 100,
     payment_type: 'przelewy24',
     items: items.map((item, index) => ({
       item_id: item.id.toString(),
       item_name: item.name,
-      price: item.price,
+      price: item.price / 100,
       quantity: item.quantity,
       index: index
     }))

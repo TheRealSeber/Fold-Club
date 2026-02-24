@@ -36,15 +36,17 @@ export class ServerTracker {
   }
 
   private async fireAll(
-    method: keyof TrackingPlatform,
+    method: Exclude<keyof TrackingPlatform, 'name'>,
     params: unknown
   ): Promise<void> {
-    for (const platform of this.platforms) {
-      try {
-        await (platform[method] as (p: unknown) => Promise<void>)(params);
-      } catch (error) {
-        console.error(`[tracking] ${platform.name}.${method} failed:`, error);
-      }
-    }
+    await Promise.allSettled(
+      this.platforms.map(async (platform) => {
+        try {
+          await (platform[method] as (p: unknown) => Promise<void>)(params);
+        } catch (error) {
+          console.error(`[tracking] ${platform.name}.${method} failed:`, error);
+        }
+      })
+    );
   }
 }

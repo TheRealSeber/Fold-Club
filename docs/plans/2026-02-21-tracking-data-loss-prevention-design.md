@@ -4,6 +4,10 @@
 > **Status:** Approved
 > **Goal:** Prevent tracking data loss by implementing dual-layer tracking (client-side Pixel + server-side Conversions API) with GDPR-compliant consent management, modular multi-platform architecture, and full-funnel event coverage.
 
+> **Patches applied:**
+> - `docs/plans/2026-02-24-fix-event-id-security.md` — Random event IDs instead of session-based
+> - `docs/plans/2026-02-24-code-review-fixes.md` — Critical/high/medium fixes from code review
+
 ---
 
 ## Problem Statement
@@ -158,7 +162,7 @@ orders (existing columns +)
 
 ```
 tracking_sessions (1) ←── (many) consent_records
-tracking_sessions (1) ←── (1)    orders (via tracking_session_id)
+tracking_sessions (1) ←── (many) orders (via tracking_session_id)
 ```
 
 ---
@@ -301,7 +305,7 @@ Each command reads `fc_session` cookie via `getRequestEvent()`, looks up trackin
 |-------|---------------|----------------|
 | ViewContent | Product page mount | `track_view_content` command() |
 | AddToCart | Cart button click | `track_add_to_cart` command() |
-| InitiateCheckout | Checkout page mount | `track_checkout` command() |
+| InitiateCheckout | Cart page checkout button click | `track_checkout` command() |
 | Purchase | Success page mount (optional) | Stripe webhook |
 
 ---
