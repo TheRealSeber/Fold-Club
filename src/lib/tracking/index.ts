@@ -19,7 +19,7 @@ export { consent } from './consent.svelte';
 
 import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';
 import { trackGA4AddToCart, trackGA4BeginCheckout, trackGA4ViewItem } from './ga4';
-import { generateEventId, getSessionIdFromCookie } from './dedup';
+import { generateEventId } from './dedup';
 import { track_add_to_cart, track_view_content, track_checkout } from './tracking.remote';
 import { browser } from '$app/environment';
 
@@ -27,8 +27,7 @@ import { browser } from '$app/environment';
  * Unified tracking for Product View (client Pixel + server CAPI)
  */
 export function trackProductView(productId: string, productName: string, price: number): void {
-  const sessionId = getSessionIdFromCookie();
-  const eventId = generateEventId('ViewContent', productId, sessionId);
+  const eventId = generateEventId();
   const sourceUrl = browser ? window.location.href : '';
 
   // Client-side
@@ -43,8 +42,7 @@ export function trackProductView(productId: string, productName: string, price: 
  * Unified tracking for Add to Cart (client Pixel + server CAPI)
  */
 export function trackAddToCart(productId: string, productName: string, price: number): void {
-  const sessionId = getSessionIdFromCookie();
-  const eventId = generateEventId('AddToCart', productId, sessionId);
+  const eventId = generateEventId();
   const sourceUrl = browser ? window.location.href : '';
 
   // Client-side
@@ -62,8 +60,7 @@ export function trackCheckoutClick(
   items: Array<{ id: string; name: string; price: number; quantity: number }>,
   totalValue: number
 ): void {
-  const sessionId = getSessionIdFromCookie();
-  const eventId = generateEventId('InitiateCheckout', sessionId, sessionId);
+  const eventId = generateEventId();
   const sourceUrl = browser ? window.location.href : '';
   const productIds = items.map((item) => item.id);
 

@@ -2,9 +2,11 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
+> **Patch applied:** `docs/plans/2026-02-24-fix-event-id-security.md` — Replaced session-based deterministic event IDs with `crypto.randomUUID()`. Removed `getSessionIdFromCookie()` and any dual-cookie pattern. `fc_session` stays httpOnly (server-only). Also removed denormalized tracking columns (`fbclid`, `utm_source`, `utm_medium`, `utm_campaign`) from `orders` table — `tracking_session_id` FK is sufficient.
+
 **Goal:** Implement dual-layer tracking (client-side Meta Pixel + server-side Conversions API) with GDPR consent management, event deduplication, and modular multi-platform architecture to prevent ~60% tracking data loss from ad blockers and iOS privacy restrictions.
 
-**Architecture:** SvelteKit `hooks.server.ts` captures URL attribution params (fbclid, UTMs) on every request and persists them in `tracking_sessions` table. A `ConsentBanner` component manages GDPR granular consent via Svelte 5 `$state()` runes, stored in `consent_records` table. Client-side events pass deterministic `event_id` for deduplication. SvelteKit remote functions (`command()`) fire server-side events to Meta CAPI via a modular `ServerTracker` orchestrator. Purchase events fire from the Stripe webhook.
+**Architecture:** SvelteKit `hooks.server.ts` captures URL attribution params (fbclid, UTMs) on every request and persists them in `tracking_sessions` table. A `ConsentBanner` component manages GDPR granular consent via Svelte 5 `$state()` runes, stored in `consent_records` table. Client-side events generate random `event_id` via `crypto.randomUUID()` for deduplication. SvelteKit remote functions (`command()`) fire server-side events to Meta CAPI via a modular `ServerTracker` orchestrator. Purchase events fire from the Stripe webhook.
 
 **Tech Stack:** SvelteKit 2.49+, Svelte 5 runes, Drizzle ORM + PostgreSQL (Supabase), SvelteKit remote functions (`$app/server`), Meta Conversions API v21.0, TailwindCSS v4 (brutalist design).
 
@@ -104,10 +106,6 @@ Add these columns to the existing `orders` table definition, after the `currency
 
 ```typescript
     trackingSessionId: uuid('tracking_session_id').references(() => trackingSessions.id, { onDelete: 'set null' }),
-    fbclid: text('fbclid'),
-    utmSource: text('utm_source'),
-    utmMedium: text('utm_medium'),
-    utmCampaign: text('utm_campaign'),
     eventId: text('event_id'),
 ```
 
@@ -142,32 +140,22 @@ git commit -m "feat: add tracking_sessions, consent_records tables and order att
 ```typescript
 /**
  * Event Deduplication
- * Generates deterministic event IDs so client Pixel and server CAPI
- * produce the same ID for the same user action.
+ * Generates random event IDs for client-server deduplication.
+ * Both client Pixel and server CAPI receive the same ID from the caller.
  * Meta deduplicates by event_name + event_id within 48h window.
  */
 
 /**
- * Generate a deterministic event ID.
- * Same inputs always produce the same ID — client and server can
- * independently generate matching IDs without communicating.
+ * Generate a unique event ID for deduplication.
+ * Called once per user action — the same ID is passed to both
+ * the client-side Pixel and the server-side remote function.
  */
-export function generateEventId(
-  eventName: string,
-  entityId: string,
-  sessionId: string
-): string {
-  const date = new Date().toISOString().slice(0, 10);
-  return `${eventName}_${entityId}_${sessionId}_${date}`;
-}
-
-/**
- * Read fc_session cookie value from document.cookie (client-side).
- */
-export function getSessionIdFromCookie(): string {
-  if (typeof document === 'undefined') return 'unknown';
-  const match = document.cookie.match(/(?:^|;\s*)fc_session=([^;]*)/);
-  return match?.[1] ?? 'unknown';
+export function generateEventId(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback for environments without crypto.randomUUID
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 }
 ```
 
@@ -1293,7 +1281,7 @@ export { consent } from './consent.svelte';
 
 import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';
 import { trackGA4AddToCart, trackGA4BeginCheckout, trackGA4ViewItem } from './ga4';
-import { generateEventId, getSessionIdFromCookie } from './dedup';
+import { generateEventId } from './dedup';
 import { track_add_to_cart, track_view_content, track_checkout } from './tracking.remote';
 import { browser } from '$app/environment';
 
@@ -1301,8 +1289,7 @@ import { browser } from '$app/environment';
  * Unified tracking for Product View (client Pixel + server CAPI)
  */
 export function trackProductView(productId: string, productName: string, price: number): void {
-  const sessionId = getSessionIdFromCookie();
-  const eventId = generateEventId('ViewContent', productId, sessionId);
+  const eventId = generateEventId();
   const sourceUrl = browser ? window.location.href : '';
 
   // Client-side
@@ -1317,8 +1304,7 @@ export function trackProductView(productId: string, productName: string, price: 
  * Unified tracking for Add to Cart (client Pixel + server CAPI)
  */
 export function trackAddToCart(productId: string, productName: string, price: number): void {
-  const sessionId = getSessionIdFromCookie();
-  const eventId = generateEventId('AddToCart', productId, sessionId);
+  const eventId = generateEventId();
   const sourceUrl = browser ? window.location.href : '';
 
   // Client-side
@@ -1336,8 +1322,7 @@ export function trackCheckoutClick(
   items: Array<{ id: string; name: string; price: number; quantity: number }>,
   totalValue: number
 ): void {
-  const sessionId = getSessionIdFromCookie();
-  const eventId = generateEventId('InitiateCheckout', sessionId, sessionId);
+  const eventId = generateEventId();
   const sourceUrl = browser ? window.location.href : '';
   const productIds = items.map((item) => item.id);
 

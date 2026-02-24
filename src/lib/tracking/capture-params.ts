@@ -63,17 +63,6 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
   const userAgent = event.request.headers.get('user-agent');
 
   if (existingSessionId) {
-    // Ensure non-httpOnly dedup cookie exists (may be missing for sessions created before this fix)
-    if (!event.cookies.get(SESSION_COOKIE + '_id')) {
-      event.cookies.set(SESSION_COOKIE + '_id', existingSessionId, {
-        path: '/',
-        httpOnly: false,
-        sameSite: 'lax',
-        secure: true,
-        maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
-      });
-    }
-
     // Update session if new attribution params arrived (last-click attribution)
     if (hasAnyParam(params) || fbc || fbp) {
       const updateData: Record<string, unknown> = {};
@@ -126,15 +115,6 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
   event.cookies.set(SESSION_COOKIE, sessionId, {
     path: '/',
     httpOnly: true,
-    sameSite: 'lax',
-    secure: true,
-    maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
-  });
-
-  // Non-httpOnly cookie for client-side event deduplication
-  event.cookies.set(SESSION_COOKIE + '_id', sessionId, {
-    path: '/',
-    httpOnly: false,
     sameSite: 'lax',
     secure: true,
     maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
