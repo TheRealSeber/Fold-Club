@@ -18,7 +18,7 @@
   "hero_tag": "ZESTAWY PAPERCRAFT DIY",
   "hero_title_line1": "STWÓRZ SWOJĄ",
   "hero_title_line2": "SZTUKĘ",
-  "hero_description": "Przekształć płaski papier w oszałamiającą model 3D. Nasze wycięte zestawy papercraft są zaprojektowane dla każdego — od początkujących po miłośników geometrii.",
+  "hero_description": "Przekształć płaski papier w oszałamiający model 3D. Nasze wycięte zestawy papercraft są zaprojektowane dla każdego - od początkujących po miłośników geometrii.",
   "hero_shop_cta": "ZOBACZ ZESTAWY",
   "hero_shop_aria": "Zobacz zestawy papercraft",
   "hero_how_cta": "JAK TO DZIAŁA",
@@ -54,7 +54,7 @@
   "step_admire_title": "PODZIWIAJ",
   "step_admire_desc": "Twoja cierpliwość i precyzja zaowocowały czymś wyjątkowym.",
   "cta_title": "ODKRYJ MAGIĘ PAPIERU",
-  "cta_desc": "Dołącz do 50 000+ twórców, którzy odkryli radość z papierowego rękodzieła. Nie potrzebujesz doświadczenia — wystarczy cierpliwość, precyzja i chęć stworzenia czegoś wyjątkowego.",
+  "cta_desc": "Dołącz do 50 000+ twórców, którzy odkryli radość z papierowego rękodzieła. Nie potrzebujesz doświadczenia - wystarczy cierpliwość, precyzja i chęć stworzenia czegoś wyjątkowego.",
   "cta_start_building": "ZACZNIJ TWORZYĆ",
   "cta_see_gallery": "ZOBACZ GALERIĘ",
   "kit_includes_label": "KAŻDY ZESTAW ZAWIERA",
@@ -74,6 +74,7 @@
   "footer_returns": "Zwroty",
   "footer_privacy": "Prywatność",
   "footer_terms": "Regulamin",
+  "footer_cookie_settings": "Ustawienia ciasteczek",
   "footer_rights": "© {year} FOLD.CLUB. Wszelkie prawa zastrzeżone.",
   "footer_social_instagram_aria": "Instagram",
   "footer_social_tiktok_aria": "TikTok",
@@ -95,7 +96,7 @@
   "faq_q4": "Dla jakiego wieku są zestawy?",
   "faq_a4": "Łatwe zestawy są odpowiednie dla dzieci 7+. Średnie dla 12+. Trudne polecamy nastolatkom i dorosłym. Dla młodszych dzieci zalecamy nadzór dorosłych.",
   "faq_q5": "Czy potrzebuję kleju lub nożyczek?",
-  "faq_a5": "Klej w sztyfcie jest dołączony do każdego zestawu. Nożyczki nie są potrzebne — wszystkie elementy są wycięte i gotowe do wypchnięcia.",
+  "faq_a5": "Klej w sztyfcie jest dołączony do każdego zestawu. Nożyczki nie są potrzebne - wszystkie elementy są wycięte i gotowe do wypchnięcia.",
   "faq_q6": "Czy mogę zwrócić zestaw?",
   "faq_a6": "Tak! Oferujemy 30-dniową politykę zwrotów dla nieotwartych zestawów. Szczegóły na stronie Zwroty.",
 
@@ -254,7 +255,7 @@
   "order_success_desc": "Wyślemy Ci e-mail, gdy tylko uruchomimy zamówienia.",
   "order_back_to_shop": "WRÓĆ DO SKLEPU",
   "fake_door_title": "JUŻ WKRÓTCE!",
-  "fake_door_description": "Prawie gotowe! Ten produkt będzie dostępny wkrótce. Dziękujemy za zainteresowanie — pomagasz nam tworzyć coś niesamowitego!",
+  "fake_door_description": "Prawie gotowe! Ten produkt będzie dostępny wkrótce. Dziękujemy za zainteresowanie - pomagasz nam tworzyć coś niesamowitego!",
   "fake_door_close": "ROZUMIEM",
 
 
@@ -351,5 +352,19 @@
   "shop_category_assembly_desc": "Pre-cut papierowe zestawy DIY",
   "shop_category_papercraft": "Papercraft",
   "shop_category_papercraft_desc": "Low-poly sztuka z papieru",
-  "shop_intro_description": "Odkryj naszą kolekcję zestawów papercraft DIY. Geometryczne modele 3D z papieru - łabędzie, dinozaur, moai, sfinks. Pre-cut zestawy gotowe do sklejania. Bez wycinania, tylko składanie i sklejanie. Idealne na prezent lub kreatywną aktywność."
+  "shop_intro_description": "Odkryj naszą kolekcję zestawów papercraft DIY. Geometryczne modele 3D z papieru - łabędzie, dinozaur, moai, sfinks. Pre-cut zestawy gotowe do sklejania. Bez wycinania, tylko składanie i sklejanie. Idealne na prezent lub kreatywną aktywność.",
+
+  "consent_banner_text": "Używamy ciasteczek, aby poprawić Twoje doświadczenie i mierzyć skuteczność reklam.",
+  "consent_accept_all": "Akceptuj wszystkie",
+  "consent_reject_all": "Odrzuć wszystkie",
+  "consent_customize": "Dostosuj",
+  "consent_preferences_title": "Preferencje ciasteczek",
+  "consent_necessary_label": "Niezbędne",
+  "consent_necessary_desc": "Koszyk, uwierzytelnianie, bezpieczeństwo",
+  "consent_necessary_always": "Zawsze aktywne",
+  "consent_analytics_label": "Analityczne",
+  "consent_analytics_desc": "Google Analytics - pomaga nam zrozumieć, jak korzystasz ze strony",
+  "consent_marketing_label": "Marketingowe",
+  "consent_marketing_desc": "Facebook Pixel - pomaga nam pokazywać Ci odpowiednie reklamy",
+  "consent_save": "Zapisz preferencje"
 }

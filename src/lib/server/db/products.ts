@@ -4,7 +4,7 @@ import { products, productTranslations } from './schema';
 
 export type Locale = 'en' | 'pl';
 
-// Shape returned by all product queries — flat for easy use in templates
+// Shape returned by all product queries - flat for easy use in templates
 export type ProductWithTranslation = {
   id: string;
   slug: string;            // canonical EN slug
@@ -136,7 +136,7 @@ export async function getProductBySlugAnyLocale(
       .limit(1);
 
     if (rows.length > 0) {
-      // Found the product — now get its translation in targetLocale
+      // Found the product - now get its translation in targetLocale
       return getProductById(rows[0].products.id, targetLocale);
     }
   }

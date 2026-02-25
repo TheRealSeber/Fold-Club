@@ -1,6 +1,7 @@
 <script lang="ts">
   import { localizeHref } from '$lib/paraglide/runtime';
   import { m } from '$lib/paraglide/messages';
+  import { consent } from '$lib/tracking';
 
   const year = new Date().getFullYear();
 </script>
@@ -115,6 +116,9 @@
         <a href={localizeHref('/terms')} class="label text-cream/50 hover:text-cream"
           >{m.footer_terms()}</a
         >
+        <button onclick={() => consent.showBanner()} class="label text-cream/50 hover:text-cream">
+          {m.footer_cookie_settings()}
+        </button>
       </div>
     </div>
   </div>

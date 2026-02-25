@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ params }) => {
     };
   }
 
-  // Slug might belong to another locale — find and redirect.
+  // Slug might belong to another locale - find and redirect.
   // localizeHref relies on the Paraglide AsyncLocalStorage context set by the middleware.
   const fallback = await getProductBySlugAnyLocale(params.slug, locale);
   if (fallback) redirect(302, localizeHref(`/products/${fallback.localizedSlug}`));
