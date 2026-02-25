@@ -121,6 +121,8 @@ export const orders = pgTable(
     paymentStatus: paymentStatusEnum('payment_status').notNull().default('pending'),
     amountTotal: integer('amount_total').notNull(),
     currency: text('currency').notNull().default('PLN'),
+    trackingSessionId: uuid('tracking_session_id').references(() => trackingSessions.id, { onDelete: 'set null' }),
+    eventId: text('event_id'),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
   },
   (table) => [
@@ -148,5 +150,51 @@ export const orderItems = pgTable(
     index('oi_product_id_idx').on(table.productId),
     check('oi_quantity_positive', sql`${table.quantity} > 0`),
     check('oi_unit_amount_positive', sql`${table.unitAmount} > 0`),
+  ]
+);
+
+// ─── Tracking ───────────────────────────────────────────────────────────────
+
+export const trackingSessions = pgTable(
+  'tracking_sessions',
+  {
+    id: uuid('id').primaryKey().$defaultFn(() => uuidv7()),
+    sessionId: text('session_id').notNull().unique(),
+    fbclid: text('fbclid'),
+    fbc: text('fbc'),
+    fbp: text('fbp'),
+    gclid: text('gclid'),
+    ttclid: text('ttclid'),
+    utmSource: text('utm_source'),
+    utmMedium: text('utm_medium'),
+    utmCampaign: text('utm_campaign'),
+    utmContent: text('utm_content'),
+    utmTerm: text('utm_term'),
+    ipAddress: text('ip_address'),
+    userAgent: text('user_agent'),
+    landingPage: text('landing_page'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  },
+  (table) => [
+    index('ts_session_id_idx').on(table.sessionId),
+    index('ts_expires_at_idx').on(table.expiresAt),
+  ]
+);
+
+export const consentRecords = pgTable(
+  'consent_records',
+  {
+    id: uuid('id').primaryKey().$defaultFn(() => uuidv7()),
+    sessionId: text('session_id')
+      .notNull()
+      .references(() => trackingSessions.sessionId, { onDelete: 'cascade' }),
+    necessary: boolean('necessary').notNull().default(true),
+    analytics: boolean('analytics').notNull().default(false),
+    marketing: boolean('marketing').notNull().default(false),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index('cr_session_id_idx').on(table.sessionId),
   ]
 );

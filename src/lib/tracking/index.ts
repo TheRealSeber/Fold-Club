@@ -1,71 +1,81 @@
 /**
  * Unified Tracking Module
- * Combines Meta Pixel + GA4 for consistent event firing
+ * Combines client-side Pixel + server-side CAPI with event deduplication.
  */
 
 export {
   initMetaPixel,
   trackMetaPageView,
-  trackMetaAddToCart,
-  trackMetaInitiateCheckout,
-  trackMetaViewContent
 } from './meta-pixel';
 
 export {
   initGA4,
   trackGA4PageView,
-  trackGA4AddToCart,
-  trackGA4BeginCheckout,
-  trackGA4ViewItem,
-  trackGA4FakeDoor,
   trackGA4ViewCheckout,
-  trackGA4PaymentClick
+  trackGA4PaymentClick,
 } from './ga4';
+
+export { consent } from './consent.svelte';
 
 import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';
-import {
-  trackGA4AddToCart,
-  trackGA4BeginCheckout,
-  trackGA4ViewItem,
-  trackGA4FakeDoor
-} from './ga4';
+import { trackGA4AddToCart, trackGA4BeginCheckout, trackGA4ViewItem, trackGA4FakeDoor } from './ga4';
+import { generateEventId } from './dedup';
+import { track_add_to_cart, track_view_content, track_checkout } from './tracking.remote';
+import { browser } from '$app/environment';
 
 /**
- * Unified tracking for Add to Cart (fires all pixels)
+ * Unified tracking for Product View (client Pixel + server CAPI)
  */
-export function trackAddToCart(productId: string, productName: string, price: number): void {
-  // Meta Pixel
-  trackMetaAddToCart(productId, productName, price);
+export function trackProductView(productId: string, productName: string, price: number): void {
+  const eventId = generateEventId();
+  const sourceUrl = browser ? window.location.href : '';
 
-  // GA4
-  trackGA4AddToCart(productId, productName, price);
-  trackGA4FakeDoor('add_to_cart', [productId]);
+  // Client-side
+  trackMetaViewContent(productId, productName, price, eventId);
+  trackGA4ViewItem(productId, productName, price);
+
+  // Server-side (fire-and-forget)
+  track_view_content({ productId, productName, price, eventId, sourceUrl }).catch(() => {});
 }
 
 /**
- * Unified tracking for Checkout Click (fires all pixels)
+ * Unified tracking for Add to Cart (client Pixel + server CAPI)
+ */
+export function trackAddToCart(productId: string, productName: string, price: number): void {
+  const eventId = generateEventId();
+  const sourceUrl = browser ? window.location.href : '';
+
+  // Client-side
+  trackMetaAddToCart(productId, productName, price, eventId);
+  trackGA4AddToCart(productId, productName, price);
+  trackGA4FakeDoor('add_to_cart', [productId]);
+
+  // Server-side (fire-and-forget)
+  track_add_to_cart({ productId, productName, price, eventId, sourceUrl }).catch(() => {});
+}
+
+/**
+ * Unified tracking for Checkout (client Pixel + server CAPI)
  */
 export function trackCheckoutClick(
   items: Array<{ id: string; name: string; price: number; quantity: number }>,
   totalValue: number
 ): void {
+  const eventId = generateEventId();
+  const sourceUrl = browser ? window.location.href : '';
   const productIds = items.map((item) => item.id);
 
-  // Meta Pixel
-  trackMetaInitiateCheckout(productIds, totalValue);
-
-  // GA4
+  // Client-side
+  trackMetaInitiateCheckout(productIds, totalValue, eventId);
   trackGA4BeginCheckout(items, totalValue);
   trackGA4FakeDoor('checkout', productIds);
-}
 
-/**
- * Unified tracking for Product View
- */
-export function trackProductView(productId: string, productName: string, price: number): void {
-  // Meta Pixel
-  trackMetaViewContent(productId, productName, price);
-
-  // GA4
-  trackGA4ViewItem(productId, productName, price);
+  // Server-side (fire-and-forget)
+  track_checkout({
+    productIds,
+    totalValue,
+    numItems: items.length,
+    eventId,
+    sourceUrl,
+  }).catch(() => {});
 }

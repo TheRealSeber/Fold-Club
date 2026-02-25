@@ -40,7 +40,7 @@ export const GET: RequestHandler = async () => {
     }
   ];
 
-  // Dynamic Product Pages from DB — pair EN and PL slugs by product ID
+  // Dynamic Product Pages from DB - pair EN and PL slugs by product ID
   const [productsEN, productsPL] = await Promise.all([
     getAllProducts('en'),
     getAllProducts('pl'),

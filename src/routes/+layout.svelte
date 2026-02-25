@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { browser } from '$app/environment';
   import { page } from '$app/state';
   import { locales, localizeHref } from '$lib/paraglide/runtime';
-  import { initMetaPixel, initGA4, trackMetaPageView, trackGA4PageView } from '$lib/tracking';
+  import { initMetaPixel, initGA4, trackMetaPageView, trackGA4PageView, consent } from '$lib/tracking';
   import { getPageMetadata } from '$lib/config/routes';
   import { m } from '$lib/paraglide/messages';
   import LandingNav from '$lib/components/landing/LandingNav.svelte';
   import FooterSection from '$lib/components/landing/FooterSection.svelte';
   import PageHeader from '$lib/components/shared/PageHeader.svelte';
   import SEOHead from '$lib/components/shared/SEOHead.svelte';
+  import ConsentBanner from '$lib/components/tracking/ConsentBanner.svelte';
   import { cart } from '$lib/stores/cart.svelte';
   import '../app.css';
 
@@ -36,16 +36,31 @@
     metadata?.subtitleKey ? (m as any)[metadata.subtitleKey]?.() : undefined
   );
 
-  onMount(() => {
-    initMetaPixel();
-    initGA4();
+  // Initialize Meta Pixel when marketing consent is granted
+  // Note: Once loaded, scripts persist until page reload.
+  // Revoking consent stops NEW events from firing but does not unload the script.
+  $effect(() => {
+    if (browser && consent.marketing) {
+      initMetaPixel();
+    }
   });
 
-  // Track page views on client-side navigation
+  // Initialize GA4 when analytics consent is granted
+  $effect(() => {
+    if (browser && consent.analytics) {
+      initGA4();
+    }
+  });
+
+  // Track page views on navigation (consent-gated)
   $effect(() => {
     if (browser && page.url) {
-      trackMetaPageView();
-      trackGA4PageView(page.url.pathname, document.title);
+      if (consent.marketing) {
+        trackMetaPageView();
+      }
+      if (consent.analytics) {
+        trackGA4PageView(page.url.pathname, document.title);
+      }
     }
   });
 </script>
@@ -84,6 +99,9 @@
 
   <!-- Footer appears on all pages -->
   <FooterSection />
+
+  <!-- GDPR consent banner -->
+  <ConsentBanner />
 </div>
 
 <!-- Hidden language switcher for i18n -->
