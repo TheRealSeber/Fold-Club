@@ -64,14 +64,28 @@ function createConsentStore() {
   }
 
   return {
-    get state() { return state; },
-    get hasConsented() { return hasConsented; },
-    get marketing() { return marketing; },
-    get analytics() { return analytics; },
-    get bannerVisible() { return browser && (bannerVisible || !hasConsented); },
+    get state() {
+      return state;
+    },
+    get hasConsented() {
+      return hasConsented;
+    },
+    get marketing() {
+      return marketing;
+    },
+    get analytics() {
+      return analytics;
+    },
+    get bannerVisible() {
+      return browser && (bannerVisible || !hasConsented);
+    },
 
-    showBanner() { bannerVisible = true; },
-    hideBanner() { bannerVisible = false; },
+    showBanner() {
+      bannerVisible = true;
+    },
+    hideBanner() {
+      bannerVisible = false;
+    },
 
     grantAll(): void {
       apply({ necessary: true, analytics: true, marketing: true });
@@ -85,9 +99,9 @@ function createConsentStore() {
       apply({
         necessary: true,
         analytics: partial.analytics ?? state?.analytics ?? false,
-        marketing: partial.marketing ?? state?.marketing ?? false,
+        marketing: partial.marketing ?? state?.marketing ?? false
       });
-    },
+    }
   };
 }
 

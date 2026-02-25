@@ -89,13 +89,18 @@ export function trackMetaAddToCart(
 ): void {
   if (!browser || !window.fbq) return;
 
-  window.fbq('track', 'AddToCart', {
-    content_ids: [productId.toString()],
-    content_name: productName,
-    content_type: 'product',
-    value: value / 100,
-    currency: 'PLN'
-  }, eventId ? { eventID: eventId } : undefined);
+  window.fbq(
+    'track',
+    'AddToCart',
+    {
+      content_ids: [productId.toString()],
+      content_name: productName,
+      content_type: 'product',
+      value: value / 100,
+      currency: 'PLN'
+    },
+    eventId ? { eventID: eventId } : undefined
+  );
 }
 
 /**
@@ -108,13 +113,18 @@ export function trackMetaInitiateCheckout(
 ): void {
   if (!browser || !window.fbq) return;
 
-  window.fbq('track', 'InitiateCheckout', {
-    content_ids: productIds.map((id) => id.toString()),
-    content_type: 'product',
-    value: value / 100,
-    currency: 'PLN',
-    num_items: productIds.length
-  }, eventId ? { eventID: eventId } : undefined);
+  window.fbq(
+    'track',
+    'InitiateCheckout',
+    {
+      content_ids: productIds.map((id) => id.toString()),
+      content_type: 'product',
+      value: value / 100,
+      currency: 'PLN',
+      num_items: productIds.length
+    },
+    eventId ? { eventID: eventId } : undefined
+  );
 }
 
 /**
@@ -128,11 +138,16 @@ export function trackMetaViewContent(
 ): void {
   if (!browser || !window.fbq) return;
 
-  window.fbq('track', 'ViewContent', {
-    content_ids: [productId.toString()],
-    content_name: productName,
-    content_type: 'product',
-    value: value / 100,
-    currency: 'PLN'
-  }, eventId ? { eventID: eventId } : undefined);
+  window.fbq(
+    'track',
+    'ViewContent',
+    {
+      content_ids: [productId.toString()],
+      content_name: productName,
+      content_type: 'product',
+      value: value / 100,
+      currency: 'PLN'
+    },
+    eventId ? { eventID: eventId } : undefined
+  );
 }

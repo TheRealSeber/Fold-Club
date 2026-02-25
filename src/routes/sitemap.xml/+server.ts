@@ -41,10 +41,7 @@ export const GET: RequestHandler = async () => {
   ];
 
   // Dynamic Product Pages from DB - pair EN and PL slugs by product ID
-  const [productsEN, productsPL] = await Promise.all([
-    getAllProducts('en'),
-    getAllProducts('pl'),
-  ]);
+  const [productsEN, productsPL] = await Promise.all([getAllProducts('en'), getAllProducts('pl')]);
   const plByProductId = new Map(productsPL.map((p) => [p.id, p.localizedSlug]));
   const productPages = productsEN.map((product) => ({
     urlPL: `produkty/${plByProductId.get(product.id) ?? product.slug}`,

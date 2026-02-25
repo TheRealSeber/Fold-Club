@@ -10,7 +10,7 @@ import type {
   ViewContentParams,
   AddToCartParams,
   CheckoutParams,
-  PurchaseParams,
+  PurchaseParams
 } from './types';
 
 const API_VERSION = 'v21.0';
@@ -29,7 +29,9 @@ function hashSha256(value: string): string {
   return createHash('sha256').update(value.toLowerCase().trim()).digest('hex');
 }
 
-function buildUserData(params: { userData: ViewContentParams['userData'] }): Record<string, unknown> {
+function buildUserData(params: {
+  userData: ViewContentParams['userData'];
+}): Record<string, unknown> {
   const ud: Record<string, unknown> = {};
   if (params.userData.email) ud.em = [hashSha256(params.userData.email)];
   if (params.userData.ip) ud.client_ip_address = params.userData.ip;
@@ -58,9 +60,9 @@ export class MetaCapi implements TrackingPlatform {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         data: [event],
-        access_token: this.accessToken,
+        access_token: this.accessToken
       }),
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(3000)
     });
 
     if (!response.ok) {
@@ -82,8 +84,8 @@ export class MetaCapi implements TrackingPlatform {
         content_name: params.productName,
         content_type: 'product',
         value: params.value / 100,
-        currency: params.currency,
-      },
+        currency: params.currency
+      }
     });
   }
 
@@ -100,8 +102,8 @@ export class MetaCapi implements TrackingPlatform {
         content_name: params.productName,
         content_type: 'product',
         value: params.value / 100,
-        currency: params.currency,
-      },
+        currency: params.currency
+      }
     });
   }
 
@@ -118,8 +120,8 @@ export class MetaCapi implements TrackingPlatform {
         content_type: 'product',
         value: params.value / 100,
         currency: params.currency,
-        num_items: params.numItems,
-      },
+        num_items: params.numItems
+      }
     });
   }
 
@@ -136,8 +138,8 @@ export class MetaCapi implements TrackingPlatform {
         content_type: 'product',
         value: params.value / 100,
         currency: params.currency,
-        num_items: params.numItems,
-      },
+        num_items: params.numItems
+      }
     });
   }
 }

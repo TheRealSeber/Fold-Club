@@ -6,5 +6,5 @@ export const formatPrice = (grosze: number): string =>
   new Intl.NumberFormat('pl-PL', {
     style: 'currency',
     currency: 'PLN',
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 0
   }).format(grosze / 100);

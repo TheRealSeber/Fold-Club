@@ -1,15 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(bun run:*)",
-      "Bash(grep:*)"
-    ]
+    "allow": ["Bash(git add:*)", "Bash(git commit:*)", "Bash(bun run:*)", "Bash(grep:*)"]
   },
-  "enabledMcpjsonServers": [
-    "svelte",
-    "dataforseo",
-    "supabase"
-  ]
+  "enabledMcpjsonServers": ["svelte", "dataforseo", "supabase"]
 }

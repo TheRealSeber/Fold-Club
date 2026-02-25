@@ -30,7 +30,7 @@ export const track_view_content = command(
     productName: v.string(),
     price: v.number(),
     eventId: v.string(),
-    sourceUrl: v.string(),
+    sourceUrl: v.string()
   }),
   async ({ productId, productName, price, eventId, sourceUrl }) => {
     try {
@@ -52,8 +52,8 @@ export const track_view_content = command(
             userAgent: session.userAgent,
             fbc: session.fbc,
             fbp: session.fbp,
-            fbclid: session.fbclid,
-          },
+            fbclid: session.fbclid
+          }
         });
       }
     } catch (error) {
@@ -69,7 +69,7 @@ export const track_add_to_cart = command(
     productName: v.string(),
     price: v.number(),
     eventId: v.string(),
-    sourceUrl: v.string(),
+    sourceUrl: v.string()
   }),
   async ({ productId, productName, price, eventId, sourceUrl }) => {
     try {
@@ -91,8 +91,8 @@ export const track_add_to_cart = command(
             userAgent: session.userAgent,
             fbc: session.fbc,
             fbp: session.fbp,
-            fbclid: session.fbclid,
-          },
+            fbclid: session.fbclid
+          }
         });
       }
     } catch (error) {
@@ -108,7 +108,7 @@ export const track_checkout = command(
     totalValue: v.number(),
     numItems: v.number(),
     eventId: v.string(),
-    sourceUrl: v.string(),
+    sourceUrl: v.string()
   }),
   async ({ productIds, totalValue, numItems, eventId, sourceUrl }) => {
     try {
@@ -130,8 +130,8 @@ export const track_checkout = command(
             userAgent: session.userAgent,
             fbc: session.fbc,
             fbp: session.fbp,
-            fbclid: session.fbclid,
-          },
+            fbclid: session.fbclid
+          }
         });
       }
     } catch (error) {
@@ -145,7 +145,7 @@ export const save_consent = command(
   v.object({
     necessary: v.boolean(),
     analytics: v.boolean(),
-    marketing: v.boolean(),
+    marketing: v.boolean()
   }),
   async ({ necessary, analytics, marketing }) => {
     try {
@@ -157,7 +157,7 @@ export const save_consent = command(
         sessionId,
         necessary,
         analytics,
-        marketing,
+        marketing
       });
 
       return { saved: true };

@@ -33,7 +33,7 @@ function extractParams(url: URL): CapturedParams {
     utmMedium: url.searchParams.get('utm_medium'),
     utmCampaign: url.searchParams.get('utm_campaign'),
     utmContent: url.searchParams.get('utm_content'),
-    utmTerm: url.searchParams.get('utm_term'),
+    utmTerm: url.searchParams.get('utm_term')
   };
 }
 
@@ -112,7 +112,7 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
     ipAddress,
     userAgent,
     landingPage: event.url.pathname,
-    expiresAt,
+    expiresAt
   });
 
   event.cookies.set(SESSION_COOKIE, sessionId, {
@@ -120,7 +120,7 @@ export async function captureTrackingParams(event: RequestEvent): Promise<void> 
     httpOnly: true,
     sameSite: 'lax',
     secure: event.url.protocol === 'https:',
-    maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60,
+    maxAge: SESSION_EXPIRY_DAYS * 24 * 60 * 60
   });
 }
 

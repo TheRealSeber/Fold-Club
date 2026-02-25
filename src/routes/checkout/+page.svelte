@@ -222,7 +222,6 @@
         <div class="mb-8 flex items-center justify-between border-t-3 border-ink pt-4">
           <span class="heading">{m.checkout_total()}</span>
           <span class="heading text-xl">{formatPrice(cartTotal)}</span>
-
         </div>
 
         <!-- Przelewy24 Payment Button -->

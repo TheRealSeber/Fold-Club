@@ -25,13 +25,13 @@
   function handleSave() {
     consent.update({
       analytics: localAnalytics,
-      marketing: localMarketing,
+      marketing: localMarketing
     });
   }
 </script>
 
 {#if consent.bannerVisible}
-  <div class="fixed bottom-0 left-0 right-0 z-50 bg-cream border-t-3 border-ink paper-shadow-lg">
+  <div class="paper-shadow-lg fixed right-0 bottom-0 left-0 z-50 border-t-3 border-ink bg-cream">
     <div class="fc-container py-6">
       {#if !showCustomize}
         <!-- Simple banner -->
@@ -58,17 +58,15 @@
             <h2 class="heading-2 text-ink">
               {m.consent_preferences_title()}
             </h2>
-            <button onclick={handleCustomize} class="text-ink-soft hover:text-ink body">
-              ✕
-            </button>
+            <button onclick={handleCustomize} class="body text-ink-soft hover:text-ink"> ✕ </button>
           </div>
 
           <div class="space-y-4">
             <!-- Necessary cookies (always on) -->
-            <div class="brutal-card p-4 bg-cream-warm">
+            <div class="brutal-card bg-cream-warm p-4">
               <div class="flex items-start justify-between">
                 <div class="flex-1">
-                  <h3 class="label text-ink mb-1">{m.consent_necessary_label()}</h3>
+                  <h3 class="label mb-1 text-ink">{m.consent_necessary_label()}</h3>
                   <p class="body-small text-ink-soft">{m.consent_necessary_desc()}</p>
                 </div>
                 <div class="label text-ink-muted">
@@ -78,39 +76,35 @@
             </div>
 
             <!-- Analytics cookies -->
-            <div class="brutal-card p-4 bg-paper">
+            <div class="brutal-card bg-paper p-4">
               <div class="flex items-start justify-between">
                 <div class="flex-1">
-                  <h3 class="label text-ink mb-1">{m.consent_analytics_label()}</h3>
+                  <h3 class="label mb-1 text-ink">{m.consent_analytics_label()}</h3>
                   <p class="body-small text-ink-soft">{m.consent_analytics_desc()}</p>
                 </div>
-                <label class="relative inline-block w-12 h-6">
-                  <input
-                    type="checkbox"
-                    bind:checked={localAnalytics}
-                    class="sr-only peer"
-                  />
-                  <div class="w-full h-full bg-cream border-3 border-ink peer-checked:bg-mint"></div>
-                  <div class="absolute top-0 left-0 w-6 h-6 bg-ink peer-checked:left-6"></div>
+                <label class="relative inline-block h-6 w-12">
+                  <input type="checkbox" bind:checked={localAnalytics} class="peer sr-only" />
+                  <div
+                    class="h-full w-full border-3 border-ink bg-cream peer-checked:bg-mint"
+                  ></div>
+                  <div class="absolute top-0 left-0 h-6 w-6 bg-ink peer-checked:left-6"></div>
                 </label>
               </div>
             </div>
 
             <!-- Marketing cookies -->
-            <div class="brutal-card p-4 bg-paper">
+            <div class="brutal-card bg-paper p-4">
               <div class="flex items-start justify-between">
                 <div class="flex-1">
-                  <h3 class="label text-ink mb-1">{m.consent_marketing_label()}</h3>
+                  <h3 class="label mb-1 text-ink">{m.consent_marketing_label()}</h3>
                   <p class="body-small text-ink-soft">{m.consent_marketing_desc()}</p>
                 </div>
-                <label class="relative inline-block w-12 h-6">
-                  <input
-                    type="checkbox"
-                    bind:checked={localMarketing}
-                    class="sr-only peer"
-                  />
-                  <div class="w-full h-full bg-cream border-3 border-ink peer-checked:bg-mint"></div>
-                  <div class="absolute top-0 left-0 w-6 h-6 bg-ink peer-checked:left-6"></div>
+                <label class="relative inline-block h-6 w-12">
+                  <input type="checkbox" bind:checked={localMarketing} class="peer sr-only" />
+                  <div
+                    class="h-full w-full border-3 border-ink bg-cream peer-checked:bg-mint"
+                  ></div>
+                  <div class="absolute top-0 left-0 h-6 w-6 bg-ink peer-checked:left-6"></div>
                 </label>
               </div>
             </div>

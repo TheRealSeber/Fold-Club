@@ -2,7 +2,13 @@
   import { browser } from '$app/environment';
   import { page } from '$app/state';
   import { locales, localizeHref } from '$lib/paraglide/runtime';
-  import { initMetaPixel, initGA4, trackMetaPageView, trackGA4PageView, consent } from '$lib/tracking';
+  import {
+    initMetaPixel,
+    initGA4,
+    trackMetaPageView,
+    trackGA4PageView,
+    consent
+  } from '$lib/tracking';
   import { getPageMetadata } from '$lib/config/routes';
   import { m } from '$lib/paraglide/messages';
   import LandingNav from '$lib/components/landing/LandingNav.svelte';

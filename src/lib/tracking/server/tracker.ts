@@ -9,7 +9,7 @@ import type {
   ViewContentParams,
   AddToCartParams,
   CheckoutParams,
-  PurchaseParams,
+  PurchaseParams
 } from './types';
 
 export class ServerTracker {

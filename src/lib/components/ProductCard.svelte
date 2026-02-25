@@ -37,10 +37,7 @@
   }
 </script>
 
-<a
-  href={productUrl}
-  class="brutal-card paper-press-hover group flex cursor-pointer flex-col"
->
+<a href={productUrl} class="brutal-card paper-press-hover group flex cursor-pointer flex-col">
   <div
     class="relative mb-4 flex aspect-square items-center justify-center overflow-hidden border-b-3 border-ink bg-cream-deep"
   >

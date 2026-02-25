@@ -16,11 +16,7 @@ const handleTracking: Handle = async ({ event, resolve }) => {
   const path = event.url.pathname;
 
   // Skip non-page requests: static assets, API routes, internal SvelteKit routes
-  if (
-    path.startsWith('/_app/') ||
-    path.startsWith('/api/') ||
-    path.includes('.')
-  ) {
+  if (path.startsWith('/_app/') || path.startsWith('/api/') || path.includes('.')) {
     return resolve(event);
   }
 
