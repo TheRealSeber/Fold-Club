@@ -1,5 +1,5 @@
 /**
- * URL Parameter Capture — Server-side only
+ * URL Parameter Capture - Server-side only
  * Extracts fbclid, UTM params, IP, user agent from incoming requests.
  * Creates or updates tracking_sessions in the database.
  */

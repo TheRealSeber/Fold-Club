@@ -18,7 +18,7 @@
   "hero_tag": "ZESTAWY PAPERCRAFT DIY",
   "hero_title_line1": "STWÓRZ SWOJĄ",
   "hero_title_line2": "SZTUKĘ",
-  "hero_description": "Przekształć płaski papier w oszałamiający model 3D. Nasze wycięte zestawy papercraft są zaprojektowane dla każdego — od początkujących po miłośników geometrii.",
+  "hero_description": "Przekształć płaski papier w oszałamiający model 3D. Nasze wycięte zestawy papercraft są zaprojektowane dla każdego - od początkujących po miłośników geometrii.",
   "hero_shop_cta": "ZOBACZ ZESTAWY",
   "hero_shop_aria": "Zobacz zestawy papercraft",
   "hero_how_cta": "JAK TO DZIAŁA",
@@ -54,7 +54,7 @@
   "step_admire_title": "PODZIWIAJ",
   "step_admire_desc": "Twoja cierpliwość i precyzja zaowocowały czymś wyjątkowym.",
   "cta_title": "ODKRYJ MAGIĘ PAPIERU",
-  "cta_desc": "Dołącz do 50 000+ twórców, którzy odkryli radość z papierowego rękodzieła. Nie potrzebujesz doświadczenia — wystarczy cierpliwość, precyzja i chęć stworzenia czegoś wyjątkowego.",
+  "cta_desc": "Dołącz do 50 000+ twórców, którzy odkryli radość z papierowego rękodzieła. Nie potrzebujesz doświadczenia - wystarczy cierpliwość, precyzja i chęć stworzenia czegoś wyjątkowego.",
   "cta_start_building": "ZACZNIJ TWORZYĆ",
   "cta_see_gallery": "ZOBACZ GALERIĘ",
   "kit_includes_label": "KAŻDY ZESTAW ZAWIERA",
@@ -96,7 +96,7 @@
   "faq_q4": "Dla jakiego wieku są zestawy?",
   "faq_a4": "Łatwe zestawy są odpowiednie dla dzieci 7+. Średnie dla 12+. Trudne polecamy nastolatkom i dorosłym. Dla młodszych dzieci zalecamy nadzór dorosłych.",
   "faq_q5": "Czy potrzebuję kleju lub nożyczek?",
-  "faq_a5": "Klej w sztyfcie jest dołączony do każdego zestawu. Nożyczki nie są potrzebne — wszystkie elementy są wycięte i gotowe do wypchnięcia.",
+  "faq_a5": "Klej w sztyfcie jest dołączony do każdego zestawu. Nożyczki nie są potrzebne - wszystkie elementy są wycięte i gotowe do wypchnięcia.",
   "faq_q6": "Czy mogę zwrócić zestaw?",
   "faq_a6": "Tak! Oferujemy 30-dniową politykę zwrotów dla nieotwartych zestawów. Szczegóły na stronie Zwroty.",
 
@@ -255,7 +255,7 @@
   "order_success_desc": "Wyślemy Ci e-mail, gdy tylko uruchomimy zamówienia.",
   "order_back_to_shop": "WRÓĆ DO SKLEPU",
   "fake_door_title": "JUŻ WKRÓTCE!",
-  "fake_door_description": "Prawie gotowe! Ten produkt będzie dostępny wkrótce. Dziękujemy za zainteresowanie — pomagasz nam tworzyć coś niesamowitego!",
+  "fake_door_description": "Prawie gotowe! Ten produkt będzie dostępny wkrótce. Dziękujemy za zainteresowanie - pomagasz nam tworzyć coś niesamowitego!",
   "fake_door_close": "ROZUMIEM",
 
 
@@ -363,8 +363,8 @@
   "consent_necessary_desc": "Koszyk, uwierzytelnianie, bezpieczeństwo",
   "consent_necessary_always": "Zawsze aktywne",
   "consent_analytics_label": "Analityczne",
-  "consent_analytics_desc": "Google Analytics — pomaga nam zrozumieć, jak korzystasz ze strony",
+  "consent_analytics_desc": "Google Analytics - pomaga nam zrozumieć, jak korzystasz ze strony",
   "consent_marketing_label": "Marketingowe",
-  "consent_marketing_desc": "Facebook Pixel — pomaga nam pokazywać Ci odpowiednie reklamy",
+  "consent_marketing_desc": "Facebook Pixel - pomaga nam pokazywać Ci odpowiednie reklamy",
   "consent_save": "Zapisz preferencje"
 }

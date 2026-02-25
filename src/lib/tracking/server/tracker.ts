@@ -1,5 +1,5 @@
 /**
- * ServerTracker — Multi-platform event orchestrator
+ * ServerTracker - Multi-platform event orchestrator
  * Registers platform adapters and fires events on all of them.
  * Failures are logged but never block the request.
  */

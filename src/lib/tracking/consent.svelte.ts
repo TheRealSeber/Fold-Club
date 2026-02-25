@@ -1,5 +1,5 @@
 /**
- * Consent State — Svelte 5 Runes Store
+ * Consent State - Svelte 5 Runes Store
  * Manages GDPR cookie consent with reactive state.
  * Reads from cookie on init, updates cookie + POSTs to server on change.
  *

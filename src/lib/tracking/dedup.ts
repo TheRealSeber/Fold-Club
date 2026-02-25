@@ -7,7 +7,7 @@
 
 /**
  * Generate a unique event ID for deduplication.
- * Called once per user action — the same ID is passed to both
+ * Called once per user action - the same ID is passed to both
  * the client-side Pixel and the server-side remote function.
  */
 export function generateEventId(): string {

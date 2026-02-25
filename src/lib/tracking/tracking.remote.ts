@@ -1,6 +1,6 @@
 /**
  * Server-Side Tracking Remote Functions
- * Called from client components via command() — execute on server.
+ * Called from client components via command() - execute on server.
  * Read fc_session cookie, look up tracking session, fire CAPI events.
  */
 
