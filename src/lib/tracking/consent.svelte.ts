@@ -12,6 +12,7 @@
 
 import { browser } from '$app/environment';
 import { getBufferedParams, clearBufferedParams } from '$lib/tracking/param-buffer';
+import { create_session } from '$lib/tracking/tracking.remote';
 
 export type ConsentState = {
   necessary: boolean;
@@ -44,30 +45,22 @@ async function createSessionOnServer(state: ConsentState): Promise<void> {
   try {
     const params = getBufferedParams();
 
-    const response = await fetch('/api/tracking/session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        consent: state,
-        params: params ?? {
-          fbclid: null,
-          gclid: null,
-          ttclid: null,
-          utmSource: null,
-          utmMedium: null,
-          utmCampaign: null,
-          utmContent: null,
-          utmTerm: null,
-          landingPage: null
-        }
-      })
+    await create_session({
+      consent: state,
+      params: params ?? {
+        fbclid: null,
+        gclid: null,
+        ttclid: null,
+        utmSource: null,
+        utmMedium: null,
+        utmCampaign: null,
+        utmContent: null,
+        utmTerm: null,
+        landingPage: null
+      }
     });
 
-    if (response.ok) {
-      clearBufferedParams();
-    } else {
-      console.error('[consent] session creation failed with status:', response.status);
-    }
+    clearBufferedParams();
   } catch (error) {
     console.error('[consent] failed to create session:', error);
   }
