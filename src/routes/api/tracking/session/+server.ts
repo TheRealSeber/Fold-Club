@@ -36,45 +36,62 @@ export const POST: RequestHandler = async ({ request, cookies, url }) => {
     // Check if session already exists (user re-consenting)
     const existingSessionId = cookies.get(SESSION_COOKIE);
     if (existingSessionId) {
-      // Last-click attribution: update session params if new attribution arrived
-      const hasAttribution = [
-        params.fbclid, params.gclid, params.ttclid,
-        params.utmSource, params.utmMedium, params.utmCampaign,
-        params.utmContent, params.utmTerm
-      ].some((p) => p !== null);
+      // Verify session still exists in DB (may have been deleted/expired)
+      const [existingSession] = await db
+        .select({ sessionId: trackingSessions.sessionId })
+        .from(trackingSessions)
+        .where(eq(trackingSessions.sessionId, existingSessionId))
+        .limit(1);
 
-      await db.transaction(async (tx) => {
-        if (hasAttribution) {
-          const updateData: Record<string, unknown> = {};
-          if (params.fbclid) updateData.fbclid = params.fbclid;
-          if (params.gclid) updateData.gclid = params.gclid;
-          if (params.ttclid) updateData.ttclid = params.ttclid;
-          if (params.utmSource) updateData.utmSource = params.utmSource;
-          if (params.utmMedium) updateData.utmMedium = params.utmMedium;
-          if (params.utmCampaign) updateData.utmCampaign = params.utmCampaign;
-          if (params.utmContent) updateData.utmContent = params.utmContent;
-          if (params.utmTerm) updateData.utmTerm = params.utmTerm;
+      if (existingSession) {
+        const fbc = cookies.get('_fbc') ?? null;
+        const fbp = cookies.get('_fbp') ?? null;
 
-          // Extend session expiry on re-attribution
-          const expiresAt = new Date();
-          expiresAt.setDate(expiresAt.getDate() + SESSION_EXPIRY_DAYS);
-          updateData.expiresAt = expiresAt;
+        // Last-click attribution: update session params if new attribution arrived
+        const hasAttribution = [
+          params.fbclid, params.gclid, params.ttclid,
+          params.utmSource, params.utmMedium, params.utmCampaign,
+          params.utmContent, params.utmTerm
+        ].some((p) => p !== null);
 
-          await tx
-            .update(trackingSessions)
-            .set(updateData)
-            .where(eq(trackingSessions.sessionId, existingSessionId));
-        }
+        await db.transaction(async (tx) => {
+          if (hasAttribution || fbc || fbp) {
+            const updateData: Record<string, unknown> = {};
+            if (params.fbclid) updateData.fbclid = params.fbclid;
+            if (params.gclid) updateData.gclid = params.gclid;
+            if (params.ttclid) updateData.ttclid = params.ttclid;
+            if (params.utmSource) updateData.utmSource = params.utmSource;
+            if (params.utmMedium) updateData.utmMedium = params.utmMedium;
+            if (params.utmCampaign) updateData.utmCampaign = params.utmCampaign;
+            if (params.utmContent) updateData.utmContent = params.utmContent;
+            if (params.utmTerm) updateData.utmTerm = params.utmTerm;
+            if (fbc) updateData.fbc = fbc;
+            if (fbp) updateData.fbp = fbp;
 
-        await tx.insert(consentRecords).values({
-          sessionId: existingSessionId,
-          necessary: consent.necessary,
-          analytics: consent.analytics,
-          marketing: consent.marketing
+            // Extend session expiry on re-attribution
+            const expiresAt = new Date();
+            expiresAt.setDate(expiresAt.getDate() + SESSION_EXPIRY_DAYS);
+            updateData.expiresAt = expiresAt;
+
+            await tx
+              .update(trackingSessions)
+              .set(updateData)
+              .where(eq(trackingSessions.sessionId, existingSessionId));
+          }
+
+          await tx.insert(consentRecords).values({
+            sessionId: existingSessionId,
+            necessary: consent.necessary,
+            analytics: consent.analytics,
+            marketing: consent.marketing
+          });
         });
-      });
 
-      return json({ sessionId: existingSessionId });
+        return json({ sessionId: existingSessionId });
+      }
+
+      // Session cookie exists but DB row is gone — clear stale cookie, fall through to create new
+      cookies.delete(SESSION_COOKIE, { path: '/' });
     }
 
     // Create new session

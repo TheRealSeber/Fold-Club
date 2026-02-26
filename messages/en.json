@@ -365,5 +365,6 @@
   "consent_analytics_desc": "Google Analytics - helps us understand how you use the site",
   "consent_marketing_label": "Marketing",
   "consent_marketing_desc": "Facebook Pixel - helps us show you relevant ads",
-  "consent_save": "Save Preferences"
+  "consent_save": "Save Preferences",
+  "consent_close_customize": "Close customization panel"
 }
