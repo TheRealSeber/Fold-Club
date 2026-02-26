@@ -3,8 +3,8 @@
  * Centralized SEO metadata for all routes and languages
  */
 
-import type { RouteValue } from './routes';
-import { ROUTES } from './routes';
+import type { RouteValue } from '$lib/config/routes';
+import { ROUTES } from '$lib/config/routes';
 
 export const SITE_CONFIG = {
   name: 'Fold Club',

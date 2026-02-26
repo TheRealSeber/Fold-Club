@@ -31,12 +31,19 @@
 </script>
 
 {#if consent.bannerVisible}
-  <div class="paper-shadow-lg fixed right-0 bottom-0 left-0 z-50 border-t-3 border-ink bg-cream">
-    <div class="fc-container py-6">
+  <!-- Full-page backdrop overlay — blocks all interaction -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4">
+    <!-- Modal card -->
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="consent-heading"
+      class="brutal-card paper-shadow-lg w-full max-w-lg border-3 border-ink bg-cream p-6 md:p-8"
+    >
       {#if !showCustomize}
-        <!-- Simple banner -->
-        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p class="body max-w-2xl text-ink">
+        <div class="space-y-6">
+          <h2 id="consent-heading" class="heading-2 text-ink">{m.consent_preferences_title()}</h2>
+          <p class="body text-ink">
             {m.consent_banner_text()}
           </p>
           <div class="flex flex-wrap gap-3">
@@ -52,13 +59,10 @@
           </div>
         </div>
       {:else}
-        <!-- Customization panel -->
         <div class="space-y-6">
           <div class="flex items-center justify-between">
-            <h2 class="heading-2 text-ink">
-              {m.consent_preferences_title()}
-            </h2>
-            <button onclick={handleCustomize} class="body text-ink-soft hover:text-ink"> ✕ </button>
+            <h2 class="heading-2 text-ink">{m.consent_preferences_title()}</h2>
+            <button onclick={handleCustomize} class="body text-ink-soft hover:text-ink" aria-label={m.consent_close_customize()}> ✕ </button>
           </div>
 
           <div class="space-y-4">
@@ -69,9 +73,7 @@
                   <h3 class="label mb-1 text-ink">{m.consent_necessary_label()}</h3>
                   <p class="body-small text-ink-soft">{m.consent_necessary_desc()}</p>
                 </div>
-                <div class="label text-ink-muted">
-                  {m.consent_necessary_always()}
-                </div>
+                <div class="label text-ink-muted">{m.consent_necessary_always()}</div>
               </div>
             </div>
 

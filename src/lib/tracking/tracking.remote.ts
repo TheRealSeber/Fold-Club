@@ -6,8 +6,8 @@
 
 import { command, getRequestEvent } from '$app/server';
 import * as v from 'valibot';
-import { getTrackingSession } from './capture-params';
-import { serverTracker } from './server';
+import { getTrackingSession } from '$lib/tracking/capture-params';
+import { serverTracker } from '$lib/tracking/server';
 import { db } from '$lib/server/db';
 import { consentRecords } from '$lib/server/db/schema';
 import { eq, desc } from 'drizzle-orm';
@@ -138,32 +138,5 @@ export const track_checkout = command(
       console.error('[tracking] track_checkout failed:', error);
     }
     return { tracked: true };
-  }
-);
-
-export const save_consent = command(
-  v.object({
-    necessary: v.boolean(),
-    analytics: v.boolean(),
-    marketing: v.boolean()
-  }),
-  async ({ necessary, analytics, marketing }) => {
-    try {
-      const event = getRequestEvent();
-      const sessionId = event.cookies.get(SESSION_COOKIE);
-      if (!sessionId) return { saved: false };
-
-      await db.insert(consentRecords).values({
-        sessionId,
-        necessary,
-        analytics,
-        marketing
-      });
-
-      return { saved: true };
-    } catch (error) {
-      console.error('[tracking] save_consent failed:', error);
-      return { saved: false };
-    }
   }
 );
