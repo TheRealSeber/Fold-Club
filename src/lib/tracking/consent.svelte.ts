@@ -45,7 +45,7 @@ async function createSessionOnServer(state: ConsentState): Promise<void> {
 
     const params = getBufferedParams();
 
-    await fetch('/api/tracking/session', {
+    const response = await fetch('/api/tracking/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -64,7 +64,11 @@ async function createSessionOnServer(state: ConsentState): Promise<void> {
       })
     });
 
-    clearBufferedParams();
+    if (response.ok) {
+      clearBufferedParams();
+    } else {
+      console.error('[consent] session creation failed with status:', response.status);
+    }
   } catch (error) {
     console.error('[consent] failed to create session:', error);
   }

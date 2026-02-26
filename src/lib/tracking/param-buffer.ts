@@ -42,11 +42,16 @@ export function bufferParams(): void {
     landingPage: url.pathname
   };
 
-  const hasAny = Object.values(params).some((v) => v !== null);
+  // Check attribution params only (exclude landingPage which is always non-null)
+  const hasAttribution = [
+    params.fbclid, params.gclid, params.ttclid,
+    params.utmSource, params.utmMedium, params.utmCampaign,
+    params.utmContent, params.utmTerm
+  ].some((v) => v !== null);
 
-  // Only write if we have new params, OR if nothing is buffered yet (capture landing page)
+  // Only write if we have new attribution params, OR if nothing is buffered yet (capture landing page)
   const existing = sessionStorage.getItem(STORAGE_KEY);
-  if (hasAny || !existing) {
+  if (hasAttribution || !existing) {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params));
   }
 }
