@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
   import { page } from '$app/state';
   import { locales, localizeHref } from '$lib/paraglide/runtime';
   import {
@@ -9,6 +10,7 @@
     trackGA4PageView,
     consent
   } from '$lib/tracking';
+  import { bufferParams } from '$lib/tracking/param-buffer';
   import { getPageMetadata } from '$lib/config/routes';
   import { m } from '$lib/paraglide/messages';
   import LandingNav from '$lib/components/landing/LandingNav.svelte';
@@ -68,6 +70,11 @@
         trackGA4PageView(page.url.pathname, document.title);
       }
     }
+  });
+
+  // Buffer URL attribution params to sessionStorage on first load
+  onMount(() => {
+    bufferParams();
   });
 </script>
 
