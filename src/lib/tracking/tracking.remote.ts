@@ -140,30 +140,3 @@ export const track_checkout = command(
     return { tracked: true };
   }
 );
-
-export const save_consent = command(
-  v.object({
-    necessary: v.boolean(),
-    analytics: v.boolean(),
-    marketing: v.boolean()
-  }),
-  async ({ necessary, analytics, marketing }) => {
-    try {
-      const event = getRequestEvent();
-      const sessionId = event.cookies.get(SESSION_COOKIE);
-      if (!sessionId) return { saved: false };
-
-      await db.insert(consentRecords).values({
-        sessionId,
-        necessary,
-        analytics,
-        marketing
-      });
-
-      return { saved: true };
-    } catch (error) {
-      console.error('[tracking] save_consent failed:', error);
-      return { saved: false };
-    }
-  }
-);
