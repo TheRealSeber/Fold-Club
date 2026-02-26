@@ -39,12 +39,34 @@ function writeToCookie(state: ConsentState): void {
   document.cookie = `${COOKIE_NAME}=${value};path=/;max-age=${COOKIE_MAX_AGE};samesite=lax${secure}`;
 }
 
-async function persistToServer(state: ConsentState): Promise<void> {
+async function createSessionOnServer(state: ConsentState): Promise<void> {
   try {
-    const { save_consent } = await import('./tracking.remote');
-    await save_consent(state);
+    const { getBufferedParams, clearBufferedParams } = await import('./param-buffer');
+
+    const params = getBufferedParams();
+
+    await fetch('/api/tracking/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        consent: state,
+        params: params ?? {
+          fbclid: null,
+          gclid: null,
+          ttclid: null,
+          utmSource: null,
+          utmMedium: null,
+          utmCampaign: null,
+          utmContent: null,
+          utmTerm: null,
+          landingPage: null
+        }
+      })
+    });
+
+    clearBufferedParams();
   } catch (error) {
-    console.error('[consent] failed to persist to server:', error);
+    console.error('[consent] failed to create session:', error);
   }
 }
 
@@ -59,7 +81,7 @@ function createConsentStore() {
   function apply(newState: ConsentState): void {
     state = newState;
     writeToCookie(newState);
-    persistToServer(newState);
+    createSessionOnServer(newState);
     bannerVisible = false;
   }
 
