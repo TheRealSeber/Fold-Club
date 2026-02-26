@@ -10,7 +10,7 @@ import type {
   AddToCartParams,
   CheckoutParams,
   PurchaseParams
-} from './types';
+} from '$lib/tracking/server/types';
 
 export class ServerTracker {
   private platforms: TrackingPlatform[] = [];

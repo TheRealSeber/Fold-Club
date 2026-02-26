@@ -11,6 +11,7 @@
  */
 
 import { browser } from '$app/environment';
+import { getBufferedParams, clearBufferedParams } from '$lib/tracking/param-buffer';
 
 export type ConsentState = {
   necessary: boolean;
@@ -41,8 +42,6 @@ function writeToCookie(state: ConsentState): void {
 
 async function createSessionOnServer(state: ConsentState): Promise<void> {
   try {
-    const { getBufferedParams, clearBufferedParams } = await import('./param-buffer');
-
     const params = getBufferedParams();
 
     const response = await fetch('/api/tracking/session', {

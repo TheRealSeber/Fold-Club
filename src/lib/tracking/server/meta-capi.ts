@@ -11,7 +11,7 @@ import type {
   AddToCartParams,
   CheckoutParams,
   PurchaseParams
-} from './types';
+} from '$lib/tracking/server/types';
 
 const API_VERSION = 'v21.0';
 

@@ -1,6 +1,6 @@
 import { eq, and } from 'drizzle-orm';
-import { db } from './index';
-import { products, productTranslations } from './schema';
+import { db } from '$lib/server/db';
+import { products, productTranslations } from '$lib/server/db/schema';
 
 export type Locale = 'en' | 'pl';
 

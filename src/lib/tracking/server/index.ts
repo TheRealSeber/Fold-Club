@@ -5,8 +5,8 @@
 
 import { env } from '$env/dynamic/private';
 import { PUBLIC_META_PIXEL_ID } from '$env/static/public';
-import { ServerTracker } from './tracker';
-import { MetaCapi } from './meta-capi';
+import { ServerTracker } from '$lib/tracking/server/tracker';
+import { MetaCapi } from '$lib/tracking/server/meta-capi';
 
 export const serverTracker = new ServerTracker();
 
@@ -21,4 +21,4 @@ if (PUBLIC_META_PIXEL_ID && metaAccessToken) {
 //   serverTracker.register(new GoogleAdsApi(...));
 // }
 
-export type { ServerTracker } from './tracker';
+export type { ServerTracker } from '$lib/tracking/server/tracker';

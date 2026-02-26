@@ -6,8 +6,8 @@
 
 import { command, getRequestEvent } from '$app/server';
 import * as v from 'valibot';
-import { getTrackingSession } from './capture-params';
-import { serverTracker } from './server';
+import { getTrackingSession } from '$lib/tracking/capture-params';
+import { serverTracker } from '$lib/tracking/server';
 import { db } from '$lib/server/db';
 import { consentRecords } from '$lib/server/db/schema';
 import { eq, desc } from 'drizzle-orm';

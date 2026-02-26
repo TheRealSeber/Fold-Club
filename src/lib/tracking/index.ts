@@ -3,21 +3,21 @@
  * Combines client-side Pixel + server-side CAPI with event deduplication.
  */
 
-export { initMetaPixel, trackMetaPageView } from './meta-pixel';
+export { initMetaPixel, trackMetaPageView } from '$lib/tracking/meta-pixel';
 
-export { initGA4, trackGA4PageView, trackGA4ViewCheckout, trackGA4PaymentClick } from './ga4';
+export { initGA4, trackGA4PageView, trackGA4ViewCheckout, trackGA4PaymentClick } from '$lib/tracking/ga4';
 
-export { consent } from './consent.svelte';
+export { consent } from '$lib/tracking/consent.svelte';
 
-import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from './meta-pixel';
+import { trackMetaAddToCart, trackMetaInitiateCheckout, trackMetaViewContent } from '$lib/tracking/meta-pixel';
 import {
   trackGA4AddToCart,
   trackGA4BeginCheckout,
   trackGA4ViewItem,
   trackGA4FakeDoor
-} from './ga4';
-import { generateEventId } from './dedup';
-import { track_add_to_cart, track_view_content, track_checkout } from './tracking.remote';
+} from '$lib/tracking/ga4';
+import { generateEventId } from '$lib/tracking/dedup';
+import { track_add_to_cart, track_view_content, track_checkout } from '$lib/tracking/tracking.remote';
 import { browser } from '$app/environment';
 
 /**
